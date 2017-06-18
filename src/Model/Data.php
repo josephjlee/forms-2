@@ -24,7 +24,7 @@ class Data extends Model
         'id',
         'record',
         'uid',
-        'from',
+        'form',
         'element',
         'time_create',
         'value',

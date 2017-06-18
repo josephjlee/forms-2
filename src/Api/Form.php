@@ -17,7 +17,9 @@ use Pi\Application\Api\AbstractApi;
 use Zend\Db\Sql\Predicate\Expression;
 
 /*
+ * Pi::api('form', 'forms')->getForm($id);
  * Pi::api('form', 'forms')->getFormView($id, $uid);
+ * Pi::api('form', 'forms')->getView($formId);
  * Pi::api('form', 'forms')->getFormList();
  * Pi::api('form', 'forms')->count();
  * Pi::api('form', 'forms')->canonizeForm($form);
@@ -25,12 +27,44 @@ use Zend\Db\Sql\Predicate\Expression;
 
 class Form extends AbstractApi
 {
+    public function getForm($id)
+    {
+        $selectForm = Pi::model('form', $this->getModule())->find($id);
+        $selectForm = $this->canonizeForm($selectForm);
+        return $selectForm;
+    }
+
     public function getFormView($id, $uid)
     {
         $selectForm = Pi::model('form', $this->getModule())->find(intval($id));
         $selectForm = $this->canonizeForm($selectForm);
 
         return $selectForm;
+    }
+
+    public function getView($formId)
+    {
+        $links = array();
+        $elements = array();
+        // Gey links
+        $where = array('form' => $formId);
+        $select = Pi::model('link', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('link', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $links[$row->element] = $row->element;
+        }
+        // Check link
+        if (!empty($links)) {
+            // Get elements
+            $where = array('id' => $links);
+            $select = Pi::model('element', $this->getModule())->select()->where($where);
+            $rowset = Pi::model('element', $this->getModule())->selectWith($select);
+            foreach ($rowset as $row) {
+                $elements[$row->id] = $row->toArray();
+            }
+        }
+
+        return $elements;
     }
 
     public function getFormList()

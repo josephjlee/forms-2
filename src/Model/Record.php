@@ -23,7 +23,7 @@ class Record extends Model
     protected $columns = array(
         'id',
         'uid',
-        'from',
+        'form',
         'time_create',
         'ip',
         'status',

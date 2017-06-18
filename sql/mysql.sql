@@ -21,7 +21,9 @@ CREATE TABLE `{form}` (
 CREATE TABLE `{element}` (
   `id`     INT(10) UNSIGNED                                                           NOT NULL AUTO_INCREMENT,
   `title`  VARCHAR(256)                                                               NOT NULL DEFAULT '',
-  `type`   ENUM ('text', 'email', 'phone', 'textarea', 'checkbox', 'radio', 'select') NOT NULL DEFAULT '',
+  `description` TEXT,
+  `required`           TINYINT(1) UNSIGNED           NOT NULL DEFAULT '0',
+  `type`   ENUM ('text', 'email', 'phone', 'textarea', 'checkbox', 'radio', 'select') NOT NULL DEFAULT 'text',
   `status` TINYINT(1) UNSIGNED                                                        NOT NULL DEFAULT '1',
   `order`  INT(10) UNSIGNED                                                           NOT NULL DEFAULT '0',
   `value`  TEXT,
@@ -30,36 +32,36 @@ CREATE TABLE `{element}` (
 
 CREATE TABLE `{link}` (
   `id`      INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
-  `from`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `form`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `element` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `status`  TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  KEY `from` (`from`),
+  KEY `form` (`form`),
   KEY `element` (`element`),
-  KEY `from_element` (`from`, `element`)
+  KEY `form_element` (`form`, `element`)
 );
 
 CREATE TABLE `{record}` (
   `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `uid`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `from`        INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `form`        INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `time_create` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `ip`          CHAR(15)            NOT NULL DEFAULT '',
   `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`),
-  KEY `from` (`from`),
-  KEY `uid_from` (`uid`, `from`)
+  KEY `form` (`form`),
+  KEY `uid_form` (`uid`, `form`)
 );
 
 CREATE TABLE `{data}` (
   `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `record`      INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `uid`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
-  `from`        INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `form`        INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `element`     INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `time_create` INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `value`       TEXT,
   PRIMARY KEY (`id`),
-  KEY `from` (`from`)
+  KEY `form` (`form`)
 );

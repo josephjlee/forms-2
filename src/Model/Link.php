@@ -22,7 +22,7 @@ class Link extends Model
      */
     protected $columns = array(
         'id',
-        'from',
+        'form',
         'element',
         'status',
     );

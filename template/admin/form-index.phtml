@@ -29,7 +29,13 @@
                 <td>
                     <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
                        href="<?php echo $this->url('', array('action' => 'update', 'id' => $form['id'])); ?>"><i
-                            class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
+                                class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
+                    <a class="btn btn-primary btn-xs" title="<?php _e('Element'); ?>"
+                       href="<?php echo $this->url('', array('action' => 'element', 'id' => $form['id'])); ?>"><i
+                                class="fa fa-edit"></i> <?php _e('Element'); ?></a>
+                    <a class="btn btn-success btn-xs" title="<?php _e('View'); ?>"
+                       href="<?php echo $this->url('', array('action' => 'view', 'id' => $form['id'])); ?>"><i
+                                class="fa fa-edit"></i> <?php _e('View'); ?></a>
                 </td>
             </tr>
         <?php } ?>

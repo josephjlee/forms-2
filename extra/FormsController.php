@@ -26,7 +26,7 @@ class FormsController extends ActionController
         );
         // Set template
         $this->view()->setTemplate(false)->setLayout('layout-content');
-        // Get info from url
+        // Get info form url
         $module = $this->params('module');
         $token = $this->params('token');
         // Check module
@@ -61,7 +61,7 @@ class FormsController extends ActionController
         );
         // Set template
         $this->view()->setTemplate(false)->setLayout('layout-content');
-        // Get info from url
+        // Get info form url
         $module = $this->params('module');
         $token = $this->params('token');
         // Check module
@@ -96,7 +96,7 @@ class FormsController extends ActionController
         );
         // Set template
         $this->view()->setTemplate(false)->setLayout('layout-content');
-        // Get info from url
+        // Get info form url
         $module = $this->params('module');
         $token = $this->params('token');
         $uid = $this->params('uid');

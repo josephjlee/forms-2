@@ -16,7 +16,7 @@ namespace Module\Forms\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class ManageForm extends BaseForm
+class ElementForm extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
@@ -27,7 +27,7 @@ class ManageForm extends BaseForm
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new ManageFilter($this->option);
+            $this->filter = new ElementFilter($this->option);
         }
         return $this->filter;
     }
@@ -51,29 +51,26 @@ class ManageForm extends BaseForm
                 'type' => 'text',
                 'description' => '',
                 'required' => true,
-
             )
         ));
-        // slug
+        // type
         $this->add(array(
-            'name' => 'slug',
+            'name' => 'type',
+            'type' => 'select',
             'options' => array(
-                'label' => __('Slug'),
+                'label' => __('Type'),
+                'value_options' => array(
+                    'text' => __('Text'),
+                    'email' => __('email'),
+                    'phone' => __('phone'),
+                    'textarea' => __('textarea'),
+                    'checkbox' => __('Checkbox'),
+                    'radio' => __('Radio button'),
+                    'select' => __('Select box'),
+                ),
             ),
             'attributes' => array(
-                'type' => 'text',
-                'description' => __('Used as story URL value : must be unique, short, and user oriented'),
-            )
-        ));
-        // text_description
-        $this->add(array(
-            'name' => 'text_description',
-            'options' => array(
-                'label' => __('Description'),
-                'editor' => 'html',
-            ),
-            'attributes' => array(
-                'type' => 'editor',
+                  'required' => true,
             )
         ));
         // status
@@ -91,59 +88,28 @@ class ManageForm extends BaseForm
                 ),
             ),
         ));
-        // type
-        $this->add(array(
-            'name' => 'type',
-            'type' => 'select',
+        // order
+        /* $this->add(array(
+            'name' => 'order',
             'options' => array(
-                'label' => __('Type'),
-                'value_options' => array(
-                    'general' => __('General'),
-                    'dedicated' => __('Dedicated'),
-                ),
-            ),
-        ));
-        // time_start
-        $this->add(array(
-            'name' => 'time_start',
-            'type' => 'datepicker',
-            'options' => array(
-                'label' => __('Time start'),
-                'datepicker' => array(
-                    'format' => 'yyyy/mm/dd',
-                    'autoclose' => true,
-                    'todayBtn' => true,
-                    'todayHighlight' => true,
-                    'weekStart' => 1,
-                    'zIndexOffset' => 10000
-
-                ),
+                'label' => __('View order'),
             ),
             'attributes' => array(
+                'type' => 'text',
                 'required' => true,
-                'value' => date('Y-m-d'),
-                'class' => 'event-time-start',
             )
-        ));
-        // time_end
+        )); */
+        // value
         $this->add(array(
-            'name' => 'time_end',
-            'type' => 'datepicker',
+            'name' => 'value',
             'options' => array(
-                'label' => __('Time end'),
-                'datepicker' => array(
-                    'format' => 'yyyy/mm/dd',
-                    'autoclose' => true,
-                    'todayBtn' => true,
-                    'todayHighlight' => true,
-                    'weekStart' => 1,
-                    'zIndexOffset' => 10000
-                ),
+                'label' => __('General value'),
             ),
             'attributes' => array(
-                'required' => true,
-                'value' => date('Y-m-d', strtotime('+6 months')),
-                'class' => 'event-time-end',
+                'type' => 'textarea',
+                'rows' => '5',
+                'cols' => '40',
+                'description' => __('Use `|` as delimiter to separate select box / Checkbox / Radio button elements'),
             )
         ));
         // Save

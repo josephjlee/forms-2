@@ -84,7 +84,7 @@ class ManageFilter extends InputFilter
         // time_end
         $this->add(array(
             'name' => 'time_end',
-            'required' => false,
+            'required' => true,
             'filters' => array(
                 array(
                     'name' => 'StringTrim',

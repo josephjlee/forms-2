@@ -14,7 +14,7 @@ return array(
     // Module meta
     'meta' => array(
         'title'        => _a('Form'),
-        'description'  => _a('From generator'),
+        'description'  => _a('form generator system'),
         'version'      => '0.0.1',
         'license'      => 'New BSD',
         'logo'         => 'image/logo.png',
@@ -26,7 +26,6 @@ return array(
     'dependency' => array(
         'tools',
         'apis',
-        'support',
         'user',
     ),
     // Author information

@@ -22,6 +22,8 @@ class Element extends Model
     protected $columns = array(
         'id',
         'title',
+        'description',
+        'required',
         'type',
         'status',
         'order',
