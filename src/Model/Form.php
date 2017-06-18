@@ -24,11 +24,12 @@ class Form extends Model
         'id',
         'title',
         'slug',
-        'text_description',
+        'description',
         'status',
         'time_create',
         'time_start',
         'time_end',
         'type',
+        'count',
     );
 }

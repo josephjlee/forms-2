@@ -65,9 +65,9 @@ class ManageForm extends BaseForm
                 'description' => __('Used as story URL value : must be unique, short, and user oriented'),
             )
         ));
-        // text_description
+        // description
         $this->add(array(
-            'name' => 'text_description',
+            'name' => 'description',
             'options' => array(
                 'label' => __('Description'),
                 'editor' => 'html',

@@ -41,7 +41,6 @@ class ViewForm extends BaseForm
                 'type' => 'hidden',
             ),
         ));
-        print_r($this->option);
         if (isset($this->option['elements']) && !empty($this->option['elements'])) {
             foreach ($this->option['elements'] as $element) {
                 switch ($element['type']) {
@@ -55,24 +54,71 @@ class ViewForm extends BaseForm
                             ),
                             'attributes' => array(
                                 'type' => 'text',
+                                'description' => $element['description'],
+                                'required' => $element['required'] ? true : false,
                             )
                         ));
                         break;
 
                     case 'textarea':
-
+                        $this->add(array(
+                            'name' => sprintf('element-%s', $element['id']),
+                            'options' => array(
+                                'label' => $element['title'],
+                            ),
+                            'attributes' => array(
+                                'type' => 'textarea',
+                                'rows' => '5',
+                                'cols' => '40',
+                                'description' => $element['description'],
+                                'required' => $element['required'] ? true : false,
+                            )
+                        ));
                         break;
 
                     case 'checkbox':
-
+                        $this->add(array(
+                            'name' => sprintf('element-%s', $element['id']),
+                            'type' => 'multi_checkbox',
+                            'options' => array(
+                                'label' => $element['title'],
+                                'value_options' => $this->makeArray($element['value']),
+                            ),
+                            'attributes' => array(
+                                'description' => $element['description'],
+                                'required' => $element['required'] ? true : false,
+                            )
+                        ));
                         break;
 
                     case 'radio':
-
+                        $this->add(array(
+                            'name' => sprintf('element-%s', $element['id']),
+                            'type' => 'radio',
+                            'options' => array(
+                                'label' => $element['title'],
+                                'value_options' => $this->makeArray($element['value']),
+                            ),
+                            'attributes' => array(
+                                'description' => $element['description'],
+                                'required' => $element['required'] ? true : false,
+                            )
+                        ));
                         break;
 
                     case 'select':
-
+                        $this->add(array(
+                            'name' => sprintf('element-%s', $element['id']),
+                            'type' => 'select',
+                            'options' => array(
+                                'label' => $element['title'],
+                                'value_options' => $this->makeArray($element['value']),
+                            ),
+                            'attributes' => array(
+                                'description' => $element['description'],
+                                'required' => $element['required'] ? true : false,
+                            )
+                        ));
                         break;
                 }
             }
@@ -85,5 +131,15 @@ class ViewForm extends BaseForm
                 'value' => __('Submit'),
             )
         ));
+    }
+
+    public function makeArray($values)
+    {
+        $list = array();
+        $variable = explode('|', $values);
+        foreach ($variable as $value) {
+            $list[$value] = $value;
+        }
+        return $list;
     }
 }

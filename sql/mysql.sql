@@ -1,13 +1,14 @@
 CREATE TABLE `{form}` (
-  `id`               INT(10) UNSIGNED              NOT NULL AUTO_INCREMENT,
-  `title`            VARCHAR(256)                  NOT NULL DEFAULT '',
-  `slug`             VARCHAR(255)                  NOT NULL DEFAULT '',
-  `text_description` TEXT,
-  `status`           TINYINT(1) UNSIGNED           NOT NULL DEFAULT '1',
-  `time_create`      INT(10) UNSIGNED              NOT NULL DEFAULT '0',
-  `time_start`       INT(10) UNSIGNED              NOT NULL DEFAULT '0',
-  `time_end`         INT(10) UNSIGNED              NOT NULL DEFAULT '0',
-  `type`             ENUM ('general', 'dedicated') NOT NULL DEFAULT 'general',
+  `id`          INT(10) UNSIGNED              NOT NULL AUTO_INCREMENT,
+  `title`       VARCHAR(256)                  NOT NULL DEFAULT '',
+  `slug`        VARCHAR(255)                  NOT NULL DEFAULT '',
+  `description` TEXT,
+  `status`      TINYINT(1) UNSIGNED           NOT NULL DEFAULT '1',
+  `time_create` INT(10) UNSIGNED              NOT NULL DEFAULT '0',
+  `time_start`  INT(10) UNSIGNED              NOT NULL DEFAULT '0',
+  `time_end`    INT(10) UNSIGNED              NOT NULL DEFAULT '0',
+  `type`        ENUM ('general', 'dedicated') NOT NULL DEFAULT 'general',
+  `count`       INT(10) UNSIGNED              NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),
   KEY `status` (`status`),
@@ -19,14 +20,14 @@ CREATE TABLE `{form}` (
 );
 
 CREATE TABLE `{element}` (
-  `id`     INT(10) UNSIGNED                                                           NOT NULL AUTO_INCREMENT,
-  `title`  VARCHAR(256)                                                               NOT NULL DEFAULT '',
+  `id`          INT(10) UNSIGNED                                                           NOT NULL AUTO_INCREMENT,
+  `title`       VARCHAR(256)                                                               NOT NULL DEFAULT '',
   `description` TEXT,
-  `required`           TINYINT(1) UNSIGNED           NOT NULL DEFAULT '0',
-  `type`   ENUM ('text', 'email', 'phone', 'textarea', 'checkbox', 'radio', 'select') NOT NULL DEFAULT 'text',
-  `status` TINYINT(1) UNSIGNED                                                        NOT NULL DEFAULT '1',
-  `order`  INT(10) UNSIGNED                                                           NOT NULL DEFAULT '0',
-  `value`  TEXT,
+  `required`    TINYINT(1) UNSIGNED                                                        NOT NULL DEFAULT '0',
+  `type`        ENUM ('text', 'email', 'phone', 'textarea', 'checkbox', 'radio', 'select') NOT NULL DEFAULT 'text',
+  `status`      TINYINT(1) UNSIGNED                                                        NOT NULL DEFAULT '1',
+  `order`       INT(10) UNSIGNED                                                           NOT NULL DEFAULT '0',
+  `value`       TEXT,
   PRIMARY KEY (`id`)
 );
 

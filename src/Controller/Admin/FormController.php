@@ -189,9 +189,36 @@ class FormController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+                // Save record
+                $saveRecord = $this->getModel('record')->createRow();
+                $saveRecord->uid = Pi::user()->getId();
+                $saveRecord->form = $selectForm['id'];
+                $saveRecord->time_create = time();
+                $saveRecord->ip = Pi::user()->getIp();
+                $saveRecord->save();
+                // Save data
+                foreach ($elements as $element) {
+                    $elementKey = sprintf('element-%s', $element['id']);
+                    if (isset($values[$elementKey]) && !empty($values[$elementKey])) {
+                        if (is_array($values[$elementKey])) {
+                            $values[$elementKey] = json_encode($values[$elementKey]);
+                        }
+                        $saveData = $this->getModel('data')->createRow();
+                        $saveData->record = $saveRecord->id;
+                        $saveData->uid = Pi::user()->getId();
+                        $saveData->form = $selectForm['id'];
+                        $saveData->time_create = time();
+                        $saveData->element = $element['id'];
+                        $saveData->value = $values[$elementKey];
+                        $saveData->save();
+                    }
+                }
+                // Update count
+                $this->getModel('form')->increment('count', array('id' => $selectForm['id']));
+                // Jump
+                $message = __('Form input values saved successfully.');
+                $this->jump(array('action' => 'index'), $message);
             }
-
-
         } else {
             $data = array(
                 'id' => $selectForm['id'],

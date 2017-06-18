@@ -20,8 +20,8 @@ use Zend\Db\Sql\Predicate\Expression;
  * Pi::api('form', 'forms')->getForm($id);
  * Pi::api('form', 'forms')->getFormView($id, $uid);
  * Pi::api('form', 'forms')->getView($formId);
- * Pi::api('form', 'forms')->getFormList();
- * Pi::api('form', 'forms')->count();
+ * Pi::api('form', 'forms')->getFormList($uid);
+ * Pi::api('form', 'forms')->count($uid);
  * Pi::api('form', 'forms')->canonizeForm($form);
  */
 
@@ -36,10 +36,17 @@ class Form extends AbstractApi
 
     public function getFormView($id, $uid)
     {
-        $selectForm = Pi::model('form', $this->getModule())->find(intval($id));
-        $selectForm = $this->canonizeForm($selectForm);
-
-        return $selectForm;
+        $where = array('uid' => $uid, 'form' => $id);
+        $columns = array('count' => new Expression('count(*)'));
+        $select = Pi::model('record', $this->getModule())->select()->columns($columns)->where($where);
+        $count = Pi::model('record', $this->getModule())->selectWith($select)->current()->count;
+        if ($count == 0) {
+            $selectForm = Pi::model('form', $this->getModule())->find(intval($id));
+            $selectForm = $this->canonizeForm($selectForm);
+            return $selectForm;
+        } else {
+            return false;
+        }
     }
 
     public function getView($formId)
@@ -67,7 +74,7 @@ class Form extends AbstractApi
         return $elements;
     }
 
-    public function getFormList()
+    public function getFormList($uid)
     {
         $forms = array();
         $where = array('status' => 1, 'time_start <= ?' => time(), 'time_end >= ?' => time());
@@ -80,20 +87,40 @@ class Form extends AbstractApi
         return $forms;
     }
 
-    public function count()
+    public function count($uid)
     {
         $count = array();
 
+        // User record forms
+        $record = array();
+        $where = array('uid' => $uid);
+        $select = Pi::model('record', $this->getModule())->select()->where($where);
+        $rowSet = Pi::model('record', $this->getModule())->selectWith($select);
+        foreach ($rowSet as $row) {
+            $record[] = $row->form;
+        }
+        $record = array_unique($record);
+        $count['record'] = implode(',',$record);
+
+        // general
         $where = array('status' => 1, 'time_start <= ?' => time(), 'time_end >= ?' => time(), 'type' => 'general');
         $columns = array('count' => new Expression('count(*)'));
         $select = Pi::model('form', $this->getModule())->select()->columns($columns)->where($where);
+        if (!empty($record)) {
+            $select->where(array(new Expression(sprintf('id NOT IN (%s)', implode(',',$record)))));
+        }
         $count['general'] = Pi::model('form', $this->getModule())->selectWith($select)->current()->count;
 
+        // dedicated
         $where = array('status' => 1, 'time_start <= ?' => time(), 'time_end >= ?' => time(), 'type' => 'dedicated');
         $columns = array('count' => new Expression('count(*)'));
         $select = Pi::model('form', $this->getModule())->select()->columns($columns)->where($where);
+        if (!empty($record)) {
+            $select->where(array(new Expression(sprintf('id NOT IN (%s)', implode(',',$record)))));
+        }
         $count['dedicated'] = Pi::model('form', $this->getModule())->selectWith($select)->current()->count;
 
+        // total
         $count['total'] = $count['general'] + $count['dedicated'];
 
         return $count;
@@ -109,8 +136,8 @@ class Form extends AbstractApi
         // object to array
         $form = $form->toArray();
 
-        // Set text_description
-        $form['text_description'] = Pi::service('markup')->render($form['text_description'], 'html', 'html');
+        // Set description
+        $form['description'] = Pi::service('markup')->render($form['description'], 'html', 'html');
 
         // Set time view
         $form['time_create_view'] = _date($form['time_create'], array('pattern' => 'yyyy/MM/dd'));

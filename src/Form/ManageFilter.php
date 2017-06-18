@@ -51,9 +51,9 @@ class ManageFilter extends InputFilter
                 )),
             ),
         ));
-        // text_description
+        // description
         $this->add(array(
-            'name' => 'text_description',
+            'name' => 'description',
             'required' => false,
             'filters' => array(
                 array(

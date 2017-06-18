@@ -54,9 +54,29 @@ class ElementFilter extends InputFilter
         $this->add(array(
             'name' => 'value',
             'required' => false,
-            'validators' => array(
-                new \Module\Forms\Validator\ElementValue,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
             ),
+            /* 'validators' => array(
+                new \Module\Forms\Validator\ElementValue,
+            ), */
+        ));
+        // description
+        $this->add(array(
+            'name' => 'description',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        // required
+        $this->add(array(
+            'name' => 'required',
+            'required' => false,
         ));
     }
 }

@@ -112,6 +112,29 @@ class ElementForm extends BaseForm
                 'description' => __('Use `|` as delimiter to separate select box / Checkbox / Radio button elements'),
             )
         ));
+        // description
+        $this->add(array(
+            'name' => 'description',
+            'options' => array(
+                'label' => __('Description'),
+            ),
+            'attributes' => array(
+                'type' => 'textarea',
+                'rows' => '5',
+                'cols' => '40',
+            )
+        ));
+        // required
+        $this->add(array(
+            'name' => 'required',
+            'type' => 'checkbox',
+            'options' => array(
+                'label' => __('Required'),
+            ),
+            'attributes' => array(
+                'required' => false,
+            )
+        ));
         // Save
         $this->add(array(
             'name' => 'submit',

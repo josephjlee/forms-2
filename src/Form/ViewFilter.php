@@ -28,43 +28,51 @@ class ViewFilter extends InputFilter
         // elements
         if (isset($option['elements']) && !empty($option['elements'])) {
             foreach ($option['elements'] as $element) {
-                switch ($element) {
+                switch ($element['type']) {
                     case 'text':
                     case 'email':
                     case 'phone':
-                    $this->add(array(
-                        'name' => sprintf('element-%s', $element['id']),
-                        'required' => false,
-                        'filters' => array(
-                            array(
-                                'name' => 'StringTrim',
+                        $this->add(array(
+                            'name' => sprintf('element-%s', $element['id']),
+                            'required' => $element['required'] ? true : false,
+                            'filters' => array(
+                                array(
+                                    'name' => 'StringTrim',
+                                ),
                             ),
-                        ),
-                    ));
+                        ));
                         break;
 
                     case 'textarea':
-
+                        $this->add(array(
+                            'name' => sprintf('element-%s', $element['id']),
+                            'required' => $element['required'] ? true : false,
+                            'filters' => array(
+                                array(
+                                    'name' => 'StringTrim',
+                                ),
+                            ),
+                        ));
                         break;
 
                     case 'checkbox':
                         $this->add(array(
                             'name' => sprintf('element-%s', $element['id']),
-                            'required' => false,
+                            'required' => $element['required'] ? true : false,
                         ));
                         break;
 
                     case 'radio':
                         $this->add(array(
                             'name' => sprintf('element-%s', $element['id']),
-                            'required' => false,
+                            'required' => $element['required'] ? true : false,
                         ));
                         break;
 
                     case 'select':
                         $this->add(array(
                             'name' => sprintf('element-%s', $element['id']),
-                            'required' => false,
+                            'required' => $element['required'] ? true : false,
                         ));
                         break;
                 }
