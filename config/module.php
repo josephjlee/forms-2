@@ -15,7 +15,7 @@ return array(
     'meta' => array(
         'title'        => _a('Form'),
         'description'  => _a('form generator system'),
-        'version'      => '0.0.1',
+        'version'      => '0.0.3',
         'license'      => 'New BSD',
         'logo'         => 'image/logo.png',
         'readme'       => 'docs/readme.txt',

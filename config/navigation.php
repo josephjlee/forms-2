@@ -59,5 +59,12 @@ return array(
                 ),
             ),
         ),
+        'record' => array(
+            'label'        => _a('Form records'),
+            'route'        => 'admin',
+            'module'       => 'forms',
+            'controller'   => 'record',
+            'action'       => 'index',
+        ),
     ),
 );

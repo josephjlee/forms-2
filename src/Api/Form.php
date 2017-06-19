@@ -169,6 +169,9 @@ class Form extends AbstractApi
                 break;
         }
 
+        // Count view
+        $form['count_view'] = _number($form['count']);
+
         // url
         $form['formUrl'] = Pi::url(Pi::service('url')->assemble('default', array(
             'module' => $this->getModule(),
