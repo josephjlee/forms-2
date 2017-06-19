@@ -73,7 +73,7 @@ class FormController extends ActionController
                 $row->save();
                 // Jump
                 $message = __('Form data saved successfully.');
-                $this->jump(array('action' => 'element', 'id' => $values['id']), $message);
+                $this->jump(array('action' => 'element', 'id' => $row->id), $message);
             }
         } else {
             if ($id) {

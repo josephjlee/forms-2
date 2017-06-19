@@ -76,9 +76,23 @@ class Form extends AbstractApi
 
     public function getFormList($uid)
     {
+        // User record forms
+        $record = array();
+        $where = array('uid' => $uid);
+        $select = Pi::model('record', $this->getModule())->select()->where($where);
+        $rowSet = Pi::model('record', $this->getModule())->selectWith($select);
+        foreach ($rowSet as $row) {
+            $record[] = $row->form;
+        }
+        $record = array_unique($record);
+
+        // Get list form
         $forms = array();
         $where = array('status' => 1, 'time_start <= ?' => time(), 'time_end >= ?' => time());
         $select = Pi::model('form', $this->getModule())->select()->where($where);
+        if (!empty($record)) {
+            $select->where(array(new Expression(sprintf('id NOT IN (%s)', implode(',',$record)))));
+        }
         $rowSet = Pi::model('form', $this->getModule())->selectWith($select);
         foreach ($rowSet as $row) {
             $forms[] =  $this->canonizeForm($row);

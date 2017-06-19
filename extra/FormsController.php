@@ -31,21 +31,26 @@ class FormsController extends ActionController
         // Get info form url
         $module = $this->params('module');
         $token = $this->params('token');
+        $uid = $this->params('uid');
         // Check module
         if (Pi::service('module')->isActive('forms')) {
             // Check token
             $check = Pi::api('token', 'tools')->check($token, $module, 'api');
             if ($check['status'] == 1) {
+                if ($uid > 0) {
 
 
 
-                $result = Pi::api('form', 'forms')->count();
+                    $result = Pi::api('form', 'forms')->count($uid);
 
 
 
-                $result['status'] = 1;
-                $result['message'] = 'Its work !';
-                return $result;
+                    $result['status'] = 1;
+                    $result['message'] = 'Its work !';
+                    return $result;
+                } else {
+                    return $result;
+                }
             } else {
                 return $check;
             }
@@ -66,21 +71,26 @@ class FormsController extends ActionController
         // Get info form url
         $module = $this->params('module');
         $token = $this->params('token');
+        $uid = $this->params('uid');
         // Check module
         if (Pi::service('module')->isActive('forms')) {
             // Check token
             $check = Pi::api('token', 'tools')->check($token, $module, 'api');
             if ($check['status'] == 1) {
+                if ($uid > 0) {
 
 
 
-                $result['forms'] = Pi::api('form', 'forms')->getFormList();
+                    $result['forms'] = Pi::api('form', 'forms')->getFormList($uid);
 
 
 
-                $result['status'] = 1;
-                $result['message'] = 'Its work !';
-                return $result;
+                    $result['status'] = 1;
+                    $result['message'] = 'Its work !';
+                    return $result;
+                } else {
+                    return $result;
+                }
             } else {
                 return $check;
             }
