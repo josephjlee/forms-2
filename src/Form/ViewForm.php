@@ -60,6 +60,20 @@ class ViewForm extends BaseForm
                         ));
                         break;
 
+                    case 'number':
+                        $this->add(array(
+                            'name' => sprintf('element-%s', $element['id']),
+                            'options' => array(
+                                'label' => $element['title'],
+                            ),
+                            'attributes' => array(
+                                'type' => 'number',
+                                'description' => $element['description'],
+                                'required' => $element['required'] ? true : false,
+                            )
+                        ));
+                        break;
+
                     case 'textarea':
                         $this->add(array(
                             'name' => sprintf('element-%s', $element['id']),

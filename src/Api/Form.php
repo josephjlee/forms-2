@@ -81,7 +81,7 @@ class Form extends AbstractApi
     {
         // User record forms
         $record = array();
-        $where = array('uid' => $uid);
+        $where = array('uid' => $uid, 'extra_key' => 0);
         $select = Pi::model('record', $this->getModule())->select()->where($where);
         $rowSet = Pi::model('record', $this->getModule())->selectWith($select);
         foreach ($rowSet as $row) {
@@ -110,7 +110,7 @@ class Form extends AbstractApi
 
         // User record forms
         $record = array();
-        $where = array('uid' => $uid);
+        $where = array('uid' => $uid, 'extra_key' => 0);
         $select = Pi::model('record', $this->getModule())->select()->where($where);
         $rowSet = Pi::model('record', $this->getModule())->selectWith($select);
         foreach ($rowSet as $row) {

@@ -32,6 +32,7 @@ class ViewFilter extends InputFilter
                     case 'text':
                     case 'email':
                     case 'phone':
+                    case 'number':
                         $this->add(array(
                             'name' => sprintf('element-%s', $element['id']),
                             'required' => $element['required'] ? true : false,
