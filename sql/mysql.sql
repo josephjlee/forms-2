@@ -46,13 +46,15 @@ CREATE TABLE `{record}` (
   `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `uid`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `form`        INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `extra_key`   INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `time_create` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `ip`          CHAR(15)            NOT NULL DEFAULT '',
   `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`),
   KEY `form` (`form`),
-  KEY `uid_form` (`uid`, `form`)
+  KEY `uid_form` (`uid`, `form`),
+  KEY `uid_form_key` (`uid`, `form`, `extra_key`)
 );
 
 CREATE TABLE `{data}` (

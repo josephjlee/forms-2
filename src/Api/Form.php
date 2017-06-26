@@ -18,7 +18,7 @@ use Zend\Db\Sql\Predicate\Expression;
 
 /*
  * Pi::api('form', 'forms')->getForm($id);
- * Pi::api('form', 'forms')->getFormView($id, $uid);
+ * Pi::api('form', 'forms')->getFormView($id, $uid, $key);
  * Pi::api('form', 'forms')->getView($formId);
  * Pi::api('form', 'forms')->getFormList($uid);
  * Pi::api('form', 'forms')->count($uid);
@@ -34,9 +34,12 @@ class Form extends AbstractApi
         return $selectForm;
     }
 
-    public function getFormView($id, $uid)
+    public function getFormView($id, $uid, $key = 0)
     {
         $where = array('uid' => $uid, 'form' => $id);
+        if ($key > 0) {
+            $where['extra_key'] = $key;
+        }
         $columns = array('count' => new Expression('count(*)'));
         $select = Pi::model('record', $this->getModule())->select()->columns($columns)->where($where);
         $count = Pi::model('record', $this->getModule())->selectWith($select)->current()->count;

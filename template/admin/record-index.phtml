@@ -6,6 +6,7 @@
         <tr>
             <th><?php _e('ID'); ?></th>
             <th><?php _e('Form'); ?></th>
+            <th><?php _e('Extra'); ?></th>
             <th><?php _e('User'); ?></th>
             <th><?php _e('Time'); ?></th>
             <th><?php _e('Action'); ?></th>
@@ -14,6 +15,7 @@
             <tr>
                 <td><?php echo $this->escape($record['id']); ?></td>
                 <td><?php echo $this->escape($record['form']['title']); ?></td>
+                <td><?php echo $this->escape($record['extra_key']); ?></td>
                 <td><?php echo $this->escape($record['user']['name']); ?> ( <?php echo $this->escape($record['user']['email']); ?> )</td>
                 <td><?php echo $this->escape($record['time_create_view']); ?></td>
                 <td>

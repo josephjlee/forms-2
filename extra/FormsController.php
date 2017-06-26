@@ -113,13 +113,14 @@ class FormsController extends ActionController
         $token = $this->params('token');
         $uid = $this->params('uid');
         $id = $this->params('id');
+        $brand = $this->params('brand', 0);
         // Check module
         if (Pi::service('module')->isActive('forms')) {
             // Check token
             $check = Pi::api('token', 'tools')->check($token, $module, 'api');
             if ($check['status'] == 1) {
                 if ($uid > 0) {
-                    $selectForm = Pi::api('form', 'forms')->getFormView($id, $uid);
+                    $selectForm = Pi::api('form', 'forms')->getFormView($id, $uid, $brand);
                     // Check form
                     if ($selectForm) {
                         // Get view
@@ -138,8 +139,9 @@ class FormsController extends ActionController
                                 $values = $form->getData();
                                 // Save record
                                 $saveRecord = Pi::model('record', 'forms')->createRow();
-                                $saveRecord->uid = Pi::user()->getId();
+                                $saveRecord->uid = $uid;
                                 $saveRecord->form = $selectForm['id'];
+                                $saveRecord->extra_key = $brand;
                                 $saveRecord->time_create = time();
                                 $saveRecord->ip = Pi::user()->getIp();
                                 $saveRecord->save();
