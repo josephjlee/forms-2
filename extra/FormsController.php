@@ -195,4 +195,9 @@ class FormsController extends ActionController
     {
         $this->view()->setTemplate('api-finish', 'forms', 'front')->setLayout('layout-front');
     }
+
+    public function backAction()
+    {
+        $this->view()->setTemplate('api-back', 'forms', 'front')->setLayout('layout-front');
+    }
 }
