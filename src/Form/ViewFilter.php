@@ -83,6 +83,13 @@ class ViewFilter extends InputFilter
                             'required' => $element['required'] ? true : false,
                         ));
                         break;
+
+                    case 'star':
+                        $this->add(array(
+                            'name' => sprintf('element-%s', $element['id']),
+                            'required' => $element['required'] ? true : false,
+                        ));
+                        break;
                 }
             }
         }

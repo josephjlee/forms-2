@@ -154,6 +154,27 @@ class ViewForm extends BaseForm
                             )
                         ));
                         break;
+
+                    case 'star':
+                        $this->add(array(
+                            'name' => sprintf('element-%s', $element['id']),
+                            'type' => 'radio',
+                            'options' => array(
+                                'label' => $element['title'],
+                                'value_options' => array(
+                                    1 => 1,
+                                    2 => 2,
+                                    3 => 3,
+                                    4 => 4,
+                                    5 => 5,
+                                ),
+                            ),
+                            'attributes' => array(
+                                'description' => $element['description'],
+                                'required' => $element['required'] ? true : false,
+                            )
+                        ));
+                        break;
                 }
             }
         }
