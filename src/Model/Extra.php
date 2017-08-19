@@ -15,21 +15,15 @@ namespace Module\Forms\Model;
 
 use Pi\Application\Model\Model;
 
-class Form extends Model
+class Extra extends Model
 {
     /**
      * {@inheritDoc}
      */
     protected $columns = array(
         'id',
-        'title',
-        'slug',
-        'description',
-        'status',
-        'time_create',
-        'time_start',
-        'time_end',
-        //'type',
-        'count',
+        'form',
+        'extra_key',
+        'extra_module',
     );
 }

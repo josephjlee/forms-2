@@ -51,7 +51,6 @@ class ManageForm extends BaseForm
                 'type' => 'text',
                 'description' => '',
                 'required' => true,
-
             )
         ));
         // slug
@@ -90,9 +89,21 @@ class ManageForm extends BaseForm
                     5 => __('Delete'),
                 ),
             ),
+            'attributes' => array(
+                'required' => true,
+            )
+        ));
+        // extra_key
+        $this->add(array(
+            'name'          => 'extra_key',
+            'options'       => array(
+                'label' => __('Brands'),
+                'value_options' => $this->option['brand'],
+            ),
+            'type'          => 'multi_checkbox',
         ));
         // type
-        $this->add(array(
+        /* $this->add(array(
             'name' => 'type',
             'type' => 'select',
             'options' => array(
@@ -102,7 +113,7 @@ class ManageForm extends BaseForm
                     'dedicated' => __('Dedicated'),
                 ),
             ),
-        ));
+        )); */
         // time_start
         $this->add(array(
             'name' => 'time_start',

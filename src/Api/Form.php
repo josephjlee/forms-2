@@ -21,6 +21,7 @@ use Zend\Db\Sql\Predicate\Expression;
  * Pi::api('form', 'forms')->getFormView($id, $uid, $key);
  * Pi::api('form', 'forms')->getView($formId);
  * Pi::api('form', 'forms')->getFormList($uid);
+ * Pi::api('form', 'forms')->getAllowIdList($form, $uid);
  * Pi::api('form', 'forms')->count($uid);
  * Pi::api('form', 'forms')->canonizeForm($form);
  */
@@ -104,7 +105,31 @@ class Form extends AbstractApi
         return $forms;
     }
 
-    public function count($uid)
+    public function getAllowIdList($form)
+    {
+        $idList = array();
+        $where = array('form' => $form);
+        $select = Pi::model('extra', $this->getModule())->select()->where($where);
+        $rowSet = Pi::model('extra', $this->getModule())->selectWith($select);
+        foreach ($rowSet as $row) {
+            $idList[] = $row->extra_key;
+        }
+        return array_unique($idList);
+    }
+
+    public function getNotAllowIdList($form, $uid)
+    {
+        $idList = array();
+        $where = array('form' => $form, 'uid' => $uid);
+        $select = Pi::model('record', $this->getModule())->select()->where($where);
+        $rowSet = Pi::model('record', $this->getModule())->selectWith($select);
+        foreach ($rowSet as $row) {
+            $idList[] = $row->form;
+        }
+        return array_unique($idList);
+    }
+
+    /* public function count($uid)
     {
         $count = array();
 
@@ -141,7 +166,7 @@ class Form extends AbstractApi
         $count['total'] = $count['general'] + $count['dedicated'];
 
         return $count;
-    }
+    } */
 
     public function canonizeForm($form)
     {
@@ -162,7 +187,7 @@ class Form extends AbstractApi
         $form['time_end_view'] = _date($form['time_end'], array('pattern' => 'yyyy/MM/dd'));
 
         // Set type view
-        switch ($form['type']) {
+        /* switch ($form['type']) {
             case 'general':
                 $form['type_view'] = __('General');
                 break;
@@ -170,7 +195,7 @@ class Form extends AbstractApi
             case 'dedicated':
                 $form['type_view'] = __('Dedicated');
                 break;
-        }
+        } */
 
         // Count view
         $form['count_view'] = _number($form['count']);

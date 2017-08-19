@@ -66,11 +66,16 @@ class ManageFilter extends InputFilter
             'name' => 'status',
             'required' => false,
         ));
-        // type
+        // extra_key
         $this->add(array(
-            'name' => 'type',
+            'name' => 'extra_key',
             'required' => false,
         ));
+        // type
+        /* $this->add(array(
+            'name' => 'type',
+            'required' => false,
+        )); */
         // time_start
         $this->add(array(
             'name' => 'time_start',

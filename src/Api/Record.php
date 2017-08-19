@@ -41,7 +41,7 @@ class Record extends AbstractApi
         $where = array('record' => $record);
         $select = Pi::db()->select();
         $select->from(array('data' => $dataTable));
-        $select->join(array('element' => $elementTable), 'data.element = element.id', array('element_id' => 'id', 'element_title' => 'title', 'element_type' => 'type'));
+        $select->join(array('element' => $elementTable), 'data.element = element.id', array('element_id' => 'id', 'element_title' => 'title'));
         $select->where($where);
         $rowset = Pi::model('data', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {

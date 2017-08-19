@@ -19,7 +19,7 @@ use Module\Forms\Form\ViewFilter;
  */
 class FormsController extends ActionController
 {
-    public function countAction()
+    /* public function countAction()
     {
         // Set result
         $result = array(
@@ -57,7 +57,7 @@ class FormsController extends ActionController
         } else {
             return $result;
         }
-    }
+    } */
 
     public function listAction()
     {

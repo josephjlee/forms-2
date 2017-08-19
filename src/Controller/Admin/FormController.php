@@ -44,8 +44,23 @@ class FormController extends ActionController
     {
         // Get id
         $id = $this->params('id');
+
+        // Set option
+        $option = array(
+            'brand' => array(),
+        );
+
+        // Get brand list
+        $where = array('status' => 1, 'type' => 'brand');
+        $order = array('display_order ASC', 'title ASC', 'id DESC');
+        $select = Pi::model('category', 'shop')->select()->where($where)->order($order);
+        $rowset = Pi::model('category', 'shop')->selectWith($select);
+        foreach ($rowset as $row) {
+            $option['brand'][$row->id] = $row->title;
+        }
+
         // Set form
-        $form = new ManageForm('manage');
+        $form = new ManageForm('manage', $option);
         $form->setAttribute('enctype', 'multipart/form-data');
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
@@ -54,7 +69,7 @@ class FormController extends ActionController
             $filter = new Filter\Slug;
             $data['slug'] = $filter($slug);
             // Form filter
-            $form->setInputFilter(new ManageFilter);
+            $form->setInputFilter(new ManageFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
@@ -71,6 +86,19 @@ class FormController extends ActionController
                 }
                 $row->assign($values);
                 $row->save();
+
+                // Remove links
+                $this->getModel('extra')->delete(array(
+                    'form' => $row->id
+                ));
+                // Save links
+                foreach ($values['extra_key'] as $extraId) {
+                    // Save
+                    $extra = $this->getModel('extra')->createRow();
+                    $extra->form = $row->id;
+                    $extra->extra_key = $extraId;
+                    $extra->save();
+                }
                 // Jump
                 $message = __('Form data saved successfully.');
                 $this->jump(array('action' => 'element', 'id' => $row->id), $message);
@@ -80,6 +108,14 @@ class FormController extends ActionController
                 $formManage = $this->getModel('form')->find($id)->toArray();
                 $formManage['time_start'] = ($formManage['time_start']) ? date('Y/m/d', $formManage['time_start']) : date('Y/m/d');
                 $formManage['time_end'] = ($formManage['time_end']) ? date('Y/m/d', $formManage['time_end']) : '';
+
+                $where = array('form' => $formManage['id']);
+                $select = $this->getModel('extra')->select()->where($where);
+                $rowset = $this->getModel('extra')->selectWith($select);
+                foreach ($rowset as $row) {
+                    $formManage['extra_key'][] = $row['extra_key'];
+                }
+
                 $form->setData($formManage);
             }
         }
