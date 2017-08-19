@@ -134,6 +134,26 @@ class ViewForm extends BaseForm
                             )
                         ));
                         break;
+
+                    case 'percent':
+                        // Set percent
+                        $percent = array();
+                        for ($i = 1; $i <= 100; $i++) {
+                            $percent[$i] = $i;
+                        }
+                        $this->add(array(
+                            'name' => sprintf('element-%s', $element['id']),
+                            'type' => 'select',
+                            'options' => array(
+                                'label' => $element['title'],
+                                'value_options' => $percent,
+                            ),
+                            'attributes' => array(
+                                'description' => $element['description'],
+                                'required' => $element['required'] ? true : false,
+                            )
+                        ));
+                        break;
                 }
             }
         }

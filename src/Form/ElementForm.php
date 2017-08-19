@@ -60,14 +60,14 @@ class ElementForm extends BaseForm
             'options' => array(
                 'label' => __('Type'),
                 'value_options' => array(
-                    'text' => __('Text'),
-                    'number' => __('Number'),
-                    //'email' => __('Email'),
-                    //'phone' => __('Phone'),
+                    'text'     => __('Text'),
+                    'number'   => __('Number'),
                     'textarea' => __('Text Area'),
                     'checkbox' => __('Check Box'),
-                    'radio' => __('Radio Button'),
-                    'select' => __('Select Box'),
+                    'radio'    => __('Radio Button'),
+                    'select'   => __('Select Box'),
+                    'star'     => __('Star'),
+                    'percent'  => __('Percent'),
                 ),
             ),
             'attributes' => array(

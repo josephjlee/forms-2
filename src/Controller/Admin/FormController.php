@@ -226,7 +226,7 @@ class FormController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 // Save record
-                $saveRecord = $this->getModel('record')->createRow();
+                /* $saveRecord = $this->getModel('record')->createRow();
                 $saveRecord->uid = Pi::user()->getId();
                 $saveRecord->form = $selectForm['id'];
                 $saveRecord->time_create = time();
@@ -253,7 +253,11 @@ class FormController extends ActionController
                 $this->getModel('form')->increment('count', array('id' => $selectForm['id']));
                 // Jump
                 $message = __('Form input values saved successfully.');
-                $this->jump(array('action' => 'index'), $message);
+                $this->jump(array('action' => 'index'), $message); */
+
+                echo '<pre>';
+                print_r($values);
+                echo '</pre>';
             }
         } else {
             $data = array(

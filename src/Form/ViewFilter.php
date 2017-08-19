@@ -76,8 +76,25 @@ class ViewFilter extends InputFilter
                             'required' => $element['required'] ? true : false,
                         ));
                         break;
+
+                    case 'percent':
+                        $this->add(array(
+                            'name' => sprintf('element-%s', $element['id']),
+                            'required' => $element['required'] ? true : false,
+                        ));
+                        break;
                 }
             }
         }
+    }
+
+    public function makeArray($values)
+    {
+        $list = array();
+        $variable = explode('|', $values);
+        foreach ($variable as $value) {
+            $list[$value] = $value;
+        }
+        return $list;
     }
 }
