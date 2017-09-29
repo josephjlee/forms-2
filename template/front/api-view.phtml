@@ -1,4 +1,9 @@
 <?php if (isset($selectForm) && $selectForm) { ?>
+    <?php if (!empty($selectForm['description'])) { ?>
+        <div class="clearfix form-description">
+            <?php echo $selectForm['description']; ?>
+        </div>
+    <?php } ?>
     <?php echo $this->form($form); ?>
 <?php } else { ?>
     <h1><?php echo $this->escape($selectForm['title']); ?></h1>

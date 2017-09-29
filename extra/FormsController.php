@@ -174,6 +174,7 @@ class FormsController extends ActionController
                             $form->setData($data);
                         }
                         // Set view
+                        $this->view()->assign('selectForm', $selectForm);
                         $this->view()->assign('elements', $elements);
                         $this->view()->assign('form', $form);
                     }
