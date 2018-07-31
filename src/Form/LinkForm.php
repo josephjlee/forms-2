@@ -13,12 +13,11 @@
 
 namespace Module\Forms\Form;
 
-use Pi;
 use Pi\Form\Form as BaseForm;
 
 class LinkForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         $this->option = $option;
         parent::__construct($name);
@@ -35,36 +34,36 @@ class LinkForm extends BaseForm
     public function init()
     {
         // id
-        $this->add(array(
-            'name' => 'id',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'id',
+            'attributes' => [
                 'type' => 'hidden',
-            ),
-        ));
+            ],
+        ]);
         // elements
         if (isset($this->option['elements']) && !empty($this->option['elements'])) {
             foreach ($this->option['elements'] as $element) {
-                $this->add(array(
-                    'name' => sprintf('element-%s', $element['id']),
-                    'type' => 'checkbox',
-                    'options' => array(
+                $this->add([
+                    'name'       => sprintf('element-%s', $element['id']),
+                    'type'       => 'checkbox',
+                    'options'    => [
                         'label' => $element['title'],
-                    ),
-                    'attributes' => array(
+                    ],
+                    'attributes' => [
                         'description' => sprintf(__('Form type is : %s'), $element['type']),
-                        'value' => $element['link'],
-                        'required' => false,
-                    )
-                ));
+                        'value'       => $element['link'],
+                        'required'    => false,
+                    ],
+                ]);
             }
         }
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Link to form'),
-            )
-        ));
+            ],
+        ]);
     }
 }

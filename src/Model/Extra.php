@@ -20,10 +20,10 @@ class Extra extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
+    protected $columns = [
         'id',
         'form',
         'extra_key',
         'extra_module',
-    );
+    ];
 }

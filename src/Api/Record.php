@@ -10,11 +10,11 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Forms\Api;
 
 use Pi;
 use Pi\Application\Api\AbstractApi;
-use Zend\Db\Sql\Predicate\Expression;
 
 /*
  * Pi::api('record', 'forms')->getRecord($id);
@@ -32,39 +32,7 @@ class Record extends AbstractApi
         return $record;
     }
 
-    public function getRecordData($record)
-    {
-        $dataTable = Pi::model('data', 'forms')->getTable();
-        $elementTable = Pi::model('element', 'forms')->getTable();
-
-        $list = array();
-        $where = array('record' => $record);
-        $select = Pi::db()->select();
-        $select->from(array('data' => $dataTable));
-        $select->join(array('element' => $elementTable), 'data.element = element.id', array('element_id' => 'id', 'element_title' => 'title'));
-        $select->where($where);
-        $rowset = Pi::model('data', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
-            $list[$row->id] = $row->toArray();
-            if ($row->element_type == 'checkbox') {
-                $list[$row->id]['value'] = implode(' , ',json_decode($row->value));
-            }
-        }
-
-        return $list;
-    }
-
-    public function getUser($uid)
-    {
-        $fields = array(
-            'id', 'identity', 'name', 'email'
-        );
-        $user = Pi::user()->get($uid, $fields);
-
-        return $user;
-    }
-
-    public function canonizeRecord($record, $form = array(), $user = array())
+    public function canonizeRecord($record, $form = [], $user = [])
     {
         // Check
         if (empty($record)) {
@@ -85,7 +53,7 @@ class Record extends AbstractApi
         $record = $record->toArray();
 
         // Set time view
-        $record['time_create_view'] = _date($record['time_create'], array('pattern' => 'yyyy/MM/dd'));
+        $record['time_create_view'] = _date($record['time_create'], ['pattern' => 'yyyy/MM/dd']);
 
         // Set user
         $record['user'] = $user;
@@ -94,5 +62,37 @@ class Record extends AbstractApi
         $record['form'] = $form;
 
         return $record;
+    }
+
+    public function getUser($uid)
+    {
+        $fields = [
+            'id', 'identity', 'name', 'email',
+        ];
+        $user   = Pi::user()->get($uid, $fields);
+
+        return $user;
+    }
+
+    public function getRecordData($record)
+    {
+        $dataTable    = Pi::model('data', 'forms')->getTable();
+        $elementTable = Pi::model('element', 'forms')->getTable();
+
+        $list   = [];
+        $where  = ['record' => $record];
+        $select = Pi::db()->select();
+        $select->from(['data' => $dataTable]);
+        $select->join(['element' => $elementTable], 'data.element = element.id', ['element_id' => 'id', 'element_title' => 'title', 'element_type' => 'type']);
+        $select->where($where);
+        $rowset = Pi::model('data', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $list[$row->id] = $row->toArray();
+            if ($row->element_type == 'checkbox') {
+                $list[$row->id]['value'] = implode(' , ', json_decode($row->value));
+            }
+        }
+
+        return $list;
     }
 }

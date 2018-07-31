@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Forms\Model;
 
 use Pi\Application\Model\Model;
@@ -19,7 +20,7 @@ class Element extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
+    protected $columns = [
         'id',
         'title',
         'description',
@@ -28,5 +29,5 @@ class Element extends Model
         'status',
         'order',
         'value',
-    );
+    ];
 }

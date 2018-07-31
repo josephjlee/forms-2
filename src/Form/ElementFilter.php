@@ -13,70 +13,69 @@
 
 namespace Module\Forms\Form;
 
-use Pi;
 use Zend\InputFilter\InputFilter;
 
 class ElementFilter extends InputFilter
 {
-    public function __construct($option = array())
+    public function __construct($option = [])
     {
         // id
-        $this->add(array(
-            'name' => 'id',
+        $this->add([
+            'name'     => 'id',
             'required' => false,
-        ));
+        ]);
         // title
-        $this->add(array(
-            'name' => 'title',
+        $this->add([
+            'name'     => 'title',
             'required' => true,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // type
-        $this->add(array(
-            'name' => 'type',
+        $this->add([
+            'name'     => 'type',
             'required' => true,
-        ));
+        ]);
         // status
-        $this->add(array(
-            'name' => 'status',
+        $this->add([
+            'name'     => 'status',
             'required' => false,
-        ));
+        ]);
         // order
         /* $this->add(array(
             'name' => 'order',
             'required' => false,
         )); */
         // value
-        $this->add(array(
-            'name' => 'value',
+        $this->add([
+            'name'     => 'value',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
+                ],
+            ],
             /* 'validators' => array(
                 new \Module\Forms\Validator\ElementValue,
             ), */
-        ));
+        ]);
         // description
-        $this->add(array(
-            'name' => 'description',
+        $this->add([
+            'name'     => 'description',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // required
-        $this->add(array(
-            'name' => 'required',
+        $this->add([
+            'name'     => 'required',
             'required' => false,
-        ));
+        ]);
     }
 }

@@ -13,12 +13,11 @@
 
 namespace Module\Forms\Form;
 
-use Pi;
 use Pi\Form\Form as BaseForm;
 
 class ElementForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         $this->option = $option;
         parent::__construct($name);
@@ -35,31 +34,31 @@ class ElementForm extends BaseForm
     public function init()
     {
         // id
-        $this->add(array(
-            'name' => 'id',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'id',
+            'attributes' => [
                 'type' => 'hidden',
-            ),
-        ));
+            ],
+        ]);
         // title
-        $this->add(array(
-            'name' => 'title',
-            'options' => array(
+        $this->add([
+            'name'       => 'title',
+            'options'    => [
                 'label' => __('Title'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-                'required' => true,
-            )
-        ));
+                'required'    => true,
+            ],
+        ]);
         // type
-        $this->add(array(
-            'name' => 'type',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Type'),
-                'value_options' => array(
+        $this->add([
+            'name'       => 'type',
+            'type'       => 'select',
+            'options'    => [
+                'label'         => __('Type'),
+                'value_options' => [
                     'text'     => __('Text'),
                     'number'   => __('Number'),
                     'textarea' => __('Text Area'),
@@ -68,27 +67,27 @@ class ElementForm extends BaseForm
                     'select'   => __('Select Box'),
                     'star'     => __('Star'),
                     'percent'  => __('Percent'),
-                ),
-            ),
-            'attributes' => array(
-                  'required' => true,
-            )
-        ));
+                ],
+            ],
+            'attributes' => [
+                'required' => true,
+            ],
+        ]);
         // status
-        $this->add(array(
-            'name' => 'status',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Status'),
-                'value_options' => array(
+        $this->add([
+            'name'    => 'status',
+            'type'    => 'select',
+            'options' => [
+                'label'         => __('Status'),
+                'value_options' => [
                     1 => __('Published'),
                     2 => __('Pending review'),
                     3 => __('Draft'),
                     4 => __('Private'),
                     5 => __('Delete'),
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // order
         /* $this->add(array(
             'name' => 'order',
@@ -101,48 +100,48 @@ class ElementForm extends BaseForm
             )
         )); */
         // value
-        $this->add(array(
-            'name' => 'value',
-            'options' => array(
+        $this->add([
+            'name'       => 'value',
+            'options'    => [
                 'label' => __('General value'),
-            ),
-            'attributes' => array(
-                'type' => 'textarea',
-                'rows' => '5',
-                'cols' => '40',
+            ],
+            'attributes' => [
+                'type'        => 'textarea',
+                'rows'        => '5',
+                'cols'        => '40',
                 'description' => __('Use `|` as delimiter to separate select box / Checkbox / Radio button elements'),
-            )
-        ));
+            ],
+        ]);
         // description
-        $this->add(array(
-            'name' => 'description',
-            'options' => array(
+        $this->add([
+            'name'       => 'description',
+            'options'    => [
                 'label' => __('Description'),
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'type' => 'textarea',
                 'rows' => '5',
                 'cols' => '40',
-            )
-        ));
+            ],
+        ]);
         // required
-        $this->add(array(
-            'name' => 'required',
-            'type' => 'checkbox',
-            'options' => array(
+        $this->add([
+            'name'       => 'required',
+            'type'       => 'checkbox',
+            'options'    => [
                 'label' => __('Required'),
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'required' => false,
-            )
-        ));
+            ],
+        ]);
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 }

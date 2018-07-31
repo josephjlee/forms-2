@@ -13,12 +13,11 @@
 
 namespace Module\Forms\Form;
 
-use Pi;
 use Pi\Form\Form as BaseForm;
 
 class ViewForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         $this->option = $option;
         parent::__construct($name);
@@ -35,162 +34,162 @@ class ViewForm extends BaseForm
     public function init()
     {
         // id
-        $this->add(array(
-            'name' => 'id',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'id',
+            'attributes' => [
                 'type' => 'hidden',
-            ),
-        ));
+            ],
+        ]);
         if (isset($this->option['elements']) && !empty($this->option['elements'])) {
             foreach ($this->option['elements'] as $element) {
                 switch ($element['type']) {
                     case 'text':
                     case 'email':
                     case 'phone':
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
-                            'options' => array(
+                        $this->add([
+                            'name'       => sprintf('element-%s', $element['id']),
+                            'options'    => [
                                 'label' => $element['title'],
-                            ),
-                            'attributes' => array(
-                                'type' => 'text',
+                            ],
+                            'attributes' => [
+                                'type'        => 'text',
                                 'description' => $element['description'],
-                                'required' => $element['required'] ? true : false,
-                            )
-                        ));
+                                'required'    => $element['required'] ? true : false,
+                            ],
+                        ]);
                         break;
 
                     case 'number':
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
-                            'options' => array(
+                        $this->add([
+                            'name'       => sprintf('element-%s', $element['id']),
+                            'options'    => [
                                 'label' => $element['title'],
-                            ),
-                            'attributes' => array(
-                                'type' => 'number',
+                            ],
+                            'attributes' => [
+                                'type'        => 'number',
                                 'description' => $element['description'],
-                                'required' => $element['required'] ? true : false,
-                            )
-                        ));
+                                'required'    => $element['required'] ? true : false,
+                            ],
+                        ]);
                         break;
 
                     case 'textarea':
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
-                            'options' => array(
+                        $this->add([
+                            'name'       => sprintf('element-%s', $element['id']),
+                            'options'    => [
                                 'label' => $element['title'],
-                            ),
-                            'attributes' => array(
-                                'type' => 'textarea',
-                                'rows' => '5',
-                                'cols' => '40',
+                            ],
+                            'attributes' => [
+                                'type'        => 'textarea',
+                                'rows'        => '5',
+                                'cols'        => '40',
                                 'description' => $element['description'],
-                                'required' => $element['required'] ? true : false,
-                            )
-                        ));
+                                'required'    => $element['required'] ? true : false,
+                            ],
+                        ]);
                         break;
 
                     case 'checkbox':
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
-                            'type' => 'multi_checkbox',
-                            'options' => array(
-                                'label' => $element['title'],
+                        $this->add([
+                            'name'       => sprintf('element-%s', $element['id']),
+                            'type'       => 'multi_checkbox',
+                            'options'    => [
+                                'label'         => $element['title'],
                                 'value_options' => $this->makeArray($element['value']),
-                            ),
-                            'attributes' => array(
+                            ],
+                            'attributes' => [
                                 'description' => $element['description'],
-                                'required' => $element['required'] ? true : false,
-                            )
-                        ));
+                                'required'    => $element['required'] ? true : false,
+                            ],
+                        ]);
                         break;
 
                     case 'radio':
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
-                            'type' => 'radio',
-                            'options' => array(
-                                'label' => $element['title'],
+                        $this->add([
+                            'name'       => sprintf('element-%s', $element['id']),
+                            'type'       => 'radio',
+                            'options'    => [
+                                'label'         => $element['title'],
                                 'value_options' => $this->makeArray($element['value']),
-                            ),
-                            'attributes' => array(
+                            ],
+                            'attributes' => [
                                 'description' => $element['description'],
-                                'required' => $element['required'] ? true : false,
-                            )
-                        ));
+                                'required'    => $element['required'] ? true : false,
+                            ],
+                        ]);
                         break;
 
                     case 'select':
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
-                            'type' => 'select',
-                            'options' => array(
-                                'label' => $element['title'],
+                        $this->add([
+                            'name'       => sprintf('element-%s', $element['id']),
+                            'type'       => 'select',
+                            'options'    => [
+                                'label'         => $element['title'],
                                 'value_options' => $this->makeArray($element['value']),
-                            ),
-                            'attributes' => array(
+                            ],
+                            'attributes' => [
                                 'description' => $element['description'],
-                                'required' => $element['required'] ? true : false,
-                            )
-                        ));
+                                'required'    => $element['required'] ? true : false,
+                            ],
+                        ]);
                         break;
 
                     case 'percent':
                         // Set percent
-                        $percent = array();
+                        $percent = [];
                         for ($i = 1; $i <= 100; $i++) {
                             $percent[$i] = $i;
                         }
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
-                            'type' => 'select',
-                            'options' => array(
-                                'label' => $element['title'],
+                        $this->add([
+                            'name'       => sprintf('element-%s', $element['id']),
+                            'type'       => 'select',
+                            'options'    => [
+                                'label'         => $element['title'],
                                 'value_options' => $percent,
-                            ),
-                            'attributes' => array(
+                            ],
+                            'attributes' => [
                                 'description' => $element['description'],
-                                'required' => $element['required'] ? true : false,
-                            )
-                        ));
+                                'required'    => $element['required'] ? true : false,
+                            ],
+                        ]);
                         break;
 
                     case 'star':
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
-                            'type' => 'radio',
-                            'options' => array(
-                                'label' => $element['title'],
-                                'value_options' => array(
+                        $this->add([
+                            'name'       => sprintf('element-%s', $element['id']),
+                            'type'       => 'radio',
+                            'options'    => [
+                                'label'         => $element['title'],
+                                'value_options' => [
                                     1 => 1,
                                     2 => 2,
                                     3 => 3,
                                     4 => 4,
                                     5 => 5,
-                                ),
-                            ),
-                            'attributes' => array(
+                                ],
+                            ],
+                            'attributes' => [
                                 'description' => $element['description'],
-                                'required' => $element['required'] ? true : false,
-                            )
-                        ));
+                                'required'    => $element['required'] ? true : false,
+                            ],
+                        ]);
                         break;
                 }
             }
         }
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 
     public function makeArray($values)
     {
-        $list = array();
+        $list     = [];
         $variable = explode('|', $values);
         foreach ($variable as $value) {
             $list[$value] = $value;

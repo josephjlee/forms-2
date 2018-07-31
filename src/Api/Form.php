@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Forms\Api;
 
 use Pi;
@@ -35,15 +36,62 @@ class Form extends AbstractApi
         return $selectForm;
     }
 
+    public function canonizeForm($form)
+    {
+        // Check
+        if (empty($form)) {
+            return '';
+        }
+
+        // object to array
+        $form = $form->toArray();
+
+        // Set description
+        $form['description'] = Pi::service('markup')->render($form['description'], 'html', 'html');
+
+        // Set time view
+        $form['time_create_view'] = _date($form['time_create'], ['pattern' => 'yyyy/MM/dd']);
+        $form['time_start_view']  = _date($form['time_start'], ['pattern' => 'yyyy/MM/dd']);
+        $form['time_end_view']    = _date($form['time_end'], ['pattern' => 'yyyy/MM/dd']);
+
+        // Set type view
+        /* switch ($form['type']) {
+            case 'general':
+                $form['type_view'] = __('General');
+                break;
+
+            case 'dedicated':
+                $form['type_view'] = __('Dedicated');
+                break;
+        } */
+
+        // Count view
+        $form['count_view'] = _number($form['count']);
+
+        // url
+        $form['formUrl']    = Pi::url(Pi::service('url')->assemble('default', [
+            'module'     => $this->getModule(),
+            'controller' => 'index',
+            'slug'       => $form['slug'],
+        ]));
+        $form['formUrlApi'] = Pi::url(Pi::service('url')->assemble('default', [
+            'module'     => 'apis',
+            'controller' => 'forms',
+            'action'     => 'view',
+        ]));
+
+        return $form;
+    }
+
     public function getFormView($id, $uid, $key = 0)
     {
-        $where = array('uid' => $uid, 'form' => $id);
+        $where = ['uid' => $uid, 'form' => $id];
         if ($key > 0) {
             $where['extra_key'] = $key;
         }
-        $columns = array('count' => new Expression('count(*)'));
-        $select = Pi::model('record', $this->getModule())->select()->columns($columns)->where($where);
-        $count = Pi::model('record', $this->getModule())->selectWith($select)->current()->count;
+        $columns = ['count' => new Expression('count(*)')];
+        $select  = Pi::model('record', $this->getModule())->select()->columns($columns)->where($where);
+        $count   = Pi::model('record', $this->getModule())->selectWith($select)->current()->count;
         if ($count == 0) {
             $selectForm = Pi::model('form', $this->getModule())->find(intval($id));
             $selectForm = $this->canonizeForm($selectForm);
@@ -55,10 +103,10 @@ class Form extends AbstractApi
 
     public function getView($formId)
     {
-        $links = array();
-        $elements = array();
+        $links    = [];
+        $elements = [];
         // Gey links
-        $where = array('form' => $formId);
+        $where  = ['form' => $formId];
         $select = Pi::model('link', $this->getModule())->select()->where($where);
         $rowset = Pi::model('link', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
@@ -67,7 +115,7 @@ class Form extends AbstractApi
         // Check link
         if (!empty($links)) {
             // Get elements
-            $where = array('id' => $links);
+            $where  = ['id' => $links];
             $select = Pi::model('element', $this->getModule())->select()->where($where);
             $rowset = Pi::model('element', $this->getModule())->selectWith($select);
             foreach ($rowset as $row) {
@@ -81,8 +129,8 @@ class Form extends AbstractApi
     public function getFormList($uid)
     {
         // User record forms
-        $record = array();
-        $where = array('uid' => $uid, 'extra_key' => 0);
+        $record = [];
+        $where  = ['uid' => $uid, 'extra_key' => 0];
         $select = Pi::model('record', $this->getModule())->select()->where($where);
         $rowSet = Pi::model('record', $this->getModule())->selectWith($select);
         foreach ($rowSet as $row) {
@@ -91,15 +139,15 @@ class Form extends AbstractApi
         $record = array_unique($record);
 
         // Get list form
-        $forms = array();
-        $where = array('status' => 1, 'time_start <= ?' => time(), 'time_end >= ?' => time());
+        $forms  = [];
+        $where  = ['status' => 1, 'time_start <= ?' => time(), 'time_end >= ?' => time()];
         $select = Pi::model('form', $this->getModule())->select()->where($where);
         if (!empty($record)) {
-            $select->where(array(new Expression(sprintf('id NOT IN (%s)', implode(',',$record)))));
+            $select->where([new Expression(sprintf('id NOT IN (%s)', implode(',', $record)))]);
         }
         $rowSet = Pi::model('form', $this->getModule())->selectWith($select);
         foreach ($rowSet as $row) {
-            $forms[] =  $this->canonizeForm($row);
+            $forms[] = $this->canonizeForm($row);
         }
 
         return $forms;
@@ -107,24 +155,12 @@ class Form extends AbstractApi
 
     public function getAllowIdList($form)
     {
-        $idList = array();
-        $where = array('form' => $form);
+        $idList = [];
+        $where  = ['form' => $form];
         $select = Pi::model('extra', $this->getModule())->select()->where($where);
         $rowSet = Pi::model('extra', $this->getModule())->selectWith($select);
         foreach ($rowSet as $row) {
             $idList[] = $row->extra_key;
-        }
-        return array_unique($idList);
-    }
-
-    public function getNotAllowIdList($form, $uid)
-    {
-        $idList = array();
-        $where = array('form' => $form, 'uid' => $uid);
-        $select = Pi::model('record', $this->getModule())->select()->where($where);
-        $rowSet = Pi::model('record', $this->getModule())->selectWith($select);
-        foreach ($rowSet as $row) {
-            $idList[] = $row->form;
         }
         return array_unique($idList);
     }
@@ -168,50 +204,15 @@ class Form extends AbstractApi
         return $count;
     } */
 
-    public function canonizeForm($form)
+    public function getNotAllowIdList($form, $uid)
     {
-        // Check
-        if (empty($form)) {
-            return '';
+        $idList = [];
+        $where  = ['form' => $form, 'uid' => $uid];
+        $select = Pi::model('record', $this->getModule())->select()->where($where);
+        $rowSet = Pi::model('record', $this->getModule())->selectWith($select);
+        foreach ($rowSet as $row) {
+            $idList[] = $row->form;
         }
-
-        // object to array
-        $form = $form->toArray();
-
-        // Set description
-        $form['description'] = Pi::service('markup')->render($form['description'], 'html', 'html');
-
-        // Set time view
-        $form['time_create_view'] = _date($form['time_create'], array('pattern' => 'yyyy/MM/dd'));
-        $form['time_start_view'] = _date($form['time_start'], array('pattern' => 'yyyy/MM/dd'));
-        $form['time_end_view'] = _date($form['time_end'], array('pattern' => 'yyyy/MM/dd'));
-
-        // Set type view
-        /* switch ($form['type']) {
-            case 'general':
-                $form['type_view'] = __('General');
-                break;
-
-            case 'dedicated':
-                $form['type_view'] = __('Dedicated');
-                break;
-        } */
-
-        // Count view
-        $form['count_view'] = _number($form['count']);
-
-        // url
-        $form['formUrl'] = Pi::url(Pi::service('url')->assemble('default', array(
-            'module' => $this->getModule(),
-            'controller' => 'index',
-            'slug' => $form['slug'],
-        )));
-        $form['formUrlApi'] = Pi::url(Pi::service('url')->assemble('default', array(
-            'module' => 'apis',
-            'controller' => 'forms',
-            'action' => 'view'
-        )));
-        
-        return $form;
+        return array_unique($idList);
     }
 }

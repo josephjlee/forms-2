@@ -13,18 +13,17 @@
 
 namespace Module\Forms\Form;
 
-use Pi;
 use Zend\InputFilter\InputFilter;
 
 class ViewFilter extends InputFilter
 {
-    public function __construct($option = array())
+    public function __construct($option = [])
     {
         // id
-        $this->add(array(
-            'name' => 'id',
+        $this->add([
+            'name'     => 'id',
             'required' => false,
-        ));
+        ]);
         // elements
         if (isset($option['elements']) && !empty($option['elements'])) {
             foreach ($option['elements'] as $element) {
@@ -33,62 +32,62 @@ class ViewFilter extends InputFilter
                     case 'email':
                     case 'phone':
                     case 'number':
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
+                        $this->add([
+                            'name'     => sprintf('element-%s', $element['id']),
                             'required' => $element['required'] ? true : false,
-                            'filters' => array(
-                                array(
+                            'filters'  => [
+                                [
                                     'name' => 'StringTrim',
-                                ),
-                            ),
-                        ));
+                                ],
+                            ],
+                        ]);
                         break;
 
                     case 'textarea':
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
+                        $this->add([
+                            'name'     => sprintf('element-%s', $element['id']),
                             'required' => $element['required'] ? true : false,
-                            'filters' => array(
-                                array(
+                            'filters'  => [
+                                [
                                     'name' => 'StringTrim',
-                                ),
-                            ),
-                        ));
+                                ],
+                            ],
+                        ]);
                         break;
 
                     case 'checkbox':
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
+                        $this->add([
+                            'name'     => sprintf('element-%s', $element['id']),
                             'required' => $element['required'] ? true : false,
-                        ));
+                        ]);
                         break;
 
                     case 'radio':
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
+                        $this->add([
+                            'name'     => sprintf('element-%s', $element['id']),
                             'required' => $element['required'] ? true : false,
-                        ));
+                        ]);
                         break;
 
                     case 'select':
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
+                        $this->add([
+                            'name'     => sprintf('element-%s', $element['id']),
                             'required' => $element['required'] ? true : false,
-                        ));
+                        ]);
                         break;
 
                     case 'percent':
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
+                        $this->add([
+                            'name'     => sprintf('element-%s', $element['id']),
                             'required' => $element['required'] ? true : false,
-                        ));
+                        ]);
                         break;
 
                     case 'star':
-                        $this->add(array(
-                            'name' => sprintf('element-%s', $element['id']),
+                        $this->add([
+                            'name'     => sprintf('element-%s', $element['id']),
                             'required' => $element['required'] ? true : false,
-                        ));
+                        ]);
                         break;
                 }
             }
@@ -97,7 +96,7 @@ class ViewFilter extends InputFilter
 
     public function makeArray($values)
     {
-        $list = array();
+        $list     = [];
         $variable = explode('|', $values);
         foreach ($variable as $value) {
             $list[$value] = $value;

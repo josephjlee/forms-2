@@ -13,26 +13,25 @@
 
 namespace Module\Forms\Form;
 
-use Pi;
 use Zend\InputFilter\InputFilter;
 
 class LinkFilter extends InputFilter
 {
-    public function __construct($option = array())
+    public function __construct($option = [])
     {
         // id
-        $this->add(array(
-            'name' => 'id',
+        $this->add([
+            'name'     => 'id',
             'required' => false,
-        ));
+        ]);
         // elements
         if (isset($option['elements']) && !empty($option['elements'])) {
             foreach ($option['elements'] as $element) {
                 // important
-                $this->add(array(
-                    'name' => sprintf('element-%s', $element['id']),
+                $this->add([
+                    'name'     => sprintf('element-%s', $element['id']),
                     'required' => false,
-                ));
+                ]);
             }
         }
     }

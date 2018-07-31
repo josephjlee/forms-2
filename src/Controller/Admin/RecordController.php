@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Forms\Controller\Admin;
 
 use Pi;
@@ -21,17 +22,19 @@ class RecordController extends ActionController
     {
         // Get id
         $selectForm = $this->params('selectForm');
+
         // Get info
-        $user = array();
-        $form = array();
-        $list = array();
-        $order = array('time_create DESC', 'id DESC');
-        $where = array();
+        $user  = [];
+        $form  = [];
+        $list  = [];
+        $order = ['time_create DESC', 'id DESC'];
+        $where = [];
         if ($selectForm) {
             $where['form'] = $selectForm;
         }
         $select = $this->getModel('record')->select()->where($where)->order($order);
         $rowset = $this->getModel('record')->selectWith($select);
+
         // Make list
         foreach ($rowset as $row) {
             if (!isset($user[$row->uid])) {
@@ -50,7 +53,7 @@ class RecordController extends ActionController
 
     public function viewAction()
     {
-        $id = $this->params('id');
+        $id     = $this->params('id');
         $record = Pi::api('record', 'forms')->getRecord($id);
 
         $record['data'] = Pi::api('record', 'forms')->getRecordData($record['id']);

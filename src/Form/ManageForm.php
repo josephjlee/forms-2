@@ -13,12 +13,11 @@
 
 namespace Module\Forms\Form;
 
-use Pi;
 use Pi\Form\Form as BaseForm;
 
 class ManageForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         $this->option = $option;
         parent::__construct($name);
@@ -35,73 +34,75 @@ class ManageForm extends BaseForm
     public function init()
     {
         // id
-        $this->add(array(
-            'name' => 'id',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'id',
+            'attributes' => [
                 'type' => 'hidden',
-            ),
-        ));
+            ],
+        ]);
         // title
-        $this->add(array(
-            'name' => 'title',
-            'options' => array(
+        $this->add([
+            'name'       => 'title',
+            'options'    => [
                 'label' => __('Title'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-                'required' => true,
-            )
-        ));
+                'required'    => true,
+            ],
+        ]);
         // slug
-        $this->add(array(
-            'name' => 'slug',
-            'options' => array(
+        $this->add([
+            'name'       => 'slug',
+            'options'    => [
                 'label' => __('Slug'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => __('Used as story URL value : must be unique, short, and user oriented'),
-            )
-        ));
+            ],
+        ]);
         // description
-        $this->add(array(
-            'name' => 'description',
-            'options' => array(
-                'label' => __('Description'),
+        $this->add([
+            'name'       => 'description',
+            'options'    => [
+                'label'  => __('Description'),
                 'editor' => 'html',
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'type' => 'editor',
-            )
-        ));
+            ],
+        ]);
         // status
-        $this->add(array(
-            'name' => 'status',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Status'),
-                'value_options' => array(
+        $this->add([
+            'name'       => 'status',
+            'type'       => 'select',
+            'options'    => [
+                'label'         => __('Status'),
+                'value_options' => [
                     1 => __('Published'),
                     2 => __('Pending review'),
                     3 => __('Draft'),
                     4 => __('Private'),
                     5 => __('Delete'),
-                ),
-            ),
-            'attributes' => array(
+                ],
+            ],
+            'attributes' => [
                 'required' => true,
-            )
-        ));
+            ],
+        ]);
         // extra_key
-        $this->add(array(
-            'name'          => 'extra_key',
-            'options'       => array(
-                'label' => __('Brands'),
-                'value_options' => $this->option['brand'],
-            ),
-            'type'          => 'multi_checkbox',
-        ));
+        if (!empty($this->option['brand'])) {
+            $this->add([
+                'name'    => 'extra_key',
+                'options' => [
+                    'label'         => __('Brands'),
+                    'value_options' => $this->option['brand'],
+                ],
+                'type'    => 'multi_checkbox',
+            ]);
+        }
         // type
         /* $this->add(array(
             'name' => 'type',
@@ -115,55 +116,55 @@ class ManageForm extends BaseForm
             ),
         )); */
         // time_start
-        $this->add(array(
-            'name' => 'time_start',
-            'type' => 'datepicker',
-            'options' => array(
-                'label' => __('Time start'),
-                'datepicker' => array(
-                    'format' => 'yyyy/mm/dd',
-                    'autoclose' => true,
-                    'todayBtn' => true,
+        $this->add([
+            'name'       => 'time_start',
+            'type'       => 'datepicker',
+            'options'    => [
+                'label'      => __('Time start'),
+                'datepicker' => [
+                    'format'         => 'yyyy/mm/dd',
+                    'autoclose'      => true,
+                    'todayBtn'       => true,
                     'todayHighlight' => true,
-                    'weekStart' => 1,
-                    'zIndexOffset' => 10000
+                    'weekStart'      => 1,
+                    'zIndexOffset'   => 10000,
 
-                ),
-            ),
-            'attributes' => array(
+                ],
+            ],
+            'attributes' => [
                 'required' => true,
-                'value' => date('Y-m-d'),
-                'class' => 'event-time-start',
-            )
-        ));
+                'value'    => date('Y-m-d'),
+                'class'    => 'event-time-start',
+            ],
+        ]);
         // time_end
-        $this->add(array(
-            'name' => 'time_end',
-            'type' => 'datepicker',
-            'options' => array(
-                'label' => __('Time end'),
-                'datepicker' => array(
-                    'format' => 'yyyy/mm/dd',
-                    'autoclose' => true,
-                    'todayBtn' => true,
+        $this->add([
+            'name'       => 'time_end',
+            'type'       => 'datepicker',
+            'options'    => [
+                'label'      => __('Time end'),
+                'datepicker' => [
+                    'format'         => 'yyyy/mm/dd',
+                    'autoclose'      => true,
+                    'todayBtn'       => true,
                     'todayHighlight' => true,
-                    'weekStart' => 1,
-                    'zIndexOffset' => 10000
-                ),
-            ),
-            'attributes' => array(
+                    'weekStart'      => 1,
+                    'zIndexOffset'   => 10000,
+                ],
+            ],
+            'attributes' => [
                 'required' => true,
-                'value' => date('Y-m-d', strtotime('+6 months')),
-                'class' => 'event-time-end',
-            )
-        ));
+                'value'    => date('Y-m-d', strtotime('+6 months')),
+                'class'    => 'event-time-end',
+            ],
+        ]);
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 }

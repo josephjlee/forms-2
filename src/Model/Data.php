@@ -20,7 +20,7 @@ class Data extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
+    protected $columns = [
         'id',
         'record',
         'uid',
@@ -28,5 +28,5 @@ class Data extends Model
         'element',
         'time_create',
         'value',
-    );
+    ];
 }

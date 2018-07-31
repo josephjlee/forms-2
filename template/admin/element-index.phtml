@@ -20,8 +20,8 @@ $this->jQuery('ui/jquery-ui.min.js');
                             </div>
                             <div class="col-md-2">
                                 <a class="btn btn-link" title="<?php _e('Edit'); ?>"
-                                   href="<?php echo $this->url('', array('action' => 'update', 'id' => $element['id'])); ?>"><i
-                                        class="fa fa-edit"></i></a>
+                                   href="<?php echo $this->url('', ['action' => 'update', 'id' => $element['id']]); ?>"><i
+                                            class="fa fa-edit"></i></a>
                             </div>
                         </div>
                     </div>
@@ -35,7 +35,7 @@ $this->jQuery('ui/jquery-ui.min.js');
         $('#attribute-sort .attribute-field').sortable({
             update: function (event, ui) {
                 var list = $(this).sortable('serialize');
-                $.post("<?php echo $this->url('', array('action' => 'sort')); ?>", list);
+                $.post("<?php echo $this->url('', ['action' => 'sort']); ?>", list);
             }
         });
     });

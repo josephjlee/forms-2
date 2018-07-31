@@ -10,9 +10,9 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Forms\Validator;
 
-use Pi;
 use Zend\Validator\AbstractValidator;
 
 class ElementValue extends AbstractValidator
@@ -22,9 +22,9 @@ class ElementValue extends AbstractValidator
     /**
      * @var array
      */
-    protected $messageTemplates = array(
+    protected $messageTemplates = [
         self::TAKEN => 'This value can to be empty',
-    );
+    ];
 
     /**
      * Slug validate
@@ -36,7 +36,7 @@ class ElementValue extends AbstractValidator
     public function isValid($value, $context = null)
     {
         $this->setValue($value);
-        if (in_array($context['type'], array('checkbox', 'radio', 'select')) && empty($value)) {
+        if (in_array($context['type'], ['checkbox', 'radio', 'select']) && empty($value)) {
             $this->error(static::TAKEN);
             return false;
         }

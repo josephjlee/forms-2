@@ -20,7 +20,7 @@ class Form extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
+    protected $columns = [
         'id',
         'title',
         'slug',
@@ -31,5 +31,5 @@ class Form extends Model
         'time_end',
         //'type',
         'count',
-    );
+    ];
 }

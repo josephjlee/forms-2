@@ -10,18 +10,18 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Forms\Controller\Admin;
 
-use Pi;
 use Pi\Mvc\Controller\ActionController;
 
 class IndexController extends ActionController
 {
     public function indexAction()
     {
-        return $this->redirect()->toRoute('', array(
+        return $this->redirect()->toRoute('', [
             'controller' => 'form',
-            'action' => 'index',
-        ));
+            'action'     => 'index',
+        ]);
     }
 }

@@ -18,83 +18,85 @@ use Zend\InputFilter\InputFilter;
 
 class ManageFilter extends InputFilter
 {
-    public function __construct($option = array())
+    public function __construct($option = [])
     {
         // id
-        $this->add(array(
-            'name' => 'id',
+        $this->add([
+            'name'     => 'id',
             'required' => false,
-        ));
+        ]);
         // title
-        $this->add(array(
-            'name' => 'title',
+        $this->add([
+            'name'     => 'title',
             'required' => true,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // slug
-        $this->add(array(
-            'name' => 'slug',
-            'required' => false,
-            'filters' => array(
-                array(
+        $this->add([
+            'name'       => 'slug',
+            'required'   => false,
+            'filters'    => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-            'validators' => array(
-                new \Module\Forms\Validator\SlugDuplicate(array(
+                ],
+            ],
+            'validators' => [
+                new \Module\Forms\Validator\SlugDuplicate([
                     'module' => Pi::service('module')->current(),
-                    'table' => 'form',
-                )),
-            ),
-        ));
+                    'table'  => 'form',
+                ]),
+            ],
+        ]);
         // description
-        $this->add(array(
-            'name' => 'description',
+        $this->add([
+            'name'     => 'description',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // status
-        $this->add(array(
-            'name' => 'status',
+        $this->add([
+            'name'     => 'status',
             'required' => false,
-        ));
+        ]);
         // extra_key
-        $this->add(array(
-            'name' => 'extra_key',
-            'required' => false,
-        ));
+        if (!empty($option['brand'])) {
+            $this->add([
+                'name'     => 'extra_key',
+                'required' => false,
+            ]);
+        }
         // type
         /* $this->add(array(
             'name' => 'type',
             'required' => false,
         )); */
         // time_start
-        $this->add(array(
-            'name' => 'time_start',
+        $this->add([
+            'name'     => 'time_start',
             'required' => true,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // time_end
-        $this->add(array(
-            'name' => 'time_end',
+        $this->add([
+            'name'     => 'time_end',
             'required' => true,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
     }
 }

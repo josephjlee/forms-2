@@ -10,20 +10,20 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Forms\Controller\Admin;
 
-use Pi;
-use Pi\Mvc\Controller\ActionController;
-use Module\Forms\Form\ElementForm;
 use Module\Forms\Form\ElementFilter;
+use Module\Forms\Form\ElementForm;
+use Pi\Mvc\Controller\ActionController;
 
 class ElementController extends ActionController
 {
     public function indexAction()
     {
         // Get info
-        $list = array();
-        $order = array('order ASC', 'id ASC');
+        $list   = [];
+        $order  = ['order ASC', 'id ASC'];
         $select = $this->getModel('element')->select()->order($order);
         $rowset = $this->getModel('element')->selectWith($select);
         // Make list
@@ -59,7 +59,7 @@ class ElementController extends ActionController
                 $row->save();
                 // Jump
                 $message = __('Element data saved successfully.');
-                $this->jump(array('action' => 'index'), $message);
+                $this->jump(['action' => 'index'], $message);
             }
         } else {
             if ($id) {
@@ -80,7 +80,7 @@ class ElementController extends ActionController
             $data = $this->request->getPost();
             foreach ($data['mod'] as $id) {
                 if ($id > 0) {
-                    $row = $this->getModel('element')->find($id);
+                    $row        = $this->getModel('element')->find($id);
                     $row->order = $order;
                     $row->save();
                     $order++;

@@ -20,7 +20,7 @@ class Record extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
+    protected $columns = [
         'id',
         'uid',
         'form',
@@ -28,5 +28,5 @@ class Record extends Model
         'time_create',
         'ip',
         'status',
-    );
+    ];
 }
