@@ -111,6 +111,9 @@ class ViewForm extends BaseForm
                             'options'    => [
                                 'label'         => $element['title'],
                                 'value_options' => $this->makeArray($element['value']),
+                                'label_attributes' => [
+                                    'class' => 'radio-inline',
+                                ],
                             ],
                             'attributes' => [
                                 'description' => $element['description'],
