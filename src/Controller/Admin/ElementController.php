@@ -26,10 +26,12 @@ class ElementController extends ActionController
         $order  = ['order ASC', 'id ASC'];
         $select = $this->getModel('element')->select()->order($order);
         $rowset = $this->getModel('element')->selectWith($select);
+
         // Make list
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
         }
+
         // Set template
         $this->view()->setTemplate('element-index');
         $this->view()->assign('list', $list);
@@ -39,24 +41,26 @@ class ElementController extends ActionController
     {
         // Get id
         $id = $this->params('id');
+
         // Set form
         $form = new ElementForm('element');
         $form->setAttribute('enctype', 'multipart/form-data');
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            // Form filter
             $form->setInputFilter(new ElementFilter);
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+
                 // Save values
-                if (!empty($values['id'])) {
-                    $row = $this->getModel('element')->find($values['id']);
+                if (!empty($id)) {
+                    $row = $this->getModel('element')->find($id);
                 } else {
                     $row = $this->getModel('element')->createRow();
                 }
                 $row->assign($values);
                 $row->save();
+
                 // Jump
                 $message = __('Element data saved successfully.');
                 $this->jump(['action' => 'index'], $message);
@@ -67,6 +71,7 @@ class ElementController extends ActionController
                 $form->setData($formManage);
             }
         }
+
         // Set template
         $this->view()->setTemplate('element-update');
         $this->view()->assign('form', $form);

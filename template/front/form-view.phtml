@@ -1,0 +1,9 @@
+<?php $this->css($this->assetModule('css/front.css')); ?>
+<div class="clearfix">
+    <?php if (!empty($selectForm['description'])) { ?>
+        <div class="clearfix form-description">
+            <?php echo $selectForm['description']; ?>
+        </div>
+    <?php } ?>
+    <?php echo $this->form($form); ?>
+</div>

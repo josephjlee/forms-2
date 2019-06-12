@@ -9,7 +9,7 @@ $this->jQuery('ui/jquery-ui.min.js');
             <?php foreach ($list as $element) { ?>
                 <div id="mod_<?php echo $this->escape($element['id']); ?>">
                     <div class="tree-item">
-                        <div class="tree-item-header" style="cursor:move;">
+                        <div class="tree-item-header row" style="cursor:move;">
                             <div class="col-md-8">
                                 <strong><?php _e('Title'); ?></strong> :
                                 <span> <?php echo $this->escape($element['title']); ?> </span>

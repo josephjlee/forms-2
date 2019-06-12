@@ -18,10 +18,10 @@ use Pi\Application\Api\AbstractApi;
 use Zend\Db\Sql\Predicate\Expression;
 
 /*
- * Pi::api('form', 'forms')->getForm($id);
+ * Pi::api('form', 'forms')->getForm($parameter, $field);
  * Pi::api('form', 'forms')->getFormView($id, $uid, $key);
  * Pi::api('form', 'forms')->getView($formId);
- * Pi::api('form', 'forms')->getFormList($uid);
+ * Pi::api('form', 'forms')->getFormList();
  * Pi::api('form', 'forms')->getAllowIdList($form, $uid);
  * Pi::api('form', 'forms')->count($uid);
  * Pi::api('form', 'forms')->canonizeForm($form);
@@ -29,9 +29,9 @@ use Zend\Db\Sql\Predicate\Expression;
 
 class Form extends AbstractApi
 {
-    public function getForm($id)
+    public function getForm($parameter, $field = 'id')
     {
-        $selectForm = Pi::model('form', $this->getModule())->find($id);
+        $selectForm = Pi::model('form', $this->getModule())->find($parameter, $field);
         $selectForm = $this->canonizeForm($selectForm);
         return $selectForm;
     }
@@ -74,6 +74,7 @@ class Form extends AbstractApi
                 'default', [
                 'module'     => $this->getModule(),
                 'controller' => 'index',
+                'action'     => 'view',
                 'slug'       => $form['slug'],
             ]
             )
@@ -89,6 +90,22 @@ class Form extends AbstractApi
         );
 
         return $form;
+    }
+
+    public function getFormCount($id, $uid, $key = 0)
+    {
+        // Set info
+        $where = ['uid' => $uid, 'form' => $id];
+        if ($key > 0) {
+            $where['extra_key'] = $key;
+        }
+        $columns = ['count' => new Expression('count(*)')];
+
+        // Get count
+        $select  = Pi::model('record', $this->getModule())->select()->columns($columns)->where($where);
+        $count   = Pi::model('record', $this->getModule())->selectWith($select)->current()->count;
+
+        return $count;
     }
 
     public function getFormView($id, $uid, $key = 0)
@@ -134,25 +151,12 @@ class Form extends AbstractApi
         return $elements;
     }
 
-    public function getFormList($uid)
+    public function getFormList()
     {
-        // User record forms
-        $record = [];
-        $where  = ['uid' => $uid, 'extra_key' => 0];
-        $select = Pi::model('record', $this->getModule())->select()->where($where);
-        $rowSet = Pi::model('record', $this->getModule())->selectWith($select);
-        foreach ($rowSet as $row) {
-            $record[] = $row->form;
-        }
-        $record = array_unique($record);
-
         // Get list form
         $forms  = [];
         $where  = ['status' => 1, 'time_start <= ?' => time(), 'time_end >= ?' => time()];
         $select = Pi::model('form', $this->getModule())->select()->where($where);
-        if (!empty($record)) {
-            $select->where([new Expression(sprintf('id NOT IN (%s)', implode(',', $record)))]);
-        }
         $rowSet = Pi::model('form', $this->getModule())->selectWith($select);
         foreach ($rowSet as $row) {
             $forms[] = $this->canonizeForm($row);

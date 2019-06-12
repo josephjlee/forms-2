@@ -8,6 +8,7 @@ CREATE TABLE `{form}` (
   `time_start`  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `time_end`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `count`       INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `main_image`  INT(10) UNSIGNED    NULL     DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),
   KEY `status` (`status`),

@@ -20,13 +20,6 @@ class ManageFilter extends InputFilter
 {
     public function __construct($option = [])
     {
-        // id
-        $this->add(
-            [
-                'name'     => 'id',
-                'required' => false,
-            ]
-        );
         // title
         $this->add(
             [
@@ -39,6 +32,7 @@ class ManageFilter extends InputFilter
                 ],
             ]
         );
+
         // slug
         $this->add(
             [
@@ -54,11 +48,13 @@ class ManageFilter extends InputFilter
                         [
                             'module' => Pi::service('module')->current(),
                             'table'  => 'form',
+                            'id'     => $option['id'],
                         ]
                     ),
                 ],
             ]
         );
+
         // description
         $this->add(
             [
@@ -71,6 +67,7 @@ class ManageFilter extends InputFilter
                 ],
             ]
         );
+
         // status
         $this->add(
             [
@@ -78,6 +75,7 @@ class ManageFilter extends InputFilter
                 'required' => false,
             ]
         );
+
         // extra_key
         if (!empty($option['brand'])) {
             $this->add(
@@ -87,11 +85,7 @@ class ManageFilter extends InputFilter
                 ]
             );
         }
-        // type
-        /* $this->add(array(
-            'name' => 'type',
-            'required' => false,
-        )); */
+
         // time_start
         $this->add(
             [
@@ -104,6 +98,7 @@ class ManageFilter extends InputFilter
                 ],
             ]
         );
+
         // time_end
         $this->add(
             [
@@ -114,6 +109,14 @@ class ManageFilter extends InputFilter
                         'name' => 'StringTrim',
                     ],
                 ],
+            ]
+        );
+
+        // main_image
+        $this->add(
+            [
+                'name'     => 'main_image',
+                'required' => false,
             ]
         );
     }

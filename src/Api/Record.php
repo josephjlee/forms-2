@@ -21,6 +21,7 @@ use Pi\Application\Api\AbstractApi;
  * Pi::api('record', 'forms')->getRecordData($record);
  * Pi::api('record', 'forms')->getUser($uid);
  * Pi::api('record', 'forms')->canonizeRecord($record, $form, $user);
+ * Pi::api('record', 'forms')->getRecordList($uid);
  */
 
 class Record extends AbstractApi
@@ -94,5 +95,33 @@ class Record extends AbstractApi
         }
 
         return $list;
+    }
+
+    public function getRecordList($uid)
+    {
+        // Set recode list
+        $records = [];
+
+        // Set tables
+        $recordTable = Pi::model('record', 'forms')->getTable();
+        $formTable   = Pi::model('form', 'forms')->getTable();
+
+        // Select
+        $select = Pi::db()->select();
+        $select->from(['record' => $recordTable]);
+        $select->join(
+            ['form' => $formTable],
+            'form.id = record.form',
+            ['title']
+        );
+        $select->where(['record.uid' => $uid]);
+        $select->order(['record.time_create DESC']);
+        $rowset = Pi::db()->query($select);
+        foreach ($rowset as $row) {
+            $records[$row['id']] = $row;
+            $records[$row['id']]['time_create_view'] = _date($row['time_create']);
+        }
+
+        return $records;
     }
 }

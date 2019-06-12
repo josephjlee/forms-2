@@ -33,15 +33,6 @@ class ElementForm extends BaseForm
 
     public function init()
     {
-        // id
-        $this->add(
-            [
-                'name'       => 'id',
-                'attributes' => [
-                    'type' => 'hidden',
-                ],
-            ]
-        );
         // title
         $this->add(
             [
@@ -56,6 +47,7 @@ class ElementForm extends BaseForm
                 ],
             ]
         );
+
         // type
         $this->add(
             [
@@ -79,6 +71,7 @@ class ElementForm extends BaseForm
                 ],
             ]
         );
+
         // status
         $this->add(
             [
@@ -96,17 +89,7 @@ class ElementForm extends BaseForm
                 ],
             ]
         );
-        // order
-        /* $this->add(array(
-            'name' => 'order',
-            'options' => array(
-                'label' => __('View order'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'required' => true,
-            )
-        )); */
+
         // value
         $this->add(
             [
@@ -122,6 +105,7 @@ class ElementForm extends BaseForm
                 ],
             ]
         );
+
         // description
         $this->add(
             [
@@ -136,6 +120,7 @@ class ElementForm extends BaseForm
                 ],
             ]
         );
+
         // required
         $this->add(
             [
@@ -149,6 +134,7 @@ class ElementForm extends BaseForm
                 ],
             ]
         );
+
         // Save
         $this->add(
             [

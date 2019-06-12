@@ -32,10 +32,12 @@ class FormController extends ActionController
         $order  = ['time_create DESC', 'id DESC'];
         $select = $this->getModel('form')->select()->order($order);
         $rowset = $this->getModel('form')->selectWith($select);
+
         // Make list
         foreach ($rowset as $row) {
             $list[$row->id] = Pi::api('form', 'forms')->canonizeForm($row);
         }
+
         // Set template
         $this->view()->setTemplate('form-index');
         $this->view()->assign('list', $list);
@@ -49,6 +51,7 @@ class FormController extends ActionController
         // Set option
         $option = [
             'brand' => [],
+            'id'    => $id,
         ];
 
         // Get brand list
@@ -68,23 +71,33 @@ class FormController extends ActionController
         $form->setAttribute('enctype', 'multipart/form-data');
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
+
             // Set slug
             $slug         = ($data['slug']) ? $data['slug'] : $data['title'];
             $filter       = new Filter\Slug;
             $data['slug'] = $filter($slug);
+
             // Form filter
             $form->setInputFilter(new ManageFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
                 $values               = $form->getData();
+
+                // Set time
                 $values['time_start'] = strtotime($values['time_start']);
                 $values['time_end']   = ($values['time_end']) ? strtotime($values['time_end']) : '';
-                if (empty($values['id'])) {
+                if (empty($id)) {
                     $values['time_create'] = time();
                 }
+
+                // Check image
+                if (empty($values['main_image'])) {
+                    unset($values['main_image']);
+                }
+
                 // Save values
-                if (!empty($values['id'])) {
-                    $row = $this->getModel('form')->find($values['id']);
+                if (!empty($id)) {
+                    $row = $this->getModel('form')->find($id);
                 } else {
                     $row = $this->getModel('form')->createRow();
                 }
@@ -97,6 +110,7 @@ class FormController extends ActionController
                         'form' => $row->id,
                     ]
                 );
+
                 // Save links
                 foreach ($values['extra_key'] as $extraId) {
                     // Save
@@ -105,6 +119,7 @@ class FormController extends ActionController
                     $extra->extra_key = $extraId;
                     $extra->save();
                 }
+
                 // Jump
                 $message = __('Form data saved successfully.');
                 $this->jump(['action' => 'element', 'id' => $row->id], $message);
@@ -112,9 +127,12 @@ class FormController extends ActionController
         } else {
             if ($id) {
                 $formManage               = $this->getModel('form')->find($id)->toArray();
+
+                // Set time
                 $formManage['time_start'] = ($formManage['time_start']) ? date('Y/m/d', $formManage['time_start']) : date('Y/m/d');
                 $formManage['time_end']   = ($formManage['time_end']) ? date('Y/m/d', $formManage['time_end']) : '';
 
+                // Get extra
                 $where  = ['form' => $formManage['id']];
                 $select = $this->getModel('extra')->select()->where($where);
                 $rowset = $this->getModel('extra')->selectWith($select);
@@ -125,6 +143,7 @@ class FormController extends ActionController
                 $form->setData($formManage);
             }
         }
+
         // Set template
         $this->view()->setTemplate('form-update');
         $this->view()->assign('form', $form);
@@ -135,8 +154,10 @@ class FormController extends ActionController
     {
         // Get id
         $id = $this->params('id');
+
         // Get form
         $selectForm = Pi::api('form', 'forms')->getForm($id);
+
         // Get links
         $links  = [];
         $where  = ['form' => $selectForm['id']];
@@ -145,6 +166,7 @@ class FormController extends ActionController
         foreach ($rowset as $row) {
             $links[$row->element] = $row->toArray();
         }
+
         // Get elements
         $elements = [];
         $where    = ['status' => 1];
@@ -158,9 +180,11 @@ class FormController extends ActionController
                 $elements[$row->id]['link'] = 0;
             }
         }
+
         // Set option
         $option             = [];
         $option['elements'] = $elements;
+
         // Set form
         $form = new LinkForm('link', $option);
         $form->setAttribute('enctype', 'multipart/form-data');
@@ -170,6 +194,7 @@ class FormController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+
                 // Set save link array
                 $saveLink = [];
                 foreach ($elements as $element) {
@@ -181,12 +206,14 @@ class FormController extends ActionController
                         ];
                     }
                 }
+
                 // Remove links
                 $this->getModel('link')->delete(
                     [
                         'form' => $selectForm['id'],
                     ]
                 );
+
                 // Save links
                 foreach ($saveLink as $link) {
                     // Save
@@ -195,6 +222,7 @@ class FormController extends ActionController
                     $row->element = $link['element'];
                     $row->save();
                 }
+
                 // Jump
                 $message = __('Form elements saved successfully.');
                 $this->jump(['action' => 'index'], $message);

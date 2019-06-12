@@ -19,13 +19,6 @@ class ElementFilter extends InputFilter
 {
     public function __construct($option = [])
     {
-        // id
-        $this->add(
-            [
-                'name'     => 'id',
-                'required' => false,
-            ]
-        );
         // title
         $this->add(
             [
@@ -38,6 +31,7 @@ class ElementFilter extends InputFilter
                 ],
             ]
         );
+
         // type
         $this->add(
             [
@@ -45,6 +39,7 @@ class ElementFilter extends InputFilter
                 'required' => true,
             ]
         );
+
         // status
         $this->add(
             [
@@ -52,11 +47,8 @@ class ElementFilter extends InputFilter
                 'required' => false,
             ]
         );
-        // order
-        /* $this->add(array(
-            'name' => 'order',
-            'required' => false,
-        )); */
+
+
         // value
         $this->add(
             [
@@ -72,6 +64,7 @@ class ElementFilter extends InputFilter
                 ), */
             ]
         );
+
         // description
         $this->add(
             [
@@ -84,6 +77,7 @@ class ElementFilter extends InputFilter
                 ],
             ]
         );
+
         // required
         $this->add(
             [

@@ -33,15 +33,6 @@ class ManageForm extends BaseForm
 
     public function init()
     {
-        // id
-        $this->add(
-            [
-                'name'       => 'id',
-                'attributes' => [
-                    'type' => 'hidden',
-                ],
-            ]
-        );
         // title
         $this->add(
             [
@@ -56,6 +47,7 @@ class ManageForm extends BaseForm
                 ],
             ]
         );
+
         // slug
         $this->add(
             [
@@ -69,6 +61,7 @@ class ManageForm extends BaseForm
                 ],
             ]
         );
+
         // description
         $this->add(
             [
@@ -82,6 +75,7 @@ class ManageForm extends BaseForm
                 ],
             ]
         );
+
         // status
         $this->add(
             [
@@ -102,6 +96,7 @@ class ManageForm extends BaseForm
                 ],
             ]
         );
+
         // extra_key
         if (!empty($this->option['brand'])) {
             $this->add(
@@ -115,18 +110,7 @@ class ManageForm extends BaseForm
                 ]
             );
         }
-        // type
-        /* $this->add(array(
-            'name' => 'type',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Type'),
-                'value_options' => array(
-                    'general' => __('General'),
-                    'dedicated' => __('Dedicated'),
-                ),
-            ),
-        )); */
+
         // time_start
         $this->add(
             [
@@ -151,6 +135,7 @@ class ManageForm extends BaseForm
                 ],
             ]
         );
+
         // time_end
         $this->add(
             [
@@ -174,6 +159,19 @@ class ManageForm extends BaseForm
                 ],
             ]
         );
+
+        // main_image
+        $this->add(
+            [
+                'name'    => 'main_image',
+                'type'    => 'Module\Media\Form\Element\Media',
+                'options' => [
+                    'label'                    => __('Main image'),
+                    'module'                   => 'forms',
+                ],
+            ]
+        );
+
         // Save
         $this->add(
             [

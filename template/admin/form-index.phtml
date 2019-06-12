@@ -6,26 +6,22 @@
             <tr>
                 <th><?php _e('ID'); ?></th>
                 <th><?php _e('Title'); ?></th>
-                <!-- <th><?php _e('Type'); ?></th> -->
                 <th><?php _e('Count'); ?></th>
                 <th><?php _e('Start'); ?></th>
                 <th><?php _e('End'); ?></th>
                 <th><?php _e('Action'); ?></th>
             </tr>
             <?php foreach ($list as $form) { ?>
-                <?php
-                if ($form['status'] == 1) {
+                <?php if ($form['status'] == 1) {
                     $labelIdClass = 'label-success';
                 } else {
                     $labelIdClass = 'label-warning';
-                }
-                ?>
+                } ?>
                 <tr>
                     <td><span
                                 class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($form['id']); ?></span>
                     </td>
                     <td><?php echo $this->escape($form['title']); ?></td>
-                    <!-- <td><?php echo $this->escape($form['type_view']); ?></td> -->
                     <td><?php echo $this->escape($form['count_view']); ?></td>
                     <td><?php echo $this->escape($form['time_start_view']); ?></td>
                     <td><?php echo $this->escape($form['time_end_view']); ?></td>
@@ -38,10 +34,19 @@
                                     class="fa fa-edit"></i> <?php _e('Element'); ?></a>
                         <a class="btn btn-success btn-sm" title="<?php _e('View'); ?>"
                            href="<?php echo $this->url('', ['action' => 'view', 'id' => $form['id']]); ?>"><i
-                                    class="fa fa-edit"></i> <?php _e('View'); ?></a>
+                                    class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                        <a class="btn btn-success btn-sm" title="<?php _e('View on front'); ?>"
+                           href="<?php echo $this->url(
+                               'default', [
+                                   'module'     => 'forms',
+                                   'controller' => 'index',
+                                   'action'     => 'view',
+                                   'slug'       => $form['slug'],
+                               ]
+                           ); ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View on front'); ?></a>
                         <a class="btn btn-success btn-sm" title="<?php _e('Record'); ?>"
                            href="<?php echo $this->url('', ['controller' => 'record', 'selectForm' => $form['id']]); ?>"><i
-                                    class="fa fa-edit"></i> <?php _e('Record'); ?></a>
+                                    class="fa fa-eye"></i> <?php _e('Record'); ?></a>
                     </td>
                 </tr>
             <?php } ?>

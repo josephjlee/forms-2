@@ -33,15 +33,6 @@ class ViewForm extends BaseForm
 
     public function init()
     {
-        // id
-        $this->add(
-            [
-                'name'       => 'id',
-                'attributes' => [
-                    'type' => 'hidden',
-                ],
-            ]
-        );
         if (isset($this->option['elements']) && !empty($this->option['elements'])) {
             foreach ($this->option['elements'] as $element) {
                 switch ($element['type']) {

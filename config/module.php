@@ -14,18 +14,16 @@ return [
     // Module meta
     'meta'       => [
         'title'       => _a('Form'),
-        'description' => _a('form generator system'),
-        'version'     => '0.0.4',
+        'description' => _a('Multi forms generator system'),
+        'version'     => '0.0.6',
         'license'     => 'New BSD',
         'logo'        => 'image/logo.png',
         'readme'      => 'docs/readme.txt',
         'demo'        => 'http://piengine.org',
-        'icon'        => 'fa-keyboard-o',
+        'icon'        => 'fa-keyboard',
     ],
     // Dependency
     'dependency' => [
-        'tools',
-        'apis',
         'user',
     ],
     // Author information
@@ -38,6 +36,7 @@ return [
     // Resource
     'resource'   => [
         'database'   => 'database.php',
+        'config'        => 'config.php',
         'navigation' => 'navigation.php',
     ],
 ];

@@ -30,7 +30,7 @@ class Form extends Model
             'time_create',
             'time_start',
             'time_end',
-            //'type',
             'count',
+            'main_image',
         ];
 }
