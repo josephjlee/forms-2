@@ -20,14 +20,15 @@ class Element extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = [
-        'id',
-        'title',
-        'description',
-        'required',
-        'type',
-        'status',
-        'order',
-        'value',
-    ];
+    protected $columns
+        = [
+            'id',
+            'title',
+            'description',
+            'required',
+            'type',
+            'status',
+            'order',
+            'value',
+        ];
 }

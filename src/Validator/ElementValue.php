@@ -22,15 +22,17 @@ class ElementValue extends AbstractValidator
     /**
      * @var array
      */
-    protected $messageTemplates = [
-        self::TAKEN => 'This value can to be empty',
-    ];
+    protected $messageTemplates
+        = [
+            self::TAKEN => 'This value can to be empty',
+        ];
 
     /**
      * Slug validate
      *
      * @param  mixed $value
      * @param  array $context
+     *
      * @return boolean
      */
     public function isValid($value, $context = null)

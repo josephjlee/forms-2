@@ -92,9 +92,11 @@ class FormController extends ActionController
                 $row->save();
 
                 // Remove links
-                $this->getModel('extra')->delete([
-                    'form' => $row->id,
-                ]);
+                $this->getModel('extra')->delete(
+                    [
+                        'form' => $row->id,
+                    ]
+                );
                 // Save links
                 foreach ($values['extra_key'] as $extraId) {
                     // Save
@@ -180,9 +182,11 @@ class FormController extends ActionController
                     }
                 }
                 // Remove links
-                $this->getModel('link')->delete([
-                    'form' => $selectForm['id'],
-                ]);
+                $this->getModel('link')->delete(
+                    [
+                        'form' => $selectForm['id'],
+                    ]
+                );
                 // Save links
                 foreach ($saveLink as $link) {
                     // Save

@@ -34,36 +34,42 @@ class LinkForm extends BaseForm
     public function init()
     {
         // id
-        $this->add([
-            'name'       => 'id',
-            'attributes' => [
-                'type' => 'hidden',
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'id',
+                'attributes' => [
+                    'type' => 'hidden',
+                ],
+            ]
+        );
         // elements
         if (isset($this->option['elements']) && !empty($this->option['elements'])) {
             foreach ($this->option['elements'] as $element) {
-                $this->add([
-                    'name'       => sprintf('element-%s', $element['id']),
-                    'type'       => 'checkbox',
-                    'options'    => [
-                        'label' => $element['title'],
-                    ],
-                    'attributes' => [
-                        'description' => sprintf(__('Form type is : %s'), $element['type']),
-                        'value'       => $element['link'],
-                        'required'    => false,
-                    ],
-                ]);
+                $this->add(
+                    [
+                        'name'       => sprintf('element-%s', $element['id']),
+                        'type'       => 'checkbox',
+                        'options'    => [
+                            'label' => $element['title'],
+                        ],
+                        'attributes' => [
+                            'description' => sprintf(__('Form type is : %s'), $element['type']),
+                            'value'       => $element['link'],
+                            'required'    => false,
+                        ],
+                    ]
+                );
             }
         }
         // Save
-        $this->add([
-            'name'       => 'submit',
-            'type'       => 'submit',
-            'attributes' => [
-                'value' => __('Link to form'),
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Link to form'),
+                ],
+            ]
+        );
     }
 }

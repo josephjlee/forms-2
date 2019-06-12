@@ -33,14 +33,14 @@ class Report extends AbstractApi
             } else {
 
                 // Make columns
-                $columns      = [];
+                $columns = [];
 
                 // Make element array from string
-                $i = 1;
+                $i           = 1;
                 $elementList = [];
-                $elements = explode('|', $questionList[$key]['value']);
+                $elements    = explode('|', $questionList[$key]['value']);
                 foreach ($elements as $element) {
-                    $elementKey = sprintf('element%s', $i++);
+                    $elementKey                        = sprintf('element%s', $i++);
                     $elementList['label'][$elementKey] = $element;
 
                     // Set count column for select
@@ -48,8 +48,8 @@ class Report extends AbstractApi
                 }
 
                 // Make query and get count of answers
-                $where = ['form' => $formId, 'element' => $value['id']];
-                $select = Pi::model('data', 'forms')->select()->columns($columns)->where($where)->limit(1);
+                $where     = ['form' => $formId, 'element' => $value['id']];
+                $select    = Pi::model('data', 'forms')->select()->columns($columns)->where($where)->limit(1);
                 $dateCount = Pi::model('data', 'forms')->selectWith($select)->current();
                 if ($dateCount) {
                     $dateCount = $dateCount->toArray();
@@ -64,7 +64,7 @@ class Report extends AbstractApi
         }
 
         // result full information
-        return  $questionList;
+        return $questionList;
     }
 
 }

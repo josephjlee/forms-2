@@ -19,9 +19,11 @@ class IndexController extends ActionController
 {
     public function indexAction()
     {
-        return $this->redirect()->toRoute('', [
+        return $this->redirect()->toRoute(
+            '', [
             'controller' => 'form',
             'action'     => 'index',
-        ]);
+        ]
+        );
     }
 }

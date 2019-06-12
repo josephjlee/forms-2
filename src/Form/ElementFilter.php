@@ -20,62 +20,76 @@ class ElementFilter extends InputFilter
     public function __construct($option = [])
     {
         // id
-        $this->add([
-            'name'     => 'id',
-            'required' => false,
-        ]);
+        $this->add(
+            [
+                'name'     => 'id',
+                'required' => false,
+            ]
+        );
         // title
-        $this->add([
-            'name'     => 'title',
-            'required' => true,
-            'filters'  => [
-                [
-                    'name' => 'StringTrim',
+        $this->add(
+            [
+                'name'     => 'title',
+                'required' => true,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
                 ],
-            ],
-        ]);
+            ]
+        );
         // type
-        $this->add([
-            'name'     => 'type',
-            'required' => true,
-        ]);
+        $this->add(
+            [
+                'name'     => 'type',
+                'required' => true,
+            ]
+        );
         // status
-        $this->add([
-            'name'     => 'status',
-            'required' => false,
-        ]);
+        $this->add(
+            [
+                'name'     => 'status',
+                'required' => false,
+            ]
+        );
         // order
         /* $this->add(array(
             'name' => 'order',
             'required' => false,
         )); */
         // value
-        $this->add([
-            'name'     => 'value',
-            'required' => false,
-            'filters'  => [
-                [
-                    'name' => 'StringTrim',
+        $this->add(
+            [
+                'name'     => 'value',
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
                 ],
-            ],
-            /* 'validators' => array(
-                new \Module\Forms\Validator\ElementValue,
-            ), */
-        ]);
+                /* 'validators' => array(
+                    new \Module\Forms\Validator\ElementValue,
+                ), */
+            ]
+        );
         // description
-        $this->add([
-            'name'     => 'description',
-            'required' => false,
-            'filters'  => [
-                [
-                    'name' => 'StringTrim',
+        $this->add(
+            [
+                'name'     => 'description',
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
                 ],
-            ],
-        ]);
+            ]
+        );
         // required
-        $this->add([
-            'name'     => 'required',
-            'required' => false,
-        ]);
+        $this->add(
+            [
+                'name'     => 'required',
+                'required' => false,
+            ]
+        );
     }
 }

@@ -20,13 +20,14 @@ class Record extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = [
-        'id',
-        'uid',
-        'form',
-        'extra_key',
-        'time_create',
-        'ip',
-        'status',
-    ];
+    protected $columns
+        = [
+            'id',
+            'uid',
+            'form',
+            'extra_key',
+            'time_create',
+            'ip',
+            'status',
+        ];
 }

@@ -69,16 +69,24 @@ class Form extends AbstractApi
         $form['count_view'] = _number($form['count']);
 
         // url
-        $form['formUrl']    = Pi::url(Pi::service('url')->assemble('default', [
-            'module'     => $this->getModule(),
-            'controller' => 'index',
-            'slug'       => $form['slug'],
-        ]));
-        $form['formUrlApi'] = Pi::url(Pi::service('url')->assemble('default', [
-            'module'     => 'apis',
-            'controller' => 'forms',
-            'action'     => 'view',
-        ]));
+        $form['formUrl']    = Pi::url(
+            Pi::service('url')->assemble(
+                'default', [
+                'module'     => $this->getModule(),
+                'controller' => 'index',
+                'slug'       => $form['slug'],
+            ]
+            )
+        );
+        $form['formUrlApi'] = Pi::url(
+            Pi::service('url')->assemble(
+                'default', [
+                'module'     => 'apis',
+                'controller' => 'forms',
+                'action'     => 'view',
+            ]
+            )
+        );
 
         return $form;
     }

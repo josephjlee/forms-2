@@ -34,74 +34,86 @@ class ManageForm extends BaseForm
     public function init()
     {
         // id
-        $this->add([
-            'name'       => 'id',
-            'attributes' => [
-                'type' => 'hidden',
-            ],
-        ]);
-        // title
-        $this->add([
-            'name'       => 'title',
-            'options'    => [
-                'label' => __('Title'),
-            ],
-            'attributes' => [
-                'type'        => 'text',
-                'description' => '',
-                'required'    => true,
-            ],
-        ]);
-        // slug
-        $this->add([
-            'name'       => 'slug',
-            'options'    => [
-                'label' => __('Slug'),
-            ],
-            'attributes' => [
-                'type'        => 'text',
-                'description' => __('Used as story URL value : must be unique, short, and user oriented'),
-            ],
-        ]);
-        // description
-        $this->add([
-            'name'       => 'description',
-            'options'    => [
-                'label'  => __('Description'),
-                'editor' => 'html',
-            ],
-            'attributes' => [
-                'type' => 'editor',
-            ],
-        ]);
-        // status
-        $this->add([
-            'name'       => 'status',
-            'type'       => 'select',
-            'options'    => [
-                'label'         => __('Status'),
-                'value_options' => [
-                    1 => __('Published'),
-                    2 => __('Pending review'),
-                    3 => __('Draft'),
-                    4 => __('Private'),
-                    5 => __('Delete'),
+        $this->add(
+            [
+                'name'       => 'id',
+                'attributes' => [
+                    'type' => 'hidden',
                 ],
-            ],
-            'attributes' => [
-                'required' => true,
-            ],
-        ]);
+            ]
+        );
+        // title
+        $this->add(
+            [
+                'name'       => 'title',
+                'options'    => [
+                    'label' => __('Title'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
+                    'required'    => true,
+                ],
+            ]
+        );
+        // slug
+        $this->add(
+            [
+                'name'       => 'slug',
+                'options'    => [
+                    'label' => __('Slug'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => __('Used as story URL value : must be unique, short, and user oriented'),
+                ],
+            ]
+        );
+        // description
+        $this->add(
+            [
+                'name'       => 'description',
+                'options'    => [
+                    'label'  => __('Description'),
+                    'editor' => 'html',
+                ],
+                'attributes' => [
+                    'type' => 'editor',
+                ],
+            ]
+        );
+        // status
+        $this->add(
+            [
+                'name'       => 'status',
+                'type'       => 'select',
+                'options'    => [
+                    'label'         => __('Status'),
+                    'value_options' => [
+                        1 => __('Published'),
+                        2 => __('Pending review'),
+                        3 => __('Draft'),
+                        4 => __('Private'),
+                        5 => __('Delete'),
+                    ],
+                ],
+                'attributes' => [
+                    'required' => true,
+                ],
+            ]
+        );
         // extra_key
         if (!empty($this->option['brand'])) {
-            $this->add([
-                'name'    => 'extra_key',
-                'options' => [
-                    'label'         => __('Brands'),
-                    'value_options' => $this->option['brand'],
-                ],
-                'type'    => 'multi_checkbox',
-            ]);
+            $this->add(
+                [
+                    'name'    => 'extra_key',
+                    'options' => [
+                        'label'         => __('Brands'),
+                        'value_options' => $this->option['brand'],
+                    ],
+                    'type'    => 'multi_checkbox',
+                ]
+            );
         }
         // type
         /* $this->add(array(
@@ -116,55 +128,61 @@ class ManageForm extends BaseForm
             ),
         )); */
         // time_start
-        $this->add([
-            'name'       => 'time_start',
-            'type'       => 'datepicker',
-            'options'    => [
-                'label'      => __('Time start'),
-                'datepicker' => [
-                    'format'         => 'yyyy/mm/dd',
-                    'autoclose'      => true,
-                    'todayBtn'       => true,
-                    'todayHighlight' => true,
-                    'weekStart'      => 1,
-                    'zIndexOffset'   => 10000,
+        $this->add(
+            [
+                'name'       => 'time_start',
+                'type'       => 'datepicker',
+                'options'    => [
+                    'label'      => __('Time start'),
+                    'datepicker' => [
+                        'format'         => 'yyyy/mm/dd',
+                        'autoclose'      => true,
+                        'todayBtn'       => true,
+                        'todayHighlight' => true,
+                        'weekStart'      => 1,
+                        'zIndexOffset'   => 10000,
 
+                    ],
                 ],
-            ],
-            'attributes' => [
-                'required' => true,
-                'value'    => date('Y-m-d'),
-                'class'    => 'event-time-start',
-            ],
-        ]);
+                'attributes' => [
+                    'required' => true,
+                    'value'    => date('Y-m-d'),
+                    'class'    => 'event-time-start',
+                ],
+            ]
+        );
         // time_end
-        $this->add([
-            'name'       => 'time_end',
-            'type'       => 'datepicker',
-            'options'    => [
-                'label'      => __('Time end'),
-                'datepicker' => [
-                    'format'         => 'yyyy/mm/dd',
-                    'autoclose'      => true,
-                    'todayBtn'       => true,
-                    'todayHighlight' => true,
-                    'weekStart'      => 1,
-                    'zIndexOffset'   => 10000,
+        $this->add(
+            [
+                'name'       => 'time_end',
+                'type'       => 'datepicker',
+                'options'    => [
+                    'label'      => __('Time end'),
+                    'datepicker' => [
+                        'format'         => 'yyyy/mm/dd',
+                        'autoclose'      => true,
+                        'todayBtn'       => true,
+                        'todayHighlight' => true,
+                        'weekStart'      => 1,
+                        'zIndexOffset'   => 10000,
+                    ],
                 ],
-            ],
-            'attributes' => [
-                'required' => true,
-                'value'    => date('Y-m-d', strtotime('+6 months')),
-                'class'    => 'event-time-end',
-            ],
-        ]);
+                'attributes' => [
+                    'required' => true,
+                    'value'    => date('Y-m-d', strtotime('+6 months')),
+                    'class'    => 'event-time-end',
+                ],
+            ]
+        );
         // Save
-        $this->add([
-            'name'       => 'submit',
-            'type'       => 'submit',
-            'attributes' => [
-                'value' => __('Submit'),
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Submit'),
+                ],
+            ]
+        );
     }
 }

@@ -20,16 +20,17 @@ class Form extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = [
-        'id',
-        'title',
-        'slug',
-        'description',
-        'status',
-        'time_create',
-        'time_start',
-        'time_end',
-        //'type',
-        'count',
-    ];
+    protected $columns
+        = [
+            'id',
+            'title',
+            'slug',
+            'description',
+            'status',
+            'time_create',
+            'time_start',
+            'time_end',
+            //'type',
+            'count',
+        ];
 }

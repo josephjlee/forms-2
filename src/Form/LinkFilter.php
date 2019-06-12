@@ -20,18 +20,22 @@ class LinkFilter extends InputFilter
     public function __construct($option = [])
     {
         // id
-        $this->add([
-            'name'     => 'id',
-            'required' => false,
-        ]);
+        $this->add(
+            [
+                'name'     => 'id',
+                'required' => false,
+            ]
+        );
         // elements
         if (isset($option['elements']) && !empty($option['elements'])) {
             foreach ($option['elements'] as $element) {
                 // important
-                $this->add([
-                    'name'     => sprintf('element-%s', $element['id']),
-                    'required' => false,
-                ]);
+                $this->add(
+                    [
+                        'name'     => sprintf('element-%s', $element['id']),
+                        'required' => false,
+                    ]
+                );
             }
         }
     }

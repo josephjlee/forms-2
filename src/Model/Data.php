@@ -20,13 +20,14 @@ class Data extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = [
-        'id',
-        'record',
-        'uid',
-        'form',
-        'element',
-        'time_create',
-        'value',
-    ];
+    protected $columns
+        = [
+            'id',
+            'record',
+            'uid',
+            'form',
+            'element',
+            'time_create',
+            'value',
+        ];
 }

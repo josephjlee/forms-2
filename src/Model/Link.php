@@ -20,10 +20,11 @@ class Link extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = [
-        'id',
-        'form',
-        'element',
-        'status',
-    ];
+    protected $columns
+        = [
+            'id',
+            'form',
+            'element',
+            'status',
+        ];
 }
