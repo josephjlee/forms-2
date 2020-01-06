@@ -2,7 +2,7 @@
 <div class="clearfix">
     <h3><?php _e('List of forms'); ?></h3>
     <?php if (!empty($list)) { ?>
-        <table class="table table-striped table-bordered table-sm">
+        <table class="table table-striped table-bordered table-hover table-responsive-md table-sm mt-3">
             <tr>
                 <th><?php _e('ID'); ?></th>
                 <th><?php _e('Title'); ?></th>
@@ -18,8 +18,8 @@
                     $labelIdClass = 'label-warning';
                 } ?>
                 <tr>
-                    <td><span
-                                class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($form['id']); ?></span>
+                    <td>
+                        <span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($form['id']); ?></span>
                     </td>
                     <td><?php echo $this->escape($form['title']); ?></td>
                     <td><?php echo $this->escape($form['count_view']); ?></td>
@@ -27,14 +27,17 @@
                     <td><?php echo $this->escape($form['time_end_view']); ?></td>
                     <td>
                         <a class="btn btn-primary btn-sm" title="<?php _e('Edit'); ?>"
-                           href="<?php echo $this->url('', ['action' => 'update', 'id' => $form['id']]); ?>"><i
-                                    class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
+                           href="<?php echo $this->url('', ['action' => 'update', 'id' => $form['id']]); ?>">
+                            <i class="fa fa-edit"></i> <?php _e('Edit'); ?>
+                        </a>
                         <a class="btn btn-primary btn-sm" title="<?php _e('Element'); ?>"
-                           href="<?php echo $this->url('', ['action' => 'element', 'id' => $form['id']]); ?>"><i
-                                    class="fa fa-edit"></i> <?php _e('Element'); ?></a>
+                           href="<?php echo $this->url('', ['action' => 'element', 'id' => $form['id']]); ?>">
+                            <i class="fa fa-edit"></i> <?php _e('Element'); ?>
+                        </a>
                         <a class="btn btn-success btn-sm" title="<?php _e('View'); ?>"
-                           href="<?php echo $this->url('', ['action' => 'view', 'id' => $form['id']]); ?>"><i
-                                    class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                           href="<?php echo $this->url('', ['action' => 'view', 'id' => $form['id']]); ?>">
+                            <i class="fa fa-eye"></i> <?php _e('View'); ?>
+                        </a>
                         <a class="btn btn-success btn-sm" title="<?php _e('View on front'); ?>"
                            href="<?php echo $this->url(
                                'default', [
@@ -43,10 +46,13 @@
                                    'action'     => 'view',
                                    'slug'       => $form['slug'],
                                ]
-                           ); ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View on front'); ?></a>
+                           ); ?>" target="_blank">
+                            <i class="fa fa-eye"></i> <?php _e('View on front'); ?>
+                        </a>
                         <a class="btn btn-success btn-sm" title="<?php _e('Record'); ?>"
-                           href="<?php echo $this->url('', ['controller' => 'record', 'selectForm' => $form['id']]); ?>"><i
-                                    class="fa fa-eye"></i> <?php _e('Record'); ?></a>
+                           href="<?php echo $this->url('', ['controller' => 'record', 'selectForm' => $form['id']]); ?>">
+                            <i class="fa fa-eye"></i> <?php _e('Record'); ?>
+                        </a>
                     </td>
                 </tr>
             <?php } ?>

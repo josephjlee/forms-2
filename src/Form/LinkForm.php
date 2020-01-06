@@ -60,6 +60,7 @@ class LinkForm extends BaseForm
                 'type'       => 'submit',
                 'attributes' => [
                     'value' => __('Link to form'),
+                    'class' => 'btn btn-primary',
                 ],
             ]
         );

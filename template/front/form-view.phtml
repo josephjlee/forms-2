@@ -1,9 +1,20 @@
 <?php $this->css($this->assetModule('css/front.css')); ?>
 <div class="clearfix">
-    <?php if (!empty($selectForm['description'])) { ?>
-        <div class="clearfix form-description">
-            <?php echo $selectForm['description']; ?>
-        </div>
+    <?php if (isset($selectForm['description']) && !empty($selectForm['description'])) { ?>
+       <div class="card bg-light mb-3">
+           <?php if (!is_null($selectForm['main_image'])) { ?>
+               <img src="<?php echo (string)Pi::api('doc', 'media')->getSingleLinkUrl($selectForm['main_image'])->setConfigModule('forms')->thumb('large'); ?>"
+                    class="card-img-top" alt="<?php echo $this->escape($selectForm['title']); ?>">
+           <?php } ?>
+           <div class="card-body">
+               <h5 class="card-title"><?php echo $this->escape($selectForm['title']); ?></h5>
+               <?php if (!empty($selectForm['description'])) { ?>
+                   <div class="card-text clearfix">
+                       <?php echo $selectForm['description']; ?>
+                   </div>
+               <?php } ?>
+           </div>
+       </div>
     <?php } ?>
     <?php echo $this->form($form); ?>
 </div>

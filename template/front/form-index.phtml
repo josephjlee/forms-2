@@ -39,15 +39,15 @@ switch (count($forms)) {
             <div class="row clearfix">
                 <?php foreach ($forms as $form) { ?>
                     <div class="<?php echo $formClass; ?>">
-                        <div class="card">
+                        <div class="card mb-3">
                             <?php if (!is_null($form['main_image'])) { ?>
-                                <img src="<?php echo (string)Pi::api('doc', 'media')->getSingleLinkUrl($form['main_image'])->thumb(400, 300); ?>"
+                                <img src="<?php echo (string)Pi::api('doc', 'media')->getSingleLinkUrl($form['main_image'])->setConfigModule('forms')->thumb('medium'); ?>"
                                      class="card-img-top" alt="<?php echo $this->escape($form['title']); ?>">
                             <?php } ?>
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $this->escape($form['title']); ?></h5>
                                 <?php if (!empty($form['description'])) { ?>
-                                    <div class="card-text">
+                                    <div class="card-text clearfix">
                                         <?php echo $form['description']; ?>
                                     </div>
                                 <?php } ?>
@@ -62,7 +62,7 @@ switch (count($forms)) {
                             </ul>
                             <div class="card-body">
                                 <a href="<?php echo $this->escape($form['formUrl']); ?>" class="card-link">
-                                    <?php _e('Fill the form'); ?>
+                                    <?php _e('View and fill the form'); ?>
                                 </a>
                             </div>
                         </div>
@@ -74,19 +74,17 @@ switch (count($forms)) {
             <div class="mt-4 mb-4">
                 <h1><?php _e('Your input recodes'); ?></h1>
             </div>
-            <table class="table table-striped table-bordered table-sm">
+            <table class="table table-striped table-bordered table-hover table-responsive-md table-sm mt-3">
                 <tr>
-                    <th class="text-center"><?php _e('Id'); ?></th>
+                    <th class="text-center"><?php _e('ID'); ?></th>
                     <th class="text-center"><?php _e('Time'); ?></th>
                     <th class="text-center"><?php _e('Form'); ?></th>
-                    <th class="text-center"><?php _e('Action'); ?></th>
                 </tr>
                 <?php foreach ($records as $record) { ?>
                     <tr>
                         <td class="text-center"><?php echo $this->escape($record['id']); ?></td>
                         <td class="text-center"><?php echo $this->escape($record['time_create_view']); ?></td>
                         <td class="text-center"><?php echo $this->escape($record['title']); ?></td>
-                        <td class="text-center"></td>
                     </tr>
                 <?php } ?>
             </table>

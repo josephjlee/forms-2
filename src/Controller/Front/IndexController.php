@@ -73,6 +73,14 @@ class IndexController extends ActionController
             return;
         }
 
+        // Check form time
+        if ($selectForm['time_start'] > time() || $selectForm['time_end'] < time()) {
+            $this->getResponse()->setStatusCode(403);
+            $this->terminate(__('You not allowed to fill this form.'), '', 'error-denied');
+            $this->view()->setLayout('layout-simple');
+            return;
+        }
+
         // Get form
         $recordCount = Pi::api('form', 'forms')->getFormCount($selectForm['id'], $uid);
 

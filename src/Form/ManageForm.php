@@ -57,7 +57,7 @@ class ManageForm extends BaseForm
                 ],
                 'attributes' => [
                     'type'        => 'text',
-                    'description' => __('Used as story URL value : must be unique, short, and user oriented'),
+                    'description' => __('Used as form URL value : must be unique, short, and user oriented'),
                 ],
             ]
         );
@@ -166,8 +166,8 @@ class ManageForm extends BaseForm
                 'name'    => 'main_image',
                 'type'    => 'Module\Media\Form\Element\Media',
                 'options' => [
-                    'label'                    => __('Main image'),
-                    'module'                   => 'forms',
+                    'label'  => __('Main image'),
+                    'module' => 'forms',
                 ],
             ]
         );
@@ -179,6 +179,7 @@ class ManageForm extends BaseForm
                 'type'       => 'submit',
                 'attributes' => [
                     'value' => __('Submit'),
+                    'class' => 'btn btn-primary',
                 ],
             ]
         );

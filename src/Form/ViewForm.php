@@ -196,6 +196,7 @@ class ViewForm extends BaseForm
                 'type'       => 'submit',
                 'attributes' => [
                     'value' => __('Submit'),
+                    'class' => 'btn btn-primary',
                 ],
             ]
         );
