@@ -76,6 +76,25 @@ class ManageForm extends BaseForm
             ]
         );
 
+        // register_need
+        $this->add(
+            [
+                'name'       => 'register_need',
+                'options'    => [
+                    'label'         => __('Need register'),
+                    'value_options' => [
+                        1 => __('Yes'),
+                        0 => __('No'),
+                    ],
+                ],
+                'type'       => 'radio',
+                'attributes' => [
+                    'value'       => 1,
+                    'description' => __('User need register to system and login for fell this form'),
+                ],
+            ]
+        );
+
         // status
         $this->add(
             [

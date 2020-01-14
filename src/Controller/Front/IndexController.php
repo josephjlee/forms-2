@@ -22,23 +22,21 @@ class IndexController extends ActionController
 {
     public function indexAction()
     {
-        // Check login in
-        Pi::service('authentication')->requireLogin();
-
         // Get info
         $module = $this->params('module');
 
         // Get Module Config
         $config = Pi::service('registry')->config->read($module);
 
-        // Get uid
-        $uid = Pi::user()->getId();
-
         // Get form list
         $forms = Pi::api('form', 'forms')->getFormList();
 
         // Get record list
-        $records = Pi::api('record', 'forms')->getRecordList($uid);
+        $records = [];
+        if (Pi::user()->hasIdentity()) {
+            $uid     = Pi::user()->getId();
+            $records = Pi::api('record', 'forms')->getRecordList($uid);
+        }
 
         // Set template
         $this->view()->setTemplate('form-index');
@@ -49,9 +47,6 @@ class IndexController extends ActionController
 
     public function viewAction()
     {
-        // Check login in
-        Pi::service('authentication')->requireLogin();
-
         // Get info
         $module = $this->params('module');
         $slug   = $this->params('slug');
@@ -73,6 +68,11 @@ class IndexController extends ActionController
             return;
         }
 
+        // Check login in
+        if ($selectForm['register_need'] == 1) {
+            Pi::service('authentication')->requireLogin();
+        }
+
         // Check form time
         if ($selectForm['time_start'] > time() || $selectForm['time_end'] < time()) {
             $this->getResponse()->setStatusCode(403);
@@ -82,13 +82,13 @@ class IndexController extends ActionController
         }
 
         // Get form
-        $recordCount = Pi::api('form', 'forms')->getFormCount($selectForm['id'], $uid);
+        //$recordCount = Pi::api('form', 'forms')->getFormCount($selectForm['id'], $uid);
 
         // Check
-        if ($recordCount > 0) {
+        //if ($recordCount > 0) {
             // Jump
             //$this->jump(['action' => 'index'],  __('You fill this form before'), 'error');
-        }
+        //}
 
         // Get view
         $elements = Pi::api('form', 'forms')->getView($selectForm['id']);
@@ -128,7 +128,7 @@ class IndexController extends ActionController
                         $saveData->form        = $selectForm['id'];
                         $saveData->time_create = time();
                         $saveData->element     = $element['id'];
-                        $saveData->value       = $values[$elementKey];
+                        $saveData->value       = _escape(_strip($values[$elementKey]));
                         $saveData->save();
                     }
                 }
@@ -136,8 +136,11 @@ class IndexController extends ActionController
                 // Update count
                 Pi::model('form', 'forms')->increment('count', ['id' => $selectForm['id']]);
 
+                // Set email
+                Pi::api('notification', 'forms')->put(['form_name' => $selectForm['title']]);
+
                 // Jump
-                $this->jump(['action' => 'index'],  __('Form input values saved successfully.'), 'success');
+                $this->jump(['action' => 'index'], __('Form input values saved successfully.'), 'success');
             }
         } else {
             $data = [

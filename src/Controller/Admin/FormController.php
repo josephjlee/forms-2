@@ -81,7 +81,7 @@ class FormController extends ActionController
             $form->setInputFilter(new ManageFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
-                $values               = $form->getData();
+                $values = $form->getData();
 
                 // Set time
                 $values['time_start'] = strtotime($values['time_start']);
@@ -126,7 +126,7 @@ class FormController extends ActionController
             }
         } else {
             if ($id) {
-                $formManage               = $this->getModel('form')->find($id)->toArray();
+                $formManage = $this->getModel('form')->find($id)->toArray();
 
                 // Set time
                 $formManage['time_start'] = ($formManage['time_start']) ? date('Y/m/d', $formManage['time_start']) : date('Y/m/d');
@@ -170,7 +170,8 @@ class FormController extends ActionController
         // Get elements
         $elements = [];
         $where    = ['status' => 1];
-        $select   = $this->getModel('element')->select()->where($where);
+        $order    = ['order ASC', 'id ASC'];
+        $select   = $this->getModel('element')->select()->where($where)->order($order);
         $rowset   = $this->getModel('element')->selectWith($select);
         foreach ($rowset as $row) {
             $elements[$row->id] = $row->toArray();

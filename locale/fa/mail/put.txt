@@ -1,0 +1,18 @@
+[comment]تکمیل فرم[/comment]
+
+[format]html[/format]
+
+[subject]%site_name% - تکمیل فرم %form_name%[/subject]
+
+[body]
+<div style="padding: 1px; direction: rtl;">
+    <h3 style="font-size: 1.1em;">مدیر وب سایت %site_name%</h3>
+    <div style="padding: 3px 0; margin: 1px 0;">یک رکورد جدید در فرم %form_name% ثبت شد</div>
+    <div style="padding: 3px 0; margin: 1px 0;">شما می توانید اطلاعات این درخواست را در بخش مدیریت مطالعه کنید.</div>
+    <div style="padding: 3px 0; margin: 1px 0;">با احترام</div>
+    <div style="padding: 3px 0; margin: 1px 0;">لطفا به این پیغام پاسخ ندهید</div>
+    <div style="margin-top: 10px">
+        <a href="%site_url%" title="%site_name%">%site_name%</a>
+    </div>
+</div>
+[/body]

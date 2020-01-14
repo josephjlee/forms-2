@@ -32,5 +32,6 @@ class Form extends Model
             'time_end',
             'count',
             'main_image',
+            'register_need',
         ];
 }

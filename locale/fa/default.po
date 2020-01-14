@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi forms module\n"
-"POT-Creation-Date: 2020-01-06 11:44+0330\n"
+"POT-Creation-Date: 2020-01-14 16:03+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -51,7 +51,7 @@ msgstr "اطلاعات وارد شده با موفقیت ذخیره شد."
 msgid "View %s elements"
 msgstr "مشاهده المان های %s"
 
-#: src/Controller/Front/IndexController.php:71
+#: src/Controller/Front/IndexController.php:66
 msgid "The form not found."
 msgstr "فرم یافت نشد."
 
@@ -100,27 +100,27 @@ msgstr "Star"
 msgid "Percent"
 msgstr "Percent"
 
-#: src/Form/ElementForm.php:81 src/Form/ManageForm.php:85
+#: src/Form/ElementForm.php:81 src/Form/ManageForm.php:104
 msgid "Status"
 msgstr "وضعیت"
 
-#: src/Form/ElementForm.php:83 src/Form/ManageForm.php:87
+#: src/Form/ElementForm.php:83 src/Form/ManageForm.php:106
 msgid "Published"
 msgstr "منتشر شده"
 
-#: src/Form/ElementForm.php:84 src/Form/ManageForm.php:88
+#: src/Form/ElementForm.php:84 src/Form/ManageForm.php:107
 msgid "Pending review"
 msgstr "در انتظار تایید"
 
-#: src/Form/ElementForm.php:85 src/Form/ManageForm.php:89
+#: src/Form/ElementForm.php:85 src/Form/ManageForm.php:108
 msgid "Draft"
 msgstr "پیش نویس"
 
-#: src/Form/ElementForm.php:86 src/Form/ManageForm.php:90
+#: src/Form/ElementForm.php:86 src/Form/ManageForm.php:109
 msgid "Private"
 msgstr "خصوصی"
 
-#: src/Form/ElementForm.php:87 src/Form/ManageForm.php:91
+#: src/Form/ElementForm.php:87 src/Form/ManageForm.php:110
 msgid "Delete"
 msgstr "حذف"
 
@@ -133,8 +133,8 @@ msgid ""
 "Use `|` as delimiter to separate select box / Checkbox / Radio button "
 "elements"
 msgstr ""
-"از `|` به عنوان جداکننده المان های حالت چک باکس / سلکت باکس و دکمه "
-"رادیویی استفاده کنید"
+"از `|` به عنوان جداکننده المان های حالت چک باکس / سلکت باکس و دکمه رادیویی "
+"استفاده کنید"
 
 #: src/Form/ElementForm.php:114 src/Form/ManageForm.php:70
 msgid "Description"
@@ -144,7 +144,7 @@ msgstr "توضیحات"
 msgid "Required"
 msgstr "ضروری"
 
-#: src/Form/ElementForm.php:144 src/Form/ManageForm.php:181
+#: src/Form/ElementForm.php:144 src/Form/ManageForm.php:200
 #: src/Form/ViewForm.php:198
 msgid "Submit"
 msgstr "ارسال"
@@ -164,27 +164,43 @@ msgstr "اسلاگ"
 
 #: src/Form/ManageForm.php:60
 msgid "Used as form URL value : must be unique, short, and user oriented"
-msgstr ""
-"به عنوان آدرس فرم استفاده می شود : باید یکتا کوتاه و کاربر پسند باشد"
+msgstr "به عنوان آدرس فرم استفاده می شود : باید یکتا کوتاه و کاربر پسند باشد"
 
-#: src/Form/ManageForm.php:106
+#: src/Form/ManageForm.php:84 template/admin/form-index.phtml:12
+msgid "Need register"
+msgstr "نیاز به ثبت نام"
+
+#: src/Form/ManageForm.php:86 template/admin/form-index.phtml:29
+msgid "Yes"
+msgstr "بلی"
+
+#: src/Form/ManageForm.php:87 template/admin/form-index.phtml:29
+msgid "No"
+msgstr "خیر"
+
+#: src/Form/ManageForm.php:93
+msgid "User need register to system and login for fell this form"
+msgstr ""
+"کاربر باید در سیستم ثبت نام کرده و سپس وارد شود تا بتواند فرم را تکمیل کند"
+
+#: src/Form/ManageForm.php:125
 msgid "Brands"
 msgstr "برند ها"
 
-#: src/Form/ManageForm.php:120
+#: src/Form/ManageForm.php:139
 msgid "Time start"
 msgstr "تاریخ شروع"
 
-#: src/Form/ManageForm.php:145
+#: src/Form/ManageForm.php:164
 msgid "Time end"
 msgstr "تاریخ پایان"
 
-#: src/Form/ManageForm.php:169
+#: src/Form/ManageForm.php:188
 msgid "Main image"
 msgstr "تصویر اصلی"
 
-#: template/admin/element-index.phtml:22 template/admin/form-index.phtml:29
-#: template/admin/form-index.phtml:31
+#: template/admin/element-index.phtml:22 template/admin/form-index.phtml:31
+#: template/admin/form-index.phtml:33
 msgid "Edit"
 msgstr "ویرایش"
 
@@ -193,7 +209,7 @@ msgid "List of forms"
 msgstr "فهرست فرم ها"
 
 #: template/admin/form-index.phtml:7 template/admin/record-index.phtml:7
-#: template/admin/record-view.phtml:5 template/front/form-index.phtml:79
+#: template/admin/record-view.phtml:5 template/front/form-index.phtml:83
 msgid "ID"
 msgstr "شناسه"
 
@@ -209,29 +225,29 @@ msgstr "شروع"
 msgid "End"
 msgstr "پایان"
 
-#: template/admin/form-index.phtml:12 template/admin/record-index.phtml:12
+#: template/admin/form-index.phtml:13 template/admin/record-index.phtml:12
 msgid "Action"
 msgstr "عملکرد"
 
-#: template/admin/form-index.phtml:33 template/admin/form-index.phtml:35
+#: template/admin/form-index.phtml:35 template/admin/form-index.phtml:37
 #: template/admin/record-view.phtml:22
 msgid "Element"
 msgstr "المان ها"
 
-#: template/admin/form-index.phtml:37 template/admin/form-index.phtml:39
+#: template/admin/form-index.phtml:39 template/admin/form-index.phtml:41
 #: template/admin/record-index.phtml:22 template/admin/record-index.phtml:24
 msgid "View"
 msgstr "نمایش"
 
-#: template/admin/form-index.phtml:41 template/admin/form-index.phtml:50
+#: template/admin/form-index.phtml:43 template/admin/form-index.phtml:52
 msgid "View on front"
 msgstr "نمایش سمت کاربر"
 
-#: template/admin/form-index.phtml:52 template/admin/form-index.phtml:54
+#: template/admin/form-index.phtml:54 template/admin/form-index.phtml:56
 msgid "Record"
 msgstr "رکورد"
 
-#: template/admin/form-index.phtml:62
+#: template/admin/form-index.phtml:64
 msgid "You still didnt make any form, please make new one"
 msgstr "شما هنوز هیچ فرم ای نساخته اید، لطفا ابتدا یک فرم ایجاد کنید"
 
@@ -240,7 +256,7 @@ msgid "List of records"
 msgstr "فهرست رکورد ها"
 
 #: template/admin/record-index.phtml:8 template/admin/record-view.phtml:6
-#: template/front/form-index.phtml:81
+#: template/front/form-index.phtml:85
 msgid "Form"
 msgstr "فرم"
 
@@ -253,7 +269,7 @@ msgid "User"
 msgstr "کاربر"
 
 #: template/admin/record-index.phtml:11 template/admin/record-view.phtml:9
-#: template/front/form-index.phtml:80
+#: template/front/form-index.phtml:84
 msgid "Time"
 msgstr "زمان"
 
@@ -285,7 +301,11 @@ msgstr "تا"
 msgid "View and fill the form"
 msgstr "مشاهده و تکمیل فرم"
 
-#: template/front/form-index.phtml:75
+#: template/front/form-index.phtml:74
+msgid "No active form available"
+msgstr "هیچ فرم فعالی وجود ندارد"
+
+#: template/front/form-index.phtml:79
 msgid "Your input recodes"
 msgstr "اطلاعات وارد شده شما"
 

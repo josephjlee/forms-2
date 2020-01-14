@@ -54,17 +54,6 @@ class Form extends AbstractApi
         $form['time_start_view']  = _date($form['time_start'], ['pattern' => 'yyyy/MM/dd']);
         $form['time_end_view']    = _date($form['time_end'], ['pattern' => 'yyyy/MM/dd']);
 
-        // Set type view
-        /* switch ($form['type']) {
-            case 'general':
-                $form['type_view'] = __('General');
-                break;
-
-            case 'dedicated':
-                $form['type_view'] = __('Dedicated');
-                break;
-        } */
-
         // Count view
         $form['count_view'] = _number($form['count']);
 
@@ -141,7 +130,8 @@ class Form extends AbstractApi
         if (!empty($links)) {
             // Get elements
             $where  = ['id' => $links];
-            $select = Pi::model('element', $this->getModule())->select()->where($where);
+            $order  = ['order ASC', 'id ASC'];
+            $select = Pi::model('element', $this->getModule())->select()->where($where)->order($order);
             $rowset = Pi::model('element', $this->getModule())->selectWith($select);
             foreach ($rowset as $row) {
                 $elements[$row->id] = $row->toArray();

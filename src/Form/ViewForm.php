@@ -13,6 +13,7 @@
 
 namespace Module\Forms\Form;
 
+use Pi;
 use Pi\Form\Form as BaseForm;
 
 class ViewForm extends BaseForm
@@ -189,6 +190,23 @@ class ViewForm extends BaseForm
                 }
             }
         }
+
+        // captcha
+        if (!Pi::service('authentication')->hasIdentity()) {
+            $captchaMode = 2;
+            if ($captchaElement = Pi::service('form')->getReCaptcha($captchaMode)) {
+                $this->add($captchaElement);
+            }
+        }
+
+        // security
+        $this->add(
+            [
+                'name' => 'security',
+                'type' => 'csrf',
+            ]
+        );
+
         // Save
         $this->add(
             [

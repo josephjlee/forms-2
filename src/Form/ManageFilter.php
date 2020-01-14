@@ -68,6 +68,14 @@ class ManageFilter extends InputFilter
             ]
         );
 
+        // register_need
+        $this->add(
+            [
+                'name'     => 'register_need',
+                'required' => false,
+            ]
+        );
+
         // status
         $this->add(
             [
