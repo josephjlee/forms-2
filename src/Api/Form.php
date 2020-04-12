@@ -25,6 +25,7 @@ use Zend\Db\Sql\Predicate\Expression;
  * Pi::api('form', 'forms')->getAllowIdList($form, $uid);
  * Pi::api('form', 'forms')->count($uid);
  * Pi::api('form', 'forms')->canonizeForm($form);
+ * Pi::api('form', 'forms')->save($formId, $params);
  */
 
 class Form extends AbstractApi
@@ -216,5 +217,40 @@ class Form extends AbstractApi
             $idList[] = $row->form;
         }
         return array_unique($idList);
+    }
+
+    public function save($formId, $params)
+    {
+        // Save record
+        $saveRecord              = Pi::model('record', 'forms')->createRow();
+        $saveRecord->uid         = $params['uid'];
+        $saveRecord->form        = $formId;
+        $saveRecord->time_create = time();
+        $saveRecord->ip          = Pi::user()->getIp();
+        $saveRecord->save();
+
+        // Save elements
+        foreach ($params['elements'] as $element) {
+            $elementKey = sprintf('element-%s', $element['id']);
+            if (isset($params['values'][$elementKey]) && !empty($params['values'][$elementKey])) {
+
+                // Check is array
+                if (is_array($params['values'][$elementKey])) {
+                    $params['values'][$elementKey] = json_encode($params['values'][$elementKey]);
+                }
+
+                $saveData              = Pi::model('data', 'forms')->createRow();
+                $saveData->record      = $saveRecord->id;
+                $saveData->uid         = $params['uid'];
+                $saveData->form        = $formId;
+                $saveData->time_create = time();
+                $saveData->element     = $element['id'];
+                $saveData->value       = _escape(_strip($params['values'][$elementKey]));
+                $saveData->save();
+            }
+        }
+
+        // Update count
+        Pi::model('form', 'forms')->increment('count', ['id' => $formId]);
     }
 }
