@@ -13,7 +13,7 @@
 
 namespace Module\Forms\Form;
 
-use Zend\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilter;
 
 class ElementFilter extends InputFilter
 {

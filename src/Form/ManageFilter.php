@@ -14,7 +14,7 @@
 namespace Module\Forms\Form;
 
 use Pi;
-use Zend\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilter;
 
 class ManageFilter extends InputFilter
 {
