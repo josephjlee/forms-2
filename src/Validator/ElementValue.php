@@ -13,7 +13,7 @@
 
 namespace Module\Forms\Validator;
 
-use Zend\Validator\AbstractValidator;
+use Laminas\Validator\AbstractValidator;
 
 class ElementValue extends AbstractValidator
 {
