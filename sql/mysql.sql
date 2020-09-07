@@ -27,14 +27,14 @@ CREATE TABLE `{element}`
     `description` TEXT,
     `required`    TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
     `type`        ENUM (
-        'text', 'number', 'email',
-        'phone', 'textarea', 'checkbox',
-        'radio', 'select', 'star',
-        'percent'
+        'text', 'number', 'email', 'phone', 'textarea', 'checkbox', 'radio', 'select', 'star', 'percent'
         )                             NOT NULL DEFAULT 'text',
     `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
     `order`       INT(10) UNSIGNED    NOT NULL DEFAULT '0',
     `value`       TEXT,
+    `is_name`     TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+    `is_email`    TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+    `is_mobile`   TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`)
 );
 

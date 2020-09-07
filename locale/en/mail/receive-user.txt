@@ -1,0 +1,18 @@
+[comment]Fell form[/comment]
+
+[format]html[/format]
+
+[subject]%site_name% - Fell form - %form_name%[/subject]
+
+[body]
+<div style="padding: 1px; direction: ltr;">
+    <h3 style="font-size: 1.1em;">Dear %user_name%</h3>
+    <div style="padding: 3px 0; margin: 1px 0;">We get your query on %form_name% form</div>
+    <div style="padding: 3px 0; margin: 1px 0;">%notification_desc%</div>
+    <div style="padding: 3px 0; margin: 1px 0;">Regards,</div>
+    <div style="padding: 3px 0; margin: 1px 0;">Don't reply to this email</div>
+    <div style="margin-top: 10px">
+        <a href="%site_url%" title="%site_name%">%site_name%</a>
+    </div>
+</div>
+[/body]

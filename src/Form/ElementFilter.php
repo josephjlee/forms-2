@@ -85,5 +85,29 @@ class ElementFilter extends InputFilter
                 'required' => false,
             ]
         );
+
+        // is_name
+        $this->add(
+            [
+                'name'     => 'is_name',
+                'required' => false,
+            ]
+        );
+
+        // is_email
+        $this->add(
+            [
+                'name'     => 'is_email',
+                'required' => false,
+            ]
+        );
+
+        // is_mobile
+        $this->add(
+            [
+                'name'     => 'is_mobile',
+                'required' => false,
+            ]
+        );
     }
 }

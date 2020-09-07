@@ -30,5 +30,8 @@ class Element extends Model
             'status',
             'order',
             'value',
+            'is_name',
+            'is_email',
+            'is_mobile',
         ];
 }

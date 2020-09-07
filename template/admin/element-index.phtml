@@ -10,18 +10,28 @@ $this->jQuery('ui/jquery-ui.min.js');
                 <div id="mod_<?php echo $this->escape($element['id']); ?>">
                     <div class="tree-item">
                         <div class="tree-item-header row" style="cursor:move;">
-                            <div class="col-md-8">
+                            <div class="col-md-7">
                                 <strong><?php _e('Title'); ?></strong> :
                                 <span> <?php echo $this->escape($element['title']); ?> </span>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <strong><?php _e('Type'); ?></strong> :
                                 <span> <?php echo $this->escape($element['type']); ?> </span>
+                                <?php if ($element['is_name']) { ?>
+                                    <i class="far fa-user"></i>
+                                <?php } ?>
+                                <?php if ($element['is_email']) { ?>
+                                    <i class="far fa-envelope"></i>
+                                <?php } ?>
+                                <?php if ($element['is_mobile']) { ?>
+                                    <i class="fas fa-mobile-alt"></i>
+                                <?php } ?>
                             </div>
                             <div class="col-md-2">
                                 <a class="btn btn-link" title="<?php _e('Edit'); ?>"
-                                   href="<?php echo $this->url('', ['action' => 'update', 'id' => $element['id']]); ?>"><i
-                                            class="fa fa-edit"></i></a>
+                                   href="<?php echo $this->url('', ['action' => 'update', 'id' => $element['id']]); ?>">
+                                    <i class="fa fa-edit"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

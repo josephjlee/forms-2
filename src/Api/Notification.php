@@ -25,11 +25,23 @@ class Notification extends AbstractApi
     public function put($params)
     {
         // Set to admin
-        $toAdmin   = [
+        $toAdmin = [
             Pi::config('adminmail') => Pi::config('adminname'),
         ];
 
-        // Send
-        Pi::service('notification')->send($toAdmin, 'put', $params, $this->getModule());
+        // Send to admin
+        Pi::service('notification')->send($toAdmin, 'receive-admin', $params, $this->getModule());
+
+        // Send to user
+        if (isset($params['user_name']) && !empty($params['user_name']) && isset($params['user_email']) && !empty($params['user_email'])) {
+
+            // Set to user
+            $toUser = [
+                $params['user_email'] => $params['user_name'],
+            ];
+
+            // Send to user
+            Pi::service('notification')->send($toUser, 'receive-user', $params, $this->getModule());
+        }
     }
 }

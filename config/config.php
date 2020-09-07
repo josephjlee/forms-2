@@ -16,11 +16,14 @@ return [
             'name'  => 'image',
             'title' => _t('Image'),
         ],
+        [
+            'name'  => 'notification',
+            'title' => _t('Notification'),
+        ],
     ],
 
     'item' => [
         // Image
-
         'image_ratio_w' => [
             'category'    => 'image',
             'title'       => _t('Image ratio width'),
@@ -36,6 +39,15 @@ return [
             'edit'        => 'text',
             'filter'      => 'number_int',
             'value'       => 1,
+        ],
+        // Notification
+        'notification_desc'   => [
+            'category'    => 'notification',
+            'title'       => _a('Description for sent notification'),
+            'description' => '',
+            'edit'        => 'textarea',
+            'filter'      => 'string',
+            'value'       => '',
         ],
     ],
 ];

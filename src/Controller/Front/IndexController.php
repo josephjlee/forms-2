@@ -86,8 +86,8 @@ class IndexController extends ActionController
 
         // Check
         //if ($recordCount > 0) {
-            // Jump
-            //$this->jump(['action' => 'index'],  __('You fill this form before'), 'error');
+        // Jump
+        //$this->jump(['action' => 'index'],  __('You fill this form before'), 'error');
         //}
 
         // Get view
@@ -115,6 +115,11 @@ class IndexController extends ActionController
                 $saveRecord->ip          = Pi::user()->getIp();
                 $saveRecord->save();
 
+                // Set info
+                $userName = [];
+                $userEmail = '';
+                $userMobile = '';
+
                 // Save data
                 foreach ($elements as $element) {
                     $elementKey = sprintf('element-%s', $element['id']);
@@ -128,8 +133,20 @@ class IndexController extends ActionController
                         $saveData->form        = $selectForm['id'];
                         $saveData->time_create = time();
                         $saveData->element     = $element['id'];
-                        $saveData->value       = _escape(_strip($values[$elementKey]));
+                        $saveData->value       = _escape($values[$elementKey]);
                         $saveData->save();
+
+                        if ($element['is_name']) {
+                            $userName[] = $saveData->value;
+                        }
+
+                        if ($element['is_email']) {
+                            $userEmail = $saveData->value;
+                        }
+
+                        if ($element['is_mobile']) {
+                            $userMobile = $saveData->value;
+                        }
                     }
                 }
 
@@ -137,7 +154,14 @@ class IndexController extends ActionController
                 Pi::model('form', 'forms')->increment('count', ['id' => $selectForm['id']]);
 
                 // Set email
-                Pi::api('notification', 'forms')->put(['form_name' => $selectForm['title']]);
+                Pi::api('notification', 'forms')->put(
+                    [
+                        'form_name'   => $selectForm['title'],
+                        'user_name'   => !empty($userName) ? implode(' ', $userName) : '',
+                        'user_email'  => $userEmail,
+                        'user_mobile' => $userMobile,
+                    ]
+                );
 
                 // Jump
                 $this->jump(['action' => 'index'], __('Form input values saved successfully.'), 'success');

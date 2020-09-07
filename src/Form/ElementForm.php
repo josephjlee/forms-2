@@ -135,6 +135,61 @@ class ElementForm extends BaseForm
             ]
         );
 
+
+
+
+
+
+
+
+
+
+
+        // is_name
+        $this->add(
+            [
+                'name'       => 'is_name',
+                'type'       => 'checkbox',
+                'options'    => [
+                    'label' => __('Is name?'),
+                ],
+                'attributes' => [
+                    'required' => false,
+                    'description' => __('Check it is this filed is part of user name, like first name or last name'),
+                ],
+            ]
+        );
+
+        // is_email
+        $this->add(
+            [
+                'name'       => 'is_email',
+                'type'       => 'checkbox',
+                'options'    => [
+                    'label' => __('Is email?'),
+                ],
+                'attributes' => [
+                    'required' => false,
+                    'description' => __('Check it is this filed is user email'),
+                ],
+            ]
+        );
+
+        // is_mobile
+        $this->add(
+            [
+                'name'       => 'is_mobile',
+                'type'       => 'checkbox',
+                'options'    => [
+                    'label' => __('Is mobile?'),
+                ],
+                'attributes' => [
+                    'required' => false,
+                    'description' => __('Check it is this filed is user mobile'),
+                ],
+            ]
+        );
+
         // Save
         $this->add(
             [
