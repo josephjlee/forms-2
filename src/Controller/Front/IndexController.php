@@ -116,8 +116,8 @@ class IndexController extends ActionController
                 $saveRecord->save();
 
                 // Set info
-                $userName = [];
-                $userEmail = '';
+                $userName   = [];
+                $userEmail  = '';
                 $userMobile = '';
 
                 // Save data
@@ -156,10 +156,11 @@ class IndexController extends ActionController
                 // Set email
                 Pi::api('notification', 'forms')->put(
                     [
-                        'form_name'   => $selectForm['title'],
-                        'user_name'   => !empty($userName) ? implode(' ', $userName) : '',
-                        'user_email'  => $userEmail,
-                        'user_mobile' => $userMobile,
+                        'form_name'         => $selectForm['title'],
+                        'user_name'         => !empty($userName) ? implode(' ', $userName) : '',
+                        'user_email'        => $userEmail,
+                        'user_mobile'       => $userMobile,
+                        'notification_desc' => $config['notification_desc'],
                     ]
                 );
 

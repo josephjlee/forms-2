@@ -44,8 +44,8 @@ class Update extends BasicUpdate
         $elementTable   = $elementModel->getTable();
         $elementAdapter = $elementModel->getAdapter();
 
-        // Update to version 1.2.0
-        if (version_compare($moduleVersion, '0.1.0', '<')) {
+        // Update to version 0.0.7
+        if (version_compare($moduleVersion, '0.0.7', '<')) {
             // Alter table add field `is_name`
             $sql = sprintf("ALTER TABLE %s ADD `is_name` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0'", $elementTable);
             try {
