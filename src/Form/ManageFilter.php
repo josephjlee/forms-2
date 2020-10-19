@@ -76,6 +76,14 @@ class ManageFilter extends InputFilter
             ]
         );
 
+        // review_need
+        $this->add(
+            [
+                'name'     => 'review_need',
+                'required' => false,
+            ]
+        );
+
         // status
         $this->add(
             [

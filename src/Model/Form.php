@@ -33,5 +33,7 @@ class Form extends Model
             'count',
             'main_image',
             'register_need',
+            'review_need',
+            'review_action',
         ];
 }

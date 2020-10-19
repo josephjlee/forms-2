@@ -11,6 +11,8 @@ CREATE TABLE `{form}`
     `count`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
     `main_image`    INT(10) UNSIGNED    NULL     DEFAULT NULL,
     `register_need` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+    `review_need`   TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+    `review_action` VARCHAR(32)         NOT NULL DEFAULT '',
     PRIMARY KEY (`id`),
     UNIQUE KEY `slug` (`slug`),
     KEY `status` (`status`),
@@ -26,7 +28,11 @@ CREATE TABLE `{element}`
     `title`       VARCHAR(256)        NOT NULL DEFAULT '',
     `description` TEXT,
     `required`    TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
-    `type`        ENUM ('text', 'number', 'email', 'phone', 'textarea', 'checkbox', 'radio', 'select', 'star', 'percent') NOT NULL DEFAULT 'text',
+    `type`        ENUM (
+        'text', 'number', 'email', 'phone',
+        'textarea', 'checkbox', 'radio',
+        'select', 'star', 'percent'
+        )                             NOT NULL DEFAULT 'text',
     `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
     `order`       INT(10) UNSIGNED    NOT NULL DEFAULT '0',
     `value`       TEXT,
@@ -50,12 +56,14 @@ CREATE TABLE `{link}`
 
 CREATE TABLE `{record}`
 (
-    `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
-    `uid`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-    `form`        INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-    `time_create` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-    `ip`          CHAR(15)            NOT NULL DEFAULT '',
-    `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+    `id`            INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
+    `uid`           INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `form`          INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `time_create`   INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `ip`            CHAR(15)            NOT NULL DEFAULT '',
+    `status`        TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+    `review_status` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0', # 0:Pending, 1:Accepted, 2:Rejected
+    `review_result` TEXT,
     PRIMARY KEY (`id`),
     KEY `uid` (`uid`),
     KEY `form` (`form`),

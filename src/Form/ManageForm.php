@@ -95,6 +95,25 @@ class ManageForm extends BaseForm
             ]
         );
 
+        // review_need
+        $this->add(
+            [
+                'name'       => 'review_need',
+                'options'    => [
+                    'label'         => __('Need review'),
+                    'value_options' => [
+                        1 => __('Yes'),
+                        0 => __('No'),
+                    ],
+                ],
+                'type'       => 'radio',
+                'attributes' => [
+                    'value'       => 1,
+                    'description' => __('All form records should be review by admin'),
+                ],
+            ]
+        );
+
         // status
         $this->add(
             [

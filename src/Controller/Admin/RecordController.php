@@ -15,6 +15,8 @@ namespace Module\Forms\Controller\Admin;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
+use Module\Forms\Form\ReviewFilter;
+use Module\Forms\Form\ReviewForm;
 use Laminas\Db\Sql\Predicate\Expression;
 
 class RecordController extends ActionController
@@ -54,14 +56,38 @@ class RecordController extends ActionController
 
     public function viewAction()
     {
-        $id     = $this->params('id');
-        $record = Pi::api('record', 'forms')->getRecord($id);
-
+        // Get review
+        $id             = $this->params('id');
+        $record         = Pi::api('record', 'forms')->getRecord($id);
         $record['data'] = Pi::api('record', 'forms')->getRecordData($record['id']);
+
+        // Set form
+        $form = new ReviewForm('element');
+        $form->setAttribute('enctype', 'multipart/form-data');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new ReviewFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+
+                // Save values
+                $row = $this->getModel('record')->find($id);
+                $row->assign($values);
+                $row->save();
+
+                // Jump
+                $message = __('Review saved successfully.');
+                $this->jump(['action' => 'view', 'id' => $id], $message);
+            }
+        } else {
+            $form->setData($record);
+        }
 
         // Set template
         $this->view()->setTemplate('record-view');
         $this->view()->assign('record', $record);
+        $this->view()->assign('form', $form);
     }
 
     public function exportAction()
@@ -162,7 +188,6 @@ class RecordController extends ActionController
 
                 // Make export dynamic list
                 foreach ($recordDate as $date) {
-
 
 
                     $exportData[$row->id][sprintf('element_%s', $date['element_id'])] = $date['value'];

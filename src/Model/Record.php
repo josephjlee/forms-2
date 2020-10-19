@@ -28,5 +28,7 @@ class Record extends Model
             'time_create',
             'ip',
             'status',
+            'review_status',
+            'review_result',
         ];
 }
