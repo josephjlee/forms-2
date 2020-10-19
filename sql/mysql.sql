@@ -53,15 +53,13 @@ CREATE TABLE `{record}`
     `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
     `uid`         INT(10) UNSIGNED    NOT NULL DEFAULT '0',
     `form`        INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-    `extra_key`   INT(10) UNSIGNED    NOT NULL DEFAULT '0',
     `time_create` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
     `ip`          CHAR(15)            NOT NULL DEFAULT '',
     `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
     PRIMARY KEY (`id`),
     KEY `uid` (`uid`),
     KEY `form` (`form`),
-    KEY `uid_form` (`uid`, `form`),
-    KEY `uid_form_key` (`uid`, `form`, `extra_key`)
+    KEY `uid_form` (`uid`, `form`)
 );
 
 CREATE TABLE `{data}`
@@ -75,15 +73,4 @@ CREATE TABLE `{data}`
     `value`       TEXT,
     PRIMARY KEY (`id`),
     KEY `form` (`form`)
-);
-
-CREATE TABLE `{extra}`
-(
-    `id`           INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `form`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
-    `extra_key`    INT(10) UNSIGNED NOT NULL DEFAULT '0',
-    `extra_module` VARCHAR(16)      NOT NULL DEFAULT 'shop',
-    PRIMARY KEY (`id`),
-    KEY `form` (`form`),
-    KEY `extra_key` (`extra_key`)
 );

@@ -25,7 +25,6 @@ class Record extends Model
             'id',
             'uid',
             'form',
-            'extra_key',
             'time_create',
             'ip',
             'status',

@@ -116,20 +116,6 @@ class ManageForm extends BaseForm
             ]
         );
 
-        // extra_key
-        if (!empty($this->option['brand'])) {
-            $this->add(
-                [
-                    'name'    => 'extra_key',
-                    'options' => [
-                        'label'         => __('Brands'),
-                        'value_options' => $this->option['brand'],
-                    ],
-                    'type'    => 'multi_checkbox',
-                ]
-            );
-        }
-
         // time_start
         $this->add(
             [

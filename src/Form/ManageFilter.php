@@ -84,16 +84,6 @@ class ManageFilter extends InputFilter
             ]
         );
 
-        // extra_key
-        if (!empty($option['brand'])) {
-            $this->add(
-                [
-                    'name'     => 'extra_key',
-                    'required' => false,
-                ]
-            );
-        }
-
         // time_start
         $this->add(
             [

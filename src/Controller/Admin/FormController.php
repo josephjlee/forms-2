@@ -50,21 +50,8 @@ class FormController extends ActionController
 
         // Set option
         $option = [
-            'brand' => [],
             'id'    => $id,
         ];
-
-        // Get brand list
-        $option['brand'] = [];
-        if (Pi::service('module')->isActive('shop')) {
-            $where  = ['status' => 1, 'type' => 'brand'];
-            $order  = ['display_order ASC', 'title ASC', 'id DESC'];
-            $select = Pi::model('category', 'shop')->select()->where($where)->order($order);
-            $rowset = Pi::model('category', 'shop')->selectWith($select);
-            foreach ($rowset as $row) {
-                $option['brand'][$row->id] = $row->title;
-            }
-        }
 
         // Set form
         $form = new ManageForm('manage', $option);
@@ -104,22 +91,6 @@ class FormController extends ActionController
                 $row->assign($values);
                 $row->save();
 
-                // Remove links
-                $this->getModel('extra')->delete(
-                    [
-                        'form' => $row->id,
-                    ]
-                );
-
-                // Save links
-                foreach ($values['extra_key'] as $extraId) {
-                    // Save
-                    $extra            = $this->getModel('extra')->createRow();
-                    $extra->form      = $row->id;
-                    $extra->extra_key = $extraId;
-                    $extra->save();
-                }
-
                 // Jump
                 $message = __('Form data saved successfully.');
                 $this->jump(['action' => 'element', 'id' => $row->id], $message);
@@ -131,14 +102,6 @@ class FormController extends ActionController
                 // Set time
                 $formManage['time_start'] = ($formManage['time_start']) ? date('Y/m/d', $formManage['time_start']) : date('Y/m/d');
                 $formManage['time_end']   = ($formManage['time_end']) ? date('Y/m/d', $formManage['time_end']) : '';
-
-                // Get extra
-                $where  = ['form' => $formManage['id']];
-                $select = $this->getModel('extra')->select()->where($where);
-                $rowset = $this->getModel('extra')->selectWith($select);
-                foreach ($rowset as $row) {
-                    $formManage['extra_key'][] = $row['extra_key'];
-                }
 
                 $form->setData($formManage);
             }

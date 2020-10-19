@@ -24,7 +24,6 @@ class Extra extends Model
         = [
             'id',
             'form',
-            'extra_key',
             'extra_module',
         ];
 }

@@ -19,7 +19,7 @@ use Laminas\Db\Sql\Predicate\Expression;
 
 /*
  * Pi::api('form', 'forms')->getForm($parameter, $field);
- * Pi::api('form', 'forms')->getFormView($id, $uid, $key);
+ * Pi::api('form', 'forms')->getFormView($id, $uid);
  * Pi::api('form', 'forms')->getView($formId);
  * Pi::api('form', 'forms')->getFormList();
  * Pi::api('form', 'forms')->getAllowIdList($form, $uid);
@@ -85,13 +85,10 @@ class Form extends AbstractApi
         return $form;
     }
 
-    public function getFormCount($id, $uid, $key = 0)
+    public function getFormCount($id, $uid)
     {
         // Set info
         $where = ['uid' => $uid, 'form' => $id];
-        if ($key > 0) {
-            $where['extra_key'] = $key;
-        }
         $columns = ['count' => new Expression('count(*)')];
 
         // Get count
@@ -101,12 +98,9 @@ class Form extends AbstractApi
         return $count;
     }
 
-    public function getFormView($id, $uid, $key = 0)
+    public function getFormView($id, $uid)
     {
         $where = ['uid' => $uid, 'form' => $id];
-        if ($key > 0) {
-            $where['extra_key'] = $key;
-        }
         $columns = ['count' => new Expression('count(*)')];
         $select  = Pi::model('record', $this->getModule())->select()->columns($columns)->where($where);
         $count   = Pi::model('record', $this->getModule())->selectWith($select)->current()->count;
@@ -172,30 +166,6 @@ class Form extends AbstractApi
         }
 
         return $forms;
-    }
-
-    public function getAllowIdList($form)
-    {
-        $idList = [];
-        $where  = ['form' => $form];
-        $select = Pi::model('extra', $this->getModule())->select()->where($where);
-        $rowSet = Pi::model('extra', $this->getModule())->selectWith($select);
-        foreach ($rowSet as $row) {
-            $idList[] = $row->extra_key;
-        }
-        return array_unique($idList);
-    }
-
-    public function getNotAllowIdList($form, $uid)
-    {
-        $idList = [];
-        $where  = ['form' => $form, 'uid' => $uid];
-        $select = Pi::model('record', $this->getModule())->select()->where($where);
-        $rowSet = Pi::model('record', $this->getModule())->selectWith($select);
-        foreach ($rowSet as $row) {
-            $idList[] = $row->form;
-        }
-        return array_unique($idList);
     }
 
     public function save($formId, $params)
