@@ -1,22 +1,22 @@
 <?php $this->css($this->assetModule('css/front.css')); ?>
 <div class="clearfix">
-    <?php if (isset($selectForm['description']) && !empty($selectForm['description'])) { ?>
+    <?php if (isset($singleForm['description']) && !empty($singleForm['description'])) { ?>
        <div class="card bg-light mb-3">
-           <?php if (!is_null($selectForm['main_image'])) { ?>
-               <img src="<?php echo (string)Pi::api('doc', 'media')->getSingleLinkUrl($selectForm['main_image'])->setConfigModule('forms')->thumb('large'); ?>"
-                    class="card-img-top" alt="<?php echo $this->escape($selectForm['title']); ?>">
+           <?php if (isset($mainImage) && !empty($mainImage)) { ?>
+               <img class="card-img-top" src="<?php echo $this->escape($mainImage['resized_url']); ?>"
+                    alt="<?php echo $this->escape($mainImage['title']); ?><?php if ($mainImage['copyright']) echo ' - ' . $mainImage['copyright'] ?>">
            <?php } ?>
            <div class="card-body">
-               <h1 class="card-title"><?php echo $this->escape($selectForm['title']); ?></h1>
-               <?php if (!empty($selectForm['description'])) { ?>
+               <h1 class="card-title"><?php echo $this->escape($singleForm['title']); ?></h1>
+               <?php if (!empty($singleForm['description'])) { ?>
                    <div class="card-text clearfix">
-                       <?php echo $selectForm['description']; ?>
+                       <?php echo $singleForm['description']; ?>
                    </div>
                <?php } ?>
            </div>
        </div>
     <?php } else { ?>
-        <h1><?php echo $this->escape($selectForm['title']); ?></h1>
+        <h1><?php echo $this->escape($singleForm['title']); ?></h1>
         <hr />
     <?php } ?>
     <?php echo $this->form($form); ?>

@@ -24,21 +24,37 @@ return [
 
     'item' => [
         // Image
-        'image_ratio_w' => [
+        'main_image_height'             => [
             'category'    => 'image',
-            'title'       => _t('Image ratio width'),
-            'description' => _t('Example : "4" for 4/1 ratio'),
+            'title'       => _a('Main Image resize height'),
+            'description' => '',
             'edit'        => 'text',
             'filter'      => 'number_int',
-            'value'       => 4,
+            'value'       => 1200,
         ],
-        'image_ratio_h' => [
+        'main_image_width'             => [
             'category'    => 'image',
-            'title'       => _t('Image ratio height'),
-            'description' => _t('Example : "1" for 4/1 ratio'),
+            'title'       => _a('Main Image resize width'),
+            'description' => '',
             'edit'        => 'text',
             'filter'      => 'number_int',
-            'value'       => 1,
+            'value'       => 250,
+        ],
+        'list_image_height'             => [
+            'category'    => 'image',
+            'title'       => _a('Image resize height for list'),
+            'description' => '',
+            'edit'        => 'text',
+            'filter'      => 'number_int',
+            'value'       => 600,
+        ],
+        'list_image_width'             => [
+            'category'    => 'image',
+            'title'       => _a('Image resize width for list'),
+            'description' => '',
+            'edit'        => 'text',
+            'filter'      => 'number_int',
+            'value'       => 125,
         ],
         // Notification
         'notification_desc'   => [

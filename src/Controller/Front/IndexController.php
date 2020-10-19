@@ -58,10 +58,10 @@ class IndexController extends ActionController
         $uid = Pi::user()->getId();
 
         // Get form
-        $selectForm = Pi::api('form', 'forms')->getForm($slug, 'slug');
+        $singleForm = Pi::api('form', 'forms')->getForm($slug, 'slug');
 
         // Check form
-        if (!$selectForm || $selectForm['status'] != 1) {
+        if (!$singleForm || $singleForm['status'] != 1) {
             $this->getResponse()->setStatusCode(404);
             $this->terminate(__('The form not found.'), '', 'error-404');
             $this->view()->setLayout('layout-simple');
@@ -69,12 +69,12 @@ class IndexController extends ActionController
         }
 
         // Check login in
-        if ($selectForm['register_need'] == 1) {
+        if ($singleForm['register_need'] == 1) {
             Pi::service('authentication')->requireLogin();
         }
 
         // Check form time
-        if ($selectForm['time_start'] > time() || $selectForm['time_end'] < time()) {
+        if ($singleForm['time_start'] > time() || $singleForm['time_end'] < time()) {
             $this->getResponse()->setStatusCode(403);
             $this->terminate(__('You not allowed to fill this form.'), '', 'error-denied');
             $this->view()->setLayout('layout-simple');
@@ -82,7 +82,7 @@ class IndexController extends ActionController
         }
 
         // Get form
-        //$recordCount = Pi::api('form', 'forms')->getFormCount($selectForm['id'], $uid);
+        //$recordCount = Pi::api('form', 'forms')->getFormCount($singleForm['id'], $uid);
 
         // Check
         //if ($recordCount > 0) {
@@ -91,7 +91,7 @@ class IndexController extends ActionController
         //}
 
         // Get view
-        $elements = Pi::api('form', 'forms')->getView($selectForm['id']);
+        $elements = Pi::api('form', 'forms')->getView($singleForm['id']);
 
         // Set option
         $option             = [];
@@ -110,7 +110,7 @@ class IndexController extends ActionController
                 // Save record
                 $saveRecord              = Pi::model('record', 'forms')->createRow();
                 $saveRecord->uid         = $uid;
-                $saveRecord->form        = $selectForm['id'];
+                $saveRecord->form        = $singleForm['id'];
                 $saveRecord->time_create = time();
                 $saveRecord->ip          = Pi::user()->getIp();
                 $saveRecord->save();
@@ -130,7 +130,7 @@ class IndexController extends ActionController
                         $saveData              = Pi::model('data', 'forms')->createRow();
                         $saveData->record      = $saveRecord->id;
                         $saveData->uid         = Pi::user()->getId();
-                        $saveData->form        = $selectForm['id'];
+                        $saveData->form        = $singleForm['id'];
                         $saveData->time_create = time();
                         $saveData->element     = $element['id'];
                         $saveData->value       = _escape($values[$elementKey]);
@@ -151,12 +151,12 @@ class IndexController extends ActionController
                 }
 
                 // Update count
-                Pi::model('form', 'forms')->increment('count', ['id' => $selectForm['id']]);
+                Pi::model('form', 'forms')->increment('count', ['id' => $singleForm['id']]);
 
                 // Set email
                 Pi::api('notification', 'forms')->put(
                     [
-                        'form_name'         => $selectForm['title'],
+                        'form_name'         => $singleForm['title'],
                         'user_name'         => !empty($userName) ? implode(' ', $userName) : '',
                         'user_email'        => $userEmail,
                         'user_mobile'       => $userMobile,
@@ -169,16 +169,27 @@ class IndexController extends ActionController
             }
         } else {
             $data = [
-                'id' => $selectForm['id'],
+                'id' => $singleForm['id'],
             ];
             $form->setData($data);
+        }
+
+        // Get main image
+        $mainImage = [];
+        if (Pi::service('module')->isActive('media') && isset($singleForm['main_image']) && $singleForm['main_image'] > 0) {
+            $mainImage = Pi::api('doc', 'media')->getSingleLinkData(
+                $singleForm['main_image'],
+                $config['main_image_height'],
+                $config['main_image_width']
+            );
         }
 
         // Set template
         $this->view()->setTemplate('form-view');
         $this->view()->assign('config', $config);
-        $this->view()->assign('selectForm', $selectForm);
+        $this->view()->assign('singleForm', $singleForm);
         $this->view()->assign('elements', $elements);
         $this->view()->assign('form', $form);
+        $this->view()->assign('mainImage', $mainImage);
     }
 }

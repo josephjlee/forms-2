@@ -144,13 +144,28 @@ class Form extends AbstractApi
 
     public function getFormList()
     {
+        // Get Module Config
+        $config = Pi::service('registry')->config->read($this->getModule());
+
         // Get list form
         $forms  = [];
         $where  = ['status' => 1, 'time_start <= ?' => time(), 'time_end >= ?' => time()];
         $select = Pi::model('form', $this->getModule())->select()->where($where);
         $rowSet = Pi::model('form', $this->getModule())->selectWith($select);
         foreach ($rowSet as $row) {
-            $forms[] = $this->canonizeForm($row);
+            $singleForm = $this->canonizeForm($row);
+
+            // Set image
+            $singleForm['image_information'] = [];
+            if (Pi::service('module')->isActive('media') && isset($singleForm['main_image']) && $singleForm['main_image'] > 0) {
+                $singleForm['image_information'] = Pi::api('doc', 'media')->getSingleLinkData(
+                    $singleForm['main_image'],
+                    $config['list_image_height'],
+                    $config['list_image_width']
+                );
+            }
+
+            $forms[] = $singleForm;
         }
 
         return $forms;

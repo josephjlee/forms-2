@@ -42,9 +42,9 @@ switch (count($forms)) {
                 <?php foreach ($forms as $form) { ?>
                     <div class="<?php echo $formClass; ?>">
                         <div class="card mb-3">
-                            <?php if (!is_null($form['main_image'])) { ?>
-                                <img src="<?php echo (string)Pi::api('doc', 'media')->getSingleLinkUrl($form['main_image'])->setConfigModule('forms')->thumb('medium'); ?>"
-                                     class="card-img-top" alt="<?php echo $this->escape($form['title']); ?>">
+                            <?php if (isset($form['image_information']) && !empty($form['image_information'])) { ?>
+                                <img class="card-img-top" src="<?php echo $this->escape($form['image_information']['resized_url']); ?>"
+                                     alt="<?php echo $this->escape($form['image_information']['title']); ?><?php if ($form['image_information']['copyright']) echo ' - ' . $form['image_information']['copyright'] ?>">
                             <?php } ?>
                             <div class="card-body">
                                 <h4 class="card-title"><?php echo $this->escape($form['title']); ?></h4>
