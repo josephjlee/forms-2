@@ -114,6 +114,22 @@ class ManageForm extends BaseForm
             ]
         );
 
+        // review_action
+        $this->add(
+            [
+                'name'       => 'review_action',
+                'type'       => 'select',
+                'options'    => [
+                    'label'         => __('Review Action'),
+                    'value_options' => $this->makeArray($this->option['review_action']),
+                ],
+                'attributes' => [
+                    'description' => __('Do action after accept form record on admin review'),
+                    'required' => true,
+                ],
+            ]
+        );
+
         // status
         $this->add(
             [
@@ -207,5 +223,15 @@ class ManageForm extends BaseForm
                 ],
             ]
         );
+    }
+
+    public function makeArray($string)
+    {
+        $list     = [];
+        $variable = explode('|', $string);
+        foreach ($variable as $value) {
+            $list[$value] = $value;
+        }
+        return $list;
     }
 }

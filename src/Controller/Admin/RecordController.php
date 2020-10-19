@@ -56,10 +56,11 @@ class RecordController extends ActionController
 
     public function viewAction()
     {
-        // Get review
+        // Get record
         $id             = $this->params('id');
         $record         = Pi::api('record', 'forms')->getRecord($id);
-        $record['data'] = Pi::api('record', 'forms')->getRecordData($record['id']);
+        $data = Pi::api('record', 'forms')->getRecordData($record['id']);
+        $selectForm = Pi::api('form', 'forms')->getForm($record['form']);
 
         // Set form
         if ($record['review_status'] == 0) {
@@ -77,6 +78,13 @@ class RecordController extends ActionController
                     $row->assign($values);
                     $row->save();
 
+                    // Do action after review
+                    if (isset($selectForm['review_action']) && !empty($selectForm['review_action'])) {
+                        if ($values['review_status'] == 1) {
+                            Pi::api('review', 'forms')->postReview($selectForm['review_action'], $selectForm, $record, $data);
+                        }
+                    }
+
                     // Jump
                     $message = __('Review saved successfully.');
                     $this->jump(['action' => 'view', 'id' => $id], $message);
@@ -92,7 +100,8 @@ class RecordController extends ActionController
         // Set template
         $this->view()->setTemplate('record-view');
         $this->view()->assign('record', $record);
-
+        $this->view()->assign('dataList', $data);
+        $this->view()->assign('selectForm', $selectForm);
     }
 
     public function exportAction()

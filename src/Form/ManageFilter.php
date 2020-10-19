@@ -84,6 +84,14 @@ class ManageFilter extends InputFilter
             ]
         );
 
+        // review_action
+        $this->add(
+            [
+                'name'     => 'review_action',
+                'required' => false,
+            ]
+        );
+
         // status
         $this->add(
             [

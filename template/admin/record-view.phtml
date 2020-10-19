@@ -22,11 +22,11 @@
             <th><?php _e('Value'); ?></th>
             <th><?php _e('Element type'); ?></th>
         </tr>
-        <?php foreach ($record['data'] as $data) { ?>
+        <?php foreach ($dataList as $dataSingle) { ?>
             <tr>
-                <td><?php echo $this->escape($data['element_title']); ?></td>
-                <td><?php echo $this->escape($data['value']); ?></td>
-                <td><?php echo $this->escape($data['element_type']); ?></td>
+                <td><?php echo $this->escape($dataSingle['element_title']); ?></td>
+                <td><?php echo $this->escape($dataSingle['value']); ?></td>
+                <td><?php echo $this->escape($dataSingle['element_type']); ?></td>
             </tr>
         <?php } ?>
     </table>

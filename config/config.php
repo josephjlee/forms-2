@@ -17,6 +17,10 @@ return [
             'title' => _t('Image'),
         ],
         [
+            'name'  => 'review',
+            'title' => _t('Review'),
+        ],
+        [
             'name'  => 'notification',
             'title' => _t('Notification'),
         ],
@@ -56,6 +60,17 @@ return [
             'filter'      => 'number_int',
             'value'       => 125,
         ],
+
+        // Review
+        'review_action'            => [
+            'category'    => 'review',
+            'title'       => _a('Review Action'),
+            'description' => _a('Use `|` as delimiter to separate terms'),
+            'edit'        => 'textarea',
+            'filter'      => 'string',
+            'value'       => '|shop_allowOrder',
+        ],
+
         // Notification
         'notification_desc'   => [
             'category'    => 'notification',

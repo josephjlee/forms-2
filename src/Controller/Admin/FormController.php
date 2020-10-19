@@ -47,10 +47,15 @@ class FormController extends ActionController
     {
         // Get id
         $id = $this->params('id');
+        $module       = $this->params('module');
+
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
 
         // Set option
         $option = [
             'id'    => $id,
+            'review_action' => $config['review_action']
         ];
 
         // Set form
