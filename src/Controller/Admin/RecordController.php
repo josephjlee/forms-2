@@ -151,16 +151,20 @@ class RecordController extends ActionController
                 // Make export static list
                 $exportData[$row->id] = [
                     'form_title'       => $selectForm['title'],
-                    'user_id'          => $user[$row->uid]['id'],
-                    'name'             => $user[$row->uid]['name'],
-                    'identity'         => $user[$row->uid]['identity'],
-                    'email'            => $user[$row->uid]['email'],
+                    'user_id'          => isset($user[$row->uid]['id']) ? $user[$row->uid]['id'] : '',
+                    'name'             => isset($user[$row->uid]['name']) ? $user[$row->uid]['name'] : '',
+                    'identity'         => isset($user[$row->uid]['identity']) ? $user[$row->uid]['identity'] : '',
+                    'email'            => isset($user[$row->uid]['email']) ? $user[$row->uid]['email'] : '',
+                    'mobile'           => isset($user[$row->uid]['mobile']) ? $user[$row->uid]['mobile'] : '',
                     'time_create'      => $record['time_create'],
                     'time_create_view' => $record['time_create_view'],
                 ];
 
                 // Make export dynamic list
                 foreach ($recordDate as $date) {
+
+
+
                     $exportData[$row->id][sprintf('element_%s', $date['element_id'])] = $date['value'];
                     $exportTitle[sprintf('element_%s', $date['element_id'])]          = $date['element_title'];
                 }
