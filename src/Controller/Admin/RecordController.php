@@ -62,32 +62,37 @@ class RecordController extends ActionController
         $record['data'] = Pi::api('record', 'forms')->getRecordData($record['id']);
 
         // Set form
-        $form = new ReviewForm('element');
-        $form->setAttribute('enctype', 'multipart/form-data');
-        if ($this->request->isPost()) {
-            $data = $this->request->getPost();
-            $form->setInputFilter(new ReviewFilter);
-            $form->setData($data);
-            if ($form->isValid()) {
-                $values = $form->getData();
+        if ($record['review_status'] == 0) {
+            $form = new ReviewForm('element');
+            $form->setAttribute('enctype', 'multipart/form-data');
+            if ($this->request->isPost()) {
+                $data = $this->request->getPost();
+                $form->setInputFilter(new ReviewFilter);
+                $form->setData($data);
+                if ($form->isValid()) {
+                    $values = $form->getData();
 
-                // Save values
-                $row = $this->getModel('record')->find($id);
-                $row->assign($values);
-                $row->save();
+                    // Save values
+                    $row = $this->getModel('record')->find($id);
+                    $row->assign($values);
+                    $row->save();
 
-                // Jump
-                $message = __('Review saved successfully.');
-                $this->jump(['action' => 'view', 'id' => $id], $message);
+                    // Jump
+                    $message = __('Review saved successfully.');
+                    $this->jump(['action' => 'view', 'id' => $id], $message);
+                }
+            } else {
+                $form->setData($record);
             }
-        } else {
-            $form->setData($record);
+
+            // Set view
+            $this->view()->assign('form', $form);
         }
 
         // Set template
         $this->view()->setTemplate('record-view');
         $this->view()->assign('record', $record);
-        $this->view()->assign('form', $form);
+
     }
 
     public function exportAction()

@@ -133,6 +133,21 @@ class Record extends AbstractApi
         // Set time view
         $record['time_create_view'] = _date($record['time_create'], ['pattern' => 'yyyy/MM/dd']);
 
+        // Set review_status_view
+        switch ($record['review_status']) {
+            case 0:
+                $record['review_status_view'] = __('Pending');
+                break;
+
+            case 1:
+                $record['review_status_view'] = __('Accepted');
+                break;
+
+            case 2:
+                $record['review_status_view'] = __('Rejected');
+                break;
+        }
+
         // Set user
         if ($setUser) {
             $record['user'] = $user;
