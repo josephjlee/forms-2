@@ -28,6 +28,8 @@
                     <td><?php echo $this->escape($form['time_end_view']); ?></td>
                     <td><?php echo $form['register_need'] ? __('Yes') : __('No'); ?></td>
                     <td>
+
+
                         <a class="btn btn-primary btn-sm" title="<?php _e('Edit'); ?>"
                            href="<?php echo $this->url('', ['action' => 'update', 'id' => $form['id']]); ?>">
                             <i class="fa fa-edit"></i> <?php _e('Edit'); ?>
@@ -36,6 +38,9 @@
                            href="<?php echo $this->url('', ['action' => 'element', 'id' => $form['id']]); ?>">
                             <i class="fa fa-edit"></i> <?php _e('Element'); ?>
                         </a>
+
+
+
                         <a class="btn btn-success btn-sm" title="<?php _e('View'); ?>"
                            href="<?php echo $this->url('', ['action' => 'view', 'id' => $form['id']]); ?>">
                             <i class="fa fa-eye"></i> <?php _e('View'); ?>
@@ -51,10 +56,18 @@
                            ); ?>" target="_blank">
                             <i class="fa fa-eye"></i> <?php _e('View on front'); ?>
                         </a>
-                        <a class="btn btn-success btn-sm" title="<?php _e('Record'); ?>"
+
+
+                        <a class="btn btn-warning btn-sm" title="<?php _e('Record'); ?>"
                            href="<?php echo $this->url('', ['controller' => 'record', 'selectForm' => $form['id']]); ?>">
                             <i class="fa fa-eye"></i> <?php _e('Record'); ?>
                         </a>
+                        <a class="btn btn-warning btn-sm" title="<?php _e('Export Record'); ?>"
+                           href="<?php echo $this->url('', ['controller' => 'record','action' => 'export', 'selectForm' => $form['id']]); ?>">
+                            <i class="fa fa-eye"></i> <?php _e('Export Record'); ?>
+                        </a>
+
+
                     </td>
                 </tr>
             <?php } ?>

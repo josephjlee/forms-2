@@ -33,19 +33,20 @@ class Form extends AbstractApi
     public function getForm($parameter, $field = 'id')
     {
         $selectForm = Pi::model('form', $this->getModule())->find($parameter, $field);
-        $selectForm = $this->canonizeForm($selectForm);
-        return $selectForm;
+        return $this->canonizeForm($selectForm);
     }
 
     public function canonizeForm($form)
     {
         // Check
         if (empty($form)) {
-            return '';
+            return [];
         }
 
         // object to array
-        $form = $form->toArray();
+        if (is_object($form)) {
+            $form = $form->toArray();
+        }
 
         // Set description
         $form['description'] = Pi::service('markup')->render($form['description'], 'html', 'html');
@@ -61,21 +62,23 @@ class Form extends AbstractApi
         // url
         $form['formUrl']    = Pi::url(
             Pi::service('url')->assemble(
-                'default', [
-                'module'     => $this->getModule(),
-                'controller' => 'index',
-                'action'     => 'view',
-                'slug'       => $form['slug'],
-            ]
+                'default',
+                [
+                    'module'     => $this->getModule(),
+                    'controller' => 'index',
+                    'action'     => 'view',
+                    'slug'       => $form['slug'],
+                ]
             )
         );
         $form['formUrlApi'] = Pi::url(
             Pi::service('url')->assemble(
-                'default', [
-                'module'     => 'apis',
-                'controller' => 'forms',
-                'action'     => 'view',
-            ]
+                'default',
+                [
+                    'module'     => 'apis',
+                    'controller' => 'forms',
+                    'action'     => 'view',
+                ]
             )
         );
 
@@ -92,8 +95,8 @@ class Form extends AbstractApi
         $columns = ['count' => new Expression('count(*)')];
 
         // Get count
-        $select  = Pi::model('record', $this->getModule())->select()->columns($columns)->where($where);
-        $count   = Pi::model('record', $this->getModule())->selectWith($select)->current()->count;
+        $select = Pi::model('record', $this->getModule())->select()->columns($columns)->where($where);
+        $count  = Pi::model('record', $this->getModule())->selectWith($select)->current()->count;
 
         return $count;
     }
@@ -182,45 +185,6 @@ class Form extends AbstractApi
         }
         return array_unique($idList);
     }
-
-    /* public function count($uid)
-    {
-        $count = array();
-
-        // User record forms
-        $record = array();
-        $where = array('uid' => $uid, 'extra_key' => 0);
-        $select = Pi::model('record', $this->getModule())->select()->where($where);
-        $rowSet = Pi::model('record', $this->getModule())->selectWith($select);
-        foreach ($rowSet as $row) {
-            $record[] = $row->form;
-        }
-        $record = array_unique($record);
-        $count['record'] = implode(',',$record);
-
-        // general
-        $where = array('status' => 1, 'time_start <= ?' => time(), 'time_end >= ?' => time(), 'type' => 'general');
-        $columns = array('count' => new Expression('count(*)'));
-        $select = Pi::model('form', $this->getModule())->select()->columns($columns)->where($where);
-        if (!empty($record)) {
-            $select->where(array(new Expression(sprintf('id NOT IN (%s)', implode(',',$record)))));
-        }
-        $count['general'] = Pi::model('form', $this->getModule())->selectWith($select)->current()->count;
-
-        // dedicated
-        $where = array('status' => 1, 'time_start <= ?' => time(), 'time_end >= ?' => time(), 'type' => 'dedicated');
-        $columns = array('count' => new Expression('count(*)'));
-        $select = Pi::model('form', $this->getModule())->select()->columns($columns)->where($where);
-        if (!empty($record)) {
-            $select->where(array(new Expression(sprintf('id NOT IN (%s)', implode(',',$record)))));
-        }
-        $count['dedicated'] = Pi::model('form', $this->getModule())->selectWith($select)->current()->count;
-
-        // total
-        $count['total'] = $count['general'] + $count['dedicated'];
-
-        return $count;
-    } */
 
     public function getNotAllowIdList($form, $uid)
     {

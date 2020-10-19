@@ -1,0 +1,59 @@
+<?php $this->css($this->assetModule('css/admin.css')); ?>
+<div class="clearfix">
+    <?php if ($confirm == 0) { ?>
+        <div class="clearfix alert alert-success">
+            <div class="row">
+                <div class="col-md-9">
+                    <?php _e('For make new csv file from form records, please click on below button and wait to generate file possess completed, after that you can download list of records as csv file'); ?>
+                </div>
+                <div class="col-md-3 text-right">
+                    <a title="<?php _e('Export users'); ?>" href="<?php echo Pi::url(
+                        $this->url(
+                            '', [
+                                'action'     => 'export',
+                                'selectForm' => $selectFormId,
+                                'confirm'    => 1,
+                            ]
+                        )
+                    ); ?>" class="btn btn-success">
+                        <i class="fa fa-download" ria-hidden="true"></i> <?php _e('Export form data'); ?>
+                    </a>
+                </div>
+            </div>
+        </div>
+    <?php } else { ?>
+        <div class="progress progress-striped active">
+            <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $percent; ?>" aria-valuemin="0"
+                 aria-valuemax="100" style="width: <?php echo $percent; ?>%">
+                <?php echo $percent; ?> % Complete
+            </div>
+        </div>
+        <pre><?php print_r($info); ?></pre>
+        <div class="clearfix">
+            <?php if (!empty($nextUrl)) { ?>
+                <script>
+                    window.setTimeout(function () {
+                        window.location.href = '<?php echo $nextUrl; ?>';
+                    }, 1000);
+                </script>
+            <?php } elseif ($downloadAllow) { ?>
+                <ul class="list-group-item list-inline">
+                    <li class="list-inline-item"><?php echo $file; ?></li>
+                    <li class="list-inline-item">
+                        <a href="<?php echo Pi::url(
+                            $this->url(
+                                '', [
+                                    'action' => 'download',
+                                    'type'   => 'csv',
+                                    'file'   => $file,
+                                ]
+                            )
+                        ); ?>">
+                            <i class="fa fa-cloud-download" aria-hidden="true"></i> <?php _e('CSV version'); ?>
+                        </a>
+                    </li>
+                </ul>
+            <?php } ?>
+        </div>
+    <?php } ?>
+</div>
