@@ -109,7 +109,6 @@ class RecordController extends ActionController
         $this->view()->setTemplate('record-view');
         $this->view()->assign('record', $record);
         $this->view()->assign('dataList', $data);
-        $this->view()->assign('selectForm', $selectForm);
     }
 
     public function exportAction()
