@@ -54,8 +54,8 @@ class IndexController extends ActionController
 
         // Check form
         if (!$singleForm || $singleForm['status'] != 1) {
-            $this->getResponse()->setStatusCode(404);
-            $this->terminate(__('The form not found.'), '', 'error-404');
+            $this->getResponse()->setStatusCode(403);
+            $this->terminate(__('The form not found.'), '', 'error-denied');
             $this->view()->setLayout('layout-simple');
             return;
         }
@@ -174,29 +174,5 @@ class IndexController extends ActionController
         $this->view()->assign('elements', $elements);
         $this->view()->assign('form', $form);
         $this->view()->assign('mainImage', $mainImage);
-    }
-
-    public function archiveAction()
-    {
-        // Check user is login
-        Pi::service('authentication')->requireLogin();
-
-        // Get info
-        $module = $this->params('module');
-
-        // Get Module Config
-        $config = Pi::service('registry')->config->read($module);
-
-        // Get record list
-        $records = [];
-        if (Pi::user()->hasIdentity()) {
-            $uid     = Pi::user()->getId();
-            $records = Pi::api('record', 'forms')->getRecordList($uid);
-        }
-
-        // Set template
-        $this->view()->setTemplate('form-archive');
-        $this->view()->assign('config', $config);
-        $this->view()->assign('records', $records);
     }
 }

@@ -45,7 +45,7 @@ class Record extends AbstractApi
     public function getRecordData($record)
     {
         // Set data list
-        $list   = [];
+        $list = [];
 
         // Set tables
         $dataTable    = Pi::model('data', 'forms')->getTable();
@@ -101,8 +101,7 @@ class Record extends AbstractApi
 
         // Make list
         foreach ($rowset as $row) {
-            $records[$row['id']]                     = $row;
-            $records[$row['id']]['time_create_view'] = _date($row['time_create']);
+            $records[$row['id']] = $this->canonizeRecord($row, [], [], false, false);
         }
 
         return $records;
@@ -157,6 +156,18 @@ class Record extends AbstractApi
         if ($setForm) {
             $record['form'] = $form;
         }
+
+        $record['urlView'] = Pi::url(
+            Pi::service('url')->assemble(
+                'default',
+                [
+                    'module'     => $this->getModule(),
+                    'controller' => 'archive',
+                    'action'     => 'view',
+                    'id'         => $record['id'],
+                ]
+            )
+        );
 
         return $record;
     }

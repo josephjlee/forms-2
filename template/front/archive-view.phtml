@@ -1,14 +1,12 @@
-<?php $this->css($this->assetModule('css/admin.css')); ?>
+<?php $this->css($this->assetModule('css/front.css')); ?>
 <div class="clearfix">
     <table class="table table-striped table-bordered table-hover table-responsive-md table-sm mt-3">
         <tr>
-            <th><?php _e('ID'); ?></th>
             <th><?php _e('Form'); ?></th>
             <th><?php _e('User'); ?></th>
             <th><?php _e('Time'); ?></th>
         </tr>
         <tr>
-            <td><?php echo $this->escape($record['id']); ?></td>
             <td><?php echo $this->escape($record['form']['title']); ?></td>
             <td><?php echo $this->escape($record['user']['name']); ?> ( <?php echo $this->escape($record['user']['email']); ?> )</td>
             <td><?php echo $this->escape($record['time_create_view']); ?></td>
@@ -36,20 +34,16 @@
         <div class="card-body">
             <h2 class="card-title"><?php _e('Admin review'); ?></h2>
             <div class="card-text">
-                <?php if (isset($form)) { ?>
-                    <?php echo $this->form($form); ?>
-                <?php } else { ?>
-                    <div class="clearfix">
-                        <div class="row mb-3">
-                            <div class="col-md-3"><strong><?php _e('Review Status'); ?></strong></div>
-                            <div class="col-md-9"><?php echo $this->escape($record['review_status_view']); ?></div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-3"><strong><?php _e('Review Result'); ?></strong></div>
-                            <div class="col-md-9"><?php echo $record['review_result']; ?></div>
-                        </div>
+                <div class="clearfix">
+                    <div class="row mb-3">
+                        <div class="col-md-3"><strong><?php _e('Review Status'); ?></strong></div>
+                        <div class="col-md-9"><?php echo $this->escape($record['review_status_view']); ?></div>
                     </div>
-                <?php } ?>
+                    <div class="row mb-3">
+                        <div class="col-md-3"><strong><?php _e('Review Result'); ?></strong></div>
+                        <div class="col-md-9"><?php echo $record['review_result']; ?></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

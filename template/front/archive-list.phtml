@@ -6,17 +6,21 @@
         </div>
         <table class="table table-striped table-bordered table-hover table-responsive-md table-sm mt-3">
             <tr>
-                <th class="text-center"><?php _e('ID'); ?></th>
-                <th class="text-center"><?php _e('Time'); ?></th>
                 <th class="text-center"><?php _e('Form'); ?></th>
+                <th class="text-center"><?php _e('Time'); ?></th>
+                <th class="text-center"><?php _e('Review'); ?></th>
                 <th class="text-center"><?php _e('Action'); ?></th>
             </tr>
             <?php foreach ($records as $record) { ?>
                 <tr>
-                    <td class="text-center"><?php echo $this->escape($record['id']); ?></td>
-                    <td class="text-center"><?php echo $this->escape($record['time_create_view']); ?></td>
                     <td class="text-center"><?php echo $this->escape($record['title']); ?></td>
-                    <dt class="text-center"></dt>
+                    <td class="text-center"><?php echo $this->escape($record['time_create_view']); ?></td>
+                    <td class="text-center"><?php echo $this->escape($record['review_status_view']); ?></td>
+                    <td class="text-center">
+                        <a class="btn btn-success btn-xs" href="<?php echo $this->escape($record['urlView']); ?>">
+                            <?php _e('View'); ?>
+                        </a>
+                    </td>
                 </tr>
             <?php } ?>
         </table>

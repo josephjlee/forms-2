@@ -57,9 +57,9 @@ class RecordController extends ActionController
     public function viewAction()
     {
         // Get record
-        $id             = $this->params('id');
-        $record         = Pi::api('record', 'forms')->getRecord($id);
-        $data = Pi::api('record', 'forms')->getRecordData($record['id']);
+        $id         = $this->params('id');
+        $record     = Pi::api('record', 'forms')->getRecord($id);
+        $data       = Pi::api('record', 'forms')->getRecordData($record['id']);
         $selectForm = Pi::api('form', 'forms')->getForm($record['form']);
 
         // Set form
