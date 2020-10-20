@@ -57,10 +57,9 @@ class RecordController extends ActionController
     public function viewAction()
     {
         // Get record
-        $id         = $this->params('id');
-        $record     = Pi::api('record', 'forms')->getRecord($id);
-        $data       = Pi::api('record', 'forms')->getRecordData($record['id']);
-        $selectForm = Pi::api('form', 'forms')->getForm($record['form']);
+        $id     = $this->params('id');
+        $record = Pi::api('record', 'forms')->getRecord($id);
+        $data   = Pi::api('record', 'forms')->getRecordData($record['id']);
 
         // Set form
         if ($record['review_status'] == 0) {
@@ -79,9 +78,18 @@ class RecordController extends ActionController
                     $row->save();
 
                     // Do action after review
-                    if (isset($selectForm['review_action']) && !empty($selectForm['review_action'])) {
+                    if (isset($record['form']['review_action']) && !empty($record['form']['review_action'])) {
                         if ($values['review_status'] == 1) {
-                            Pi::api('review', 'forms')->postReview($selectForm['review_action'], $selectForm, $record, $data);
+
+                            // Set params
+                            $params = [
+                                'uid'         => $record['uid'],
+                                'time_create' => $record['time_create'],
+                                'form'        => $record['form']['id'],
+                            ];
+
+                            // Call postReview
+                            Pi::api('review', 'forms')->postReview($record['form']['review_action'], $params);
                         }
                     }
 

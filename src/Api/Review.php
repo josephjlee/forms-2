@@ -18,26 +18,27 @@ use Pi\Application\Api\AbstractApi;
 use Laminas\Db\Sql\Predicate\Expression;
 
 /*
- * Pi::api('review', 'forms')->postReview($form, $record, $date);
+ * Pi::api('review', 'forms')->postReview($form, $params);
  */
 
 class Review extends AbstractApi
 {
-    public function postReview($name, $form, $record, $date)
+    public function postReview($name, $params)
     {
         $action = explode('_', $name);
 
+        // Check module is active
         if (Pi::service('module')->isActive($action[0])) {
+
+            // Set class namespace
             $class = sprintf('Module\%s\Api\Forms', ucfirst($action[0]));
+
+            // Check class exists
             if (class_exists($class)) {
-                $params = [];
+
+                // Call api
                 Pi::api('forms', $action[0])->postReview($params);
             }
         }
-
-        d($name);
-        d($form);
-        d($record);
-        d($date);
     }
 }

@@ -54,7 +54,6 @@ class ArchiveController extends ActionController
         // Get data
         $record     = Pi::api('record', 'forms')->getRecord($id);
         $data       = Pi::api('record', 'forms')->getRecordData($record['id']);
-        $selectForm = Pi::api('form', 'forms')->getForm($record['form']);
 
         // Check
         if ($record['uid'] != Pi::user()->getId()) {
@@ -69,6 +68,5 @@ class ArchiveController extends ActionController
         $this->view()->assign('config', $config);
         $this->view()->assign('record', $record);
         $this->view()->assign('dataList', $data);
-        $this->view()->assign('selectForm', $selectForm);
     }
 }

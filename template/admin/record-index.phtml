@@ -8,6 +8,7 @@
                 <th><?php _e('Form'); ?></th>
                 <th><?php _e('User'); ?></th>
                 <th><?php _e('Time'); ?></th>
+                <th><?php _e('Review'); ?></th>
                 <th><?php _e('Action'); ?></th>
             </tr>
             <?php foreach ($list as $record) { ?>
@@ -16,6 +17,7 @@
                     <td><?php echo $this->escape($record['form']['title']); ?></td>
                     <td><?php echo $this->escape($record['user']['name']); ?>( <?php echo $this->escape($record['user']['email']); ?> )</td>
                     <td><?php echo $this->escape($record['time_create_view']); ?></td>
+                    <td><?php echo $this->escape($record['review_status_view']); ?></td>
                     <td>
                         <a class="btn btn-success btn-sm" title="<?php _e('View'); ?>"
                            href="<?php echo $this->url('', ['action' => 'view', 'id' => $record['id']]); ?>"><i
