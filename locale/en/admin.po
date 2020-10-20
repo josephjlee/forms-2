@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi forms module\n"
-"POT-Creation-Date: 2020-01-06 11:08+0330\n"
+"POT-Creation-Date: 2020-10-20 15:42+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _a;_t\n"
 "X-Poedit-Basepath: ../..\n"
@@ -20,20 +20,40 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: config/config.php:26
-msgid "Image ratio width"
+#: config/config.php:21
+msgid "Review"
 msgstr ""
 
-#: config/config.php:27
-msgid "Example : \"4\" for 4/1 ratio"
+#: config/config.php:25
+msgid "Notification"
 msgstr ""
 
-#: config/config.php:34
-msgid "Image ratio height"
+#: config/config.php:33
+msgid "Main Image resize height"
 msgstr ""
 
-#: config/config.php:35
-msgid "Example : \"1\" for 4/1 ratio"
+#: config/config.php:41
+msgid "Main Image resize width"
+msgstr ""
+
+#: config/config.php:49
+msgid "Image resize height for list"
+msgstr ""
+
+#: config/config.php:57
+msgid "Image resize width for list"
+msgstr ""
+
+#: config/config.php:67
+msgid "Review Action"
+msgstr ""
+
+#: config/config.php:68
+msgid "Use `|` as delimiter to separate terms"
+msgstr ""
+
+#: config/config.php:77
+msgid "Description for sent notification"
 msgstr ""
 
 #: config/module.php:16

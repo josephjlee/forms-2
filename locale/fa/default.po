@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi forms module\n"
-"POT-Creation-Date: 2020-01-14 16:03+0330\n"
+"POT-Creation-Date: 2020-10-20 15:48+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,12 +9,24 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: src/Api/Record.php:138 src/Form/ReviewForm.php:43
+msgid "Pending"
+msgstr "در انتظار بررسی"
+
+#: src/Api/Record.php:142 src/Form/ReviewForm.php:44
+msgid "Accepted"
+msgstr "تایید شده"
+
+#: src/Api/Record.php:146 src/Form/ReviewForm.php:45
+msgid "Rejected"
+msgstr "رد شده"
 
 #: src/Controller/Admin/ElementController.php:65
 msgid "Element data saved successfully."
@@ -24,38 +36,79 @@ msgstr "اطلاعات المان با موفقت ذخیره شد."
 msgid "Element form"
 msgstr "فرم ساخت المان"
 
-#: src/Controller/Admin/FormController.php:124
+#: src/Controller/Admin/FormController.php:100
 msgid "Form data saved successfully."
 msgstr "اطلاعات فرم با موفقیت ذخیره شد."
 
-#: src/Controller/Admin/FormController.php:150
+#: src/Controller/Admin/FormController.php:118
 msgid "Manage form"
 msgstr "مدیریت فرم"
 
-#: src/Controller/Admin/FormController.php:227
+#: src/Controller/Admin/FormController.php:196
 msgid "Form elements saved successfully."
 msgstr "المان های متصل به فرم با موفقیت ذخیره شد."
 
-#: src/Controller/Admin/FormController.php:238
+#: src/Controller/Admin/FormController.php:207
 #, php-format
 msgid "Manage %s elements"
 msgstr "مدیریت المان های %s"
 
-#: src/Controller/Admin/FormController.php:299
-#: src/Controller/Front/IndexController.php:140
+#: src/Controller/Admin/FormController.php:268
+#: src/Controller/Front/IndexController.php:151
 msgid "Form input values saved successfully."
 msgstr "اطلاعات وارد شده با موفقیت ذخیره شد."
 
-#: src/Controller/Admin/FormController.php:311
+#: src/Controller/Admin/FormController.php:280
 #, php-format
 msgid "View %s elements"
 msgstr "مشاهده المان های %s"
 
-#: src/Controller/Front/IndexController.php:66
+#: src/Controller/Admin/RecordController.php:97
+msgid "Review saved successfully."
+msgstr "نتیجه بررسی با موفقیت ذخیره شد."
+
+#: src/Controller/Admin/RecordController.php:131
+#: src/Controller/Front/IndexController.php:58
 msgid "The form not found."
 msgstr "فرم یافت نشد."
 
-#: src/Controller/Front/IndexController.php:79
+#: src/Controller/Admin/RecordController.php:176
+msgid "Form title"
+msgstr "عنوان فرم"
+
+#: src/Controller/Admin/RecordController.php:177
+msgid "User ID"
+msgstr "شناسه کاربر"
+
+#: src/Controller/Admin/RecordController.php:178
+msgid "User name"
+msgstr "نام کاربر"
+
+#: src/Controller/Admin/RecordController.php:179
+msgid "User identity"
+msgstr "یوزرنیم کاربر"
+
+#: src/Controller/Admin/RecordController.php:180
+msgid "User email"
+msgstr "ایمیل کاربر"
+
+#: src/Controller/Admin/RecordController.php:181
+msgid "Time create"
+msgstr "زمان ایجاد"
+
+#: src/Controller/Admin/RecordController.php:182
+msgid "Time create view"
+msgstr "زمان ایجاد نمایشی"
+
+#: src/Controller/Admin/RecordController.php:331
+msgid "File not exit !"
+msgstr "فایل موجود نیست !"
+
+#: src/Controller/Front/ArchiveController.php:61
+msgid "This is not your record."
+msgstr "این رکورد متعلق به شما نیست."
+
+#: src/Controller/Front/IndexController.php:71
 msgid "You not allowed to fill this form."
 msgstr "شما مجاز به دسترسی به این فرم نیستید."
 
@@ -100,27 +153,27 @@ msgstr "Star"
 msgid "Percent"
 msgstr "Percent"
 
-#: src/Form/ElementForm.php:81 src/Form/ManageForm.php:104
+#: src/Form/ElementForm.php:81 src/Form/ManageForm.php:139
 msgid "Status"
 msgstr "وضعیت"
 
-#: src/Form/ElementForm.php:83 src/Form/ManageForm.php:106
+#: src/Form/ElementForm.php:83 src/Form/ManageForm.php:141
 msgid "Published"
 msgstr "منتشر شده"
 
-#: src/Form/ElementForm.php:84 src/Form/ManageForm.php:107
+#: src/Form/ElementForm.php:84 src/Form/ManageForm.php:142
 msgid "Pending review"
 msgstr "در انتظار تایید"
 
-#: src/Form/ElementForm.php:85 src/Form/ManageForm.php:108
+#: src/Form/ElementForm.php:85 src/Form/ManageForm.php:143
 msgid "Draft"
 msgstr "پیش نویس"
 
-#: src/Form/ElementForm.php:86 src/Form/ManageForm.php:109
+#: src/Form/ElementForm.php:86 src/Form/ManageForm.php:144
 msgid "Private"
 msgstr "خصوصی"
 
-#: src/Form/ElementForm.php:87 src/Form/ManageForm.php:110
+#: src/Form/ElementForm.php:87 src/Form/ManageForm.php:145
 msgid "Delete"
 msgstr "حذف"
 
@@ -144,8 +197,33 @@ msgstr "توضیحات"
 msgid "Required"
 msgstr "ضروری"
 
-#: src/Form/ElementForm.php:144 src/Form/ManageForm.php:200
-#: src/Form/ViewForm.php:198
+#: src/Form/ElementForm.php:154
+msgid "Is name?"
+msgstr "نام کاربر؟"
+
+#: src/Form/ElementForm.php:158
+msgid ""
+"Check it is this filed is part of user name, like first name or last name"
+msgstr "اگر این فیلد بخشی از نام کاربر مثل نام یا نام خانوادگی است تیک بزنید"
+
+#: src/Form/ElementForm.php:169
+msgid "Is email?"
+msgstr "ایمیل کاربر؟"
+
+#: src/Form/ElementForm.php:173
+msgid "Check it is this filed is user email"
+msgstr "اگر این فیلد بخشی از ایمیل است تیک بزنید"
+
+#: src/Form/ElementForm.php:184
+msgid "Is mobile?"
+msgstr "موبایل کاربر؟"
+
+#: src/Form/ElementForm.php:188
+msgid "Check it is this filed is user mobile"
+msgstr "اگر این فیلد موبایل کاربر است تیک بزنید"
+
+#: src/Form/ElementForm.php:199 src/Form/ManageForm.php:221
+#: src/Form/ReviewForm.php:78 src/Form/ViewForm.php:216
 msgid "Submit"
 msgstr "ارسال"
 
@@ -170,11 +248,13 @@ msgstr "به عنوان آدرس فرم استفاده می شود : باید ی
 msgid "Need register"
 msgstr "نیاز به ثبت نام"
 
-#: src/Form/ManageForm.php:86 template/admin/form-index.phtml:29
+#: src/Form/ManageForm.php:86 src/Form/ManageForm.php:105
+#: template/admin/form-index.phtml:30 template/admin/form-index.phtml:31
 msgid "Yes"
 msgstr "بلی"
 
-#: src/Form/ManageForm.php:87 template/admin/form-index.phtml:29
+#: src/Form/ManageForm.php:87 src/Form/ManageForm.php:106
+#: template/admin/form-index.phtml:30 template/admin/form-index.phtml:31
 msgid "No"
 msgstr "خیر"
 
@@ -183,24 +263,46 @@ msgid "User need register to system and login for fell this form"
 msgstr ""
 "کاربر باید در سیستم ثبت نام کرده و سپس وارد شود تا بتواند فرم را تکمیل کند"
 
-#: src/Form/ManageForm.php:125
-msgid "Brands"
-msgstr "برند ها"
+#: src/Form/ManageForm.php:103 template/admin/form-index.phtml:13
+msgid "Need review"
+msgstr "نیاز به بررسی"
 
-#: src/Form/ManageForm.php:139
+#: src/Form/ManageForm.php:112
+msgid "All form records should be review by admin"
+msgstr "تمام رکورد ها باید توسط مدیر بررسی شود"
+
+#: src/Form/ManageForm.php:123
+msgid "Review Action"
+msgstr "عملیات بررسی"
+
+#: src/Form/ManageForm.php:127
+msgid "Do action after accept form record on admin review"
+msgstr "عملیات انجامی بر روی رکورد بعد از بررسی و تایید مدیر"
+
+#: src/Form/ManageForm.php:160
 msgid "Time start"
 msgstr "تاریخ شروع"
 
-#: src/Form/ManageForm.php:164
+#: src/Form/ManageForm.php:185
 msgid "Time end"
 msgstr "تاریخ پایان"
 
-#: src/Form/ManageForm.php:188
+#: src/Form/ManageForm.php:209
 msgid "Main image"
 msgstr "تصویر اصلی"
 
-#: template/admin/element-index.phtml:22 template/admin/form-index.phtml:31
-#: template/admin/form-index.phtml:33
+#: src/Form/ReviewForm.php:41 template/admin/record-view.phtml:44
+#: template/front/archive-view.phtml:39
+msgid "Review Status"
+msgstr "وضعیت بررسی"
+
+#: src/Form/ReviewForm.php:60 template/admin/record-view.phtml:48
+#: template/front/archive-view.phtml:43
+msgid "Review Result"
+msgstr "نتیجه بررسی"
+
+#: template/admin/element-index.phtml:31 template/admin/form-index.phtml:38
+#: template/admin/form-index.phtml:40
 msgid "Edit"
 msgstr "ویرایش"
 
@@ -209,7 +311,7 @@ msgid "List of forms"
 msgstr "فهرست فرم ها"
 
 #: template/admin/form-index.phtml:7 template/admin/record-index.phtml:7
-#: template/admin/record-view.phtml:5 template/front/form-index.phtml:83
+#: template/admin/record-view.phtml:5
 msgid "ID"
 msgstr "شناسه"
 
@@ -225,89 +327,140 @@ msgstr "شروع"
 msgid "End"
 msgstr "پایان"
 
-#: template/admin/form-index.phtml:13 template/admin/record-index.phtml:12
+#: template/admin/form-index.phtml:14 template/admin/record-index.phtml:12
+#: template/front/archive-list.phtml:12
 msgid "Action"
 msgstr "عملکرد"
 
-#: template/admin/form-index.phtml:35 template/admin/form-index.phtml:37
-#: template/admin/record-view.phtml:22
+#: template/admin/form-index.phtml:35
+msgid "Manage"
+msgstr "مدیریت"
+
+#: template/admin/form-index.phtml:42 template/admin/form-index.phtml:44
+#: template/admin/record-view.phtml:21 template/front/archive-view.phtml:19
 msgid "Element"
 msgstr "المان ها"
 
-#: template/admin/form-index.phtml:39 template/admin/form-index.phtml:41
-#: template/admin/record-index.phtml:22 template/admin/record-index.phtml:24
+#: template/admin/form-index.phtml:50 template/admin/record-index.phtml:22
+#: template/admin/record-index.phtml:24 template/front/archive-list.phtml:21
 msgid "View"
 msgstr "نمایش"
 
-#: template/admin/form-index.phtml:43 template/admin/form-index.phtml:52
-msgid "View on front"
-msgstr "نمایش سمت کاربر"
+#: template/admin/form-index.phtml:53 template/admin/form-index.phtml:55
+msgid "View on admin side"
+msgstr "مشاهده در سمت مدیر"
 
-#: template/admin/form-index.phtml:54 template/admin/form-index.phtml:56
+#: template/admin/form-index.phtml:57 template/admin/form-index.phtml:59
+msgid "View on front side"
+msgstr "مشاهده در سمت کاربر"
+
+#: template/admin/form-index.phtml:65
 msgid "Record"
 msgstr "رکورد"
 
-#: template/admin/form-index.phtml:64
+#: template/admin/form-index.phtml:68 template/admin/form-index.phtml:70
+msgid "View Records"
+msgstr "مشاهده رکورد ها"
+
+#: template/admin/form-index.phtml:72 template/admin/form-index.phtml:74
+msgid "Export Records"
+msgstr "خروجی رکورد ها"
+
+#: template/admin/form-index.phtml:84
 msgid "You still didnt make any form, please make new one"
 msgstr "شما هنوز هیچ فرم ای نساخته اید، لطفا ابتدا یک فرم ایجاد کنید"
+
+#: template/admin/record-export.phtml:7
+msgid ""
+"To make a new CSV file from form records, please click on the below button "
+"and wait to generate file possess completed, after that you can download a "
+"list of records as CSV file"
+msgstr ""
+"برای ایجاد یک پرونده CSV جدید از سوابق فرم ، لطفاً بر روی دکمه زیر کلیک کنید "
+"و منتظر بمانید تا پرونده کامل شود ، پس از آن می توانید لیستی از سوابق را به "
+"عنوان یک پرونده CSV بارگیری کنید"
+
+#: template/admin/record-export.phtml:10 template/admin/record-export.phtml:19
+msgid "Export form data"
+msgstr "خورجی از اطلاعات فرم"
+
+#: template/admin/record-export.phtml:52
+msgid "CSV version"
+msgstr "خروجی CSV"
 
 #: template/admin/record-index.phtml:3
 msgid "List of records"
 msgstr "فهرست رکورد ها"
 
 #: template/admin/record-index.phtml:8 template/admin/record-view.phtml:6
-#: template/front/form-index.phtml:85
+#: template/front/archive-list.phtml:9 template/front/archive-view.phtml:5
 msgid "Form"
 msgstr "فرم"
 
 #: template/admin/record-index.phtml:9 template/admin/record-view.phtml:7
-msgid "Extra"
-msgstr "کلید مکمل"
-
-#: template/admin/record-index.phtml:10 template/admin/record-view.phtml:8
+#: template/front/archive-view.phtml:6
 msgid "User"
 msgstr "کاربر"
 
-#: template/admin/record-index.phtml:11 template/admin/record-view.phtml:9
-#: template/front/form-index.phtml:84
+#: template/admin/record-index.phtml:10 template/admin/record-view.phtml:8
+#: template/front/archive-list.phtml:10 template/front/archive-view.phtml:7
 msgid "Time"
 msgstr "زمان"
+
+#: template/admin/record-index.phtml:11 template/front/archive-list.phtml:11
+msgid "Review"
+msgstr "بازنگری"
 
 #: template/admin/record-index.phtml:31
 msgid "No record saved on system"
 msgstr "هیچ رکوردی در سیستم ذخیره نشده است"
 
-#: template/admin/record-view.phtml:23
+#: template/admin/record-view.phtml:22 template/front/archive-view.phtml:20
 msgid "Value"
 msgstr "مقدار"
 
-#: template/admin/record-view.phtml:24
+#: template/admin/record-view.phtml:23 template/front/archive-view.phtml:21
 msgid "Element type"
 msgstr "نوع المان"
 
-#: template/front/form-index.phtml:36
+#: template/admin/record-view.phtml:37 template/front/archive-view.phtml:35
+msgid "Admin review"
+msgstr "نتیجه بررسی مدیر"
+
+#: template/front/archive-list.phtml:5
+msgid "Your input recodes"
+msgstr "اطلاعات وارد شده شما"
+
+#: template/front/archive-list.phtml:29
+msgid "You dont put any entry on our forms yet !"
+msgstr "هنوز هیچ کدام از فرم ها را تکمیل نکرده اید !"
+
+#: template/front/form-index.phtml:38
 msgid "List of available forms"
 msgstr "فهرست فرم ها"
 
-#: template/front/form-index.phtml:57
-msgid "From"
-msgstr "از"
-
-#: template/front/form-index.phtml:60
-msgid "To"
-msgstr "تا"
-
-#: template/front/form-index.phtml:65
+#: template/front/form-index.phtml:58
 msgid "View and fill the form"
 msgstr "مشاهده و تکمیل فرم"
 
-#: template/front/form-index.phtml:74
+#: template/front/form-index.phtml:67
 msgid "No active form available"
 msgstr "هیچ فرم فعالی وجود ندارد"
 
-#: template/front/form-index.phtml:79
-msgid "Your input recodes"
-msgstr "اطلاعات وارد شده شما"
+#~ msgid "Brands"
+#~ msgstr "برند ها"
+
+#~ msgid "View on front"
+#~ msgstr "نمایش سمت کاربر"
+
+#~ msgid "Extra"
+#~ msgstr "کلید مکمل"
+
+#~ msgid "From"
+#~ msgstr "از"
+
+#~ msgid "To"
+#~ msgstr "تا"
 
 #~ msgid "Fill the form"
 #~ msgstr "تکمیل فرم"
