@@ -78,6 +78,19 @@ class ElementFilter extends InputFilter
             ]
         );
 
+        // answer
+        $this->add(
+            [
+                'name'     => 'answer',
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+            ]
+        );
+
         // required
         $this->add(
             [

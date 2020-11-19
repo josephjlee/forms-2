@@ -25,19 +25,23 @@ class Review extends AbstractApi
 {
     public function postReview($name, $params)
     {
-        $action = explode('_', $name);
+        if ($name != 'none') {
 
-        // Check module is active
-        if (Pi::service('module')->isActive($action[0])) {
+            //
+            $action = explode('_', $name);
 
-            // Set class namespace
-            $class = sprintf('Module\%s\Api\Forms', ucfirst($action[0]));
+            // Check module is active
+            if (Pi::service('module')->isActive($action[0])) {
 
-            // Check class exists
-            if (class_exists($class)) {
+                // Set class namespace
+                $class = sprintf('Module\%s\Api\Forms', ucfirst($action[0]));
 
-                // Call api
-                Pi::api('forms', $action[0])->postReview($params);
+                // Check class exists
+                if (class_exists($class)) {
+
+                    // Call api
+                    Pi::api('forms', $action[0])->postReview($params);
+                }
             }
         }
     }

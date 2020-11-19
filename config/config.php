@@ -68,7 +68,7 @@ return [
             'description' => _a('Use `|` as delimiter to separate terms'),
             'edit'        => 'textarea',
             'filter'      => 'string',
-            'value'       => '|shop_allowOrder',
+            'value'       => 'none|shop_allowOrder',
         ],
 
         // Notification

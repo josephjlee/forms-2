@@ -34,6 +34,7 @@ class Form extends Model
             'main_image',
             'register_need',
             'review_need',
+            'show_answer',
             'review_action',
         ];
 }

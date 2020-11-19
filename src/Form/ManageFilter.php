@@ -84,6 +84,14 @@ class ManageFilter extends InputFilter
             ]
         );
 
+        // show_answer
+        $this->add(
+            [
+                'name'     => 'show_answer',
+                'required' => false,
+            ]
+        );
+
         // review_action
         $this->add(
             [

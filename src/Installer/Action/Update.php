@@ -165,6 +165,39 @@ class Update extends BasicUpdate
             }
         }
 
+        // Update to version 0.2.2
+        if (version_compare($moduleVersion, '0.2.2', '<')) {
+            // Alter table add field `review_action`
+            $sql = sprintf("ALTER TABLE %s ADD `show_answer` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0'", $formTable);
+            try {
+                $formAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+
+            // Alter table add field `review_status`
+            $sql = sprintf("ALTER TABLE %s ADD `answer` MEDIUMTEXT", $elementTable);
+            try {
+                $elementAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+        }
+
         return true;
     }
 }

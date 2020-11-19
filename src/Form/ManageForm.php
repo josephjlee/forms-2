@@ -114,6 +114,25 @@ class ManageForm extends BaseForm
             ]
         );
 
+        // show_answer
+        $this->add(
+            [
+                'name'       => 'show_answer',
+                'options'    => [
+                    'label'         => __('Show answer'),
+                    'value_options' => [
+                        1 => __('Yes'),
+                        0 => __('No'),
+                    ],
+                ],
+                'type'       => 'radio',
+                'attributes' => [
+                    'value'       => 1,
+                    'description' => __('Show answer after submit form by user'),
+                ],
+            ]
+        );
+
         // review_action
         $this->add(
             [

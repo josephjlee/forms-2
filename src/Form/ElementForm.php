@@ -58,6 +58,9 @@ class ElementForm extends BaseForm
                     'value_options' => [
                         'text'     => __('Text'),
                         'number'   => __('Number'),
+                        'email'   => __('Email'),
+                        'url'   => __('Url'),
+                        'phone'   => __('Phone'),
                         'textarea' => __('Text Area'),
                         'checkbox' => __('Check Box'),
                         'radio'    => __('Radio Button'),
@@ -117,6 +120,22 @@ class ElementForm extends BaseForm
                     'type' => 'textarea',
                     'rows' => '5',
                     'cols' => '40',
+                ],
+            ]
+        );
+
+        // answer
+        $this->add(
+            [
+                'name'       => 'answer',
+                'options'    => [
+                    'label' => __('Answer'),
+                ],
+                'attributes' => [
+                    'type' => 'textarea',
+                    'rows' => '5',
+                    'cols' => '40',
+                    'description' => __('Use `|` as delimiter to separate select box / Checkbox / Radio button elements'),
                 ],
             ]
         );

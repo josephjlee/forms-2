@@ -12,6 +12,7 @@ CREATE TABLE `{form}`
     `main_image`    INT(10) UNSIGNED    NULL     DEFAULT NULL,
     `register_need` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
     `review_need`   TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+    `show_answer`   TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
     `review_action` VARCHAR(32)         NOT NULL DEFAULT '',
     PRIMARY KEY (`id`),
     UNIQUE KEY `slug` (`slug`),
@@ -26,16 +27,17 @@ CREATE TABLE `{element}`
 (
     `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
     `title`       VARCHAR(256)        NOT NULL DEFAULT '',
-    `description` TEXT,
     `required`    TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
     `type`        ENUM (
-        'text', 'number', 'email', 'phone',
+        'text', 'number', 'email', 'url', 'phone',
         'textarea', 'checkbox', 'radio',
         'select', 'star', 'percent'
         )                             NOT NULL DEFAULT 'text',
     `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
     `order`       INT(10) UNSIGNED    NOT NULL DEFAULT '0',
     `value`       TEXT,
+    `description` TEXT,
+    `answer`      MEDIUMTEXT,
     `is_name`     TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
     `is_email`    TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
     `is_mobile`   TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',

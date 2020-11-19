@@ -201,5 +201,8 @@ class Form extends AbstractApi
 
         // Update count
         Pi::model('form', 'forms')->increment('count', ['id' => $formId]);
+
+        // Return record
+        return $saveRecord->id;
     }
 }
