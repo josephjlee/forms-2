@@ -29,9 +29,8 @@ CREATE TABLE `{element}`
     `title`       VARCHAR(256)        NOT NULL DEFAULT '',
     `required`    TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
     `type`        ENUM (
-        'text', 'number', 'email', 'url', 'phone',
-        'textarea', 'checkbox', 'radio',
-        'select', 'star', 'percent'
+        'text', 'number', 'email', 'url', 'tel',
+        'textarea', 'checkbox', 'radio',  'select'
         )                             NOT NULL DEFAULT 'text',
     `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
     `order`       INT(10) UNSIGNED    NOT NULL DEFAULT '0',

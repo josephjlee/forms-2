@@ -60,7 +60,7 @@ class ElementForm extends BaseForm
                         'number'   => __('Number'),
                         'email'   => __('Email'),
                         'url'   => __('Url'),
-                        'phone'   => __('Phone'),
+                        'tel'   => __('Phone'),
                         'textarea' => __('Text Area'),
                         'checkbox' => __('Check Box'),
                         'radio'    => __('Radio Button'),
