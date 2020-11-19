@@ -62,6 +62,8 @@ class Record extends AbstractApi
                 'element_id'    => 'id',
                 'element_title' => 'title',
                 'element_type'  => 'type',
+                'element_value' => 'value',
+                'element_answer' => 'answer',
             ]
         );
         $select->where($where);
@@ -69,10 +71,31 @@ class Record extends AbstractApi
 
         // Make list
         foreach ($rowSet as $row) {
-            $list[$row['id']] = $row;
-            if ($row['element_type'] == 'checkbox') {
-                $list[$row['id']]['value'] = implode(' , ', json_decode($row['value']));
+
+            // Make as answer
+            $row['answer_date'] = [];
+            if (isset($row['element_value']) &&
+                !empty($row['element_value']) &&
+                isset($row['element_answer']) &&
+                !empty($row['element_answer'])
+            ) {
+                $row['element_value'] = explode('|', $row['element_value']);
+                $row['element_answer'] = explode('|', $row['element_answer']);
+
+                foreach ($row['element_value'] as $key => $value) {
+                    if ($value == $row['value'] && isset($row['element_answer'][$key]) && !empty($row['element_answer'][$key])) {
+                        $row['answer_date'][$key] = $row['element_answer'][$key];
+                    }
+                }
             }
+
+            // Set for checkbox
+            if ($row['element_type'] == 'checkbox') {
+                $row['value'] = implode(' , ', json_decode($row['value']));
+            }
+
+            // Add to list
+            $list[$row['id']] = $row;
         }
 
         return $list;
