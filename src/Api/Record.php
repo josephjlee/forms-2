@@ -82,9 +82,11 @@ class Record extends AbstractApi
                 $row['element_value'] = explode('|', $row['element_value']);
                 $row['element_answer'] = explode('|', $row['element_answer']);
 
-                foreach ($row['element_value'] as $key => $value) {
-                    if ($value == $row['value'] && isset($row['element_answer'][$key]) && !empty($row['element_answer'][$key])) {
-                        $row['answer_date'][$key] = $row['element_answer'][$key];
+                if ($row['element_type'] != 'checkbox') {
+                    foreach ($row['element_value'] as $key => $value) {
+                        if ($value == $row['value'] && isset($row['element_answer'][$key]) && !empty($row['element_answer'][$key])) {
+                            $row['answer_date'][$key] = $row['element_answer'][$key];
+                        }
                     }
                 }
             }
