@@ -58,9 +58,9 @@ class ElementForm extends BaseForm
                     'value_options' => [
                         'text'     => __('Text'),
                         'number'   => __('Number'),
-                        'email'   => __('Email'),
-                        'url'   => __('Url'),
-                        'tel'   => __('Phone'),
+                        'email'    => __('Email'),
+                        'url'      => __('Url'),
+                        'tel'      => __('Phone'),
                         'textarea' => __('Text Area'),
                         'checkbox' => __('Check Box'),
                         'radio'    => __('Radio Button'),
@@ -132,9 +132,9 @@ class ElementForm extends BaseForm
                     'label' => __('Answer'),
                 ],
                 'attributes' => [
-                    'type' => 'textarea',
-                    'rows' => '5',
-                    'cols' => '40',
+                    'type'        => 'textarea',
+                    'rows'        => '5',
+                    'cols'        => '40',
                     'description' => __('Use `|` as delimiter to separate select box / Checkbox / Radio button elements'),
                 ],
             ]
@@ -155,15 +155,6 @@ class ElementForm extends BaseForm
         );
 
 
-
-
-
-
-
-
-
-
-
         // is_name
         $this->add(
             [
@@ -173,7 +164,7 @@ class ElementForm extends BaseForm
                     'label' => __('Is name?'),
                 ],
                 'attributes' => [
-                    'required' => false,
+                    'required'    => false,
                     'description' => __('Check it is this filed is part of user name, like first name or last name'),
                 ],
             ]
@@ -188,7 +179,7 @@ class ElementForm extends BaseForm
                     'label' => __('Is email?'),
                 ],
                 'attributes' => [
-                    'required' => false,
+                    'required'    => false,
                     'description' => __('Check it is this filed is user email'),
                 ],
             ]
@@ -203,7 +194,7 @@ class ElementForm extends BaseForm
                     'label' => __('Is mobile?'),
                 ],
                 'attributes' => [
-                    'required' => false,
+                    'required'    => false,
                     'description' => __('Check it is this filed is user mobile'),
                 ],
             ]

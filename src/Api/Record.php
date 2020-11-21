@@ -59,10 +59,10 @@ class Record extends AbstractApi
             ['element' => $elementTable],
             'data.element = element.id',
             [
-                'element_id'    => 'id',
-                'element_title' => 'title',
-                'element_type'  => 'type',
-                'element_value' => 'value',
+                'element_id'     => 'id',
+                'element_title'  => 'title',
+                'element_type'   => 'type',
+                'element_value'  => 'value',
                 'element_answer' => 'answer',
             ]
         );
@@ -74,12 +74,12 @@ class Record extends AbstractApi
 
             // Make as answer
             $row['answer_date'] = [];
-            if (isset($row['element_value']) &&
-                !empty($row['element_value']) &&
-                isset($row['element_answer']) &&
-                !empty($row['element_answer'])
+            if (isset($row['element_value'])
+                && !empty($row['element_value'])
+                && isset($row['element_answer'])
+                && !empty($row['element_answer'])
             ) {
-                $row['element_value'] = explode('|', $row['element_value']);
+                $row['element_value']  = explode('|', $row['element_value']);
                 $row['element_answer'] = explode('|', $row['element_answer']);
 
                 if ($row['element_type'] != 'checkbox') {

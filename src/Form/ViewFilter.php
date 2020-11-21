@@ -40,14 +40,14 @@ class ViewFilter extends InputFilter
                     case 'checkbox':
                     case 'radio':
                     case 'select':
-                    $filters = [];
+                        $filters = [];
                         break;
                 }
 
-                $formFilter =  [
+                $formFilter = [
                     'name'     => sprintf('element-%s', $element['id']),
                     'required' => $element['required'] ? true : false,
-                    'filters' => $filters
+                    'filters'  => $filters,
                 ];
 
                 $this->add($formFilter);

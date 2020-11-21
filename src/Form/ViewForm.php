@@ -50,21 +50,21 @@ class ViewForm extends BaseForm
                     case 'textarea':
                         $attributes = [
                             'type' => $element['type'],
-                            'rows'        => '5',
-                            'cols'        => '40',
+                            'rows' => '5',
+                            'cols' => '40',
                         ];
                         break;
 
                     case 'checkbox':
-                        $options = [
+                        $options     = [
                             'value_options' => $this->makeArray($element['value']),
                         ];
                         $elementType = 'multi_checkbox';
                         break;
 
                     case 'radio':
-                        $options = [
-                            'value_options' => $this->makeArray($element['value']),
+                        $options     = [
+                            'value_options'    => $this->makeArray($element['value']),
                             'label_attributes' => [
                                 'class' => 'form-check',
                             ],
@@ -73,14 +73,14 @@ class ViewForm extends BaseForm
                         break;
 
                     case 'select':
-                        $options = [
+                        $options     = [
                             'value_options' => $this->makeArray($element['value']),
                         ];
                         $elementType = $element['type'];
                         break;
                 }
 
-                $formElement =  [
+                $formElement = [
                     'name'       => sprintf('element-%s', $element['id']),
                     'options'    => [
                         'label' => $element['title'],

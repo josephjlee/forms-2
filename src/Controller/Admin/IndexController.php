@@ -21,9 +21,9 @@ class IndexController extends ActionController
     {
         return $this->redirect()->toRoute(
             '', [
-            'controller' => 'form',
-            'action'     => 'index',
-        ]
+                'controller' => 'form',
+                'action'     => 'index',
+            ]
         );
     }
 }

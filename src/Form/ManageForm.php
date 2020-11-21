@@ -144,7 +144,7 @@ class ManageForm extends BaseForm
                 ],
                 'attributes' => [
                     'description' => __('Do action after accept form record on admin review'),
-                    'required' => true,
+                    'required'    => true,
                 ],
             ]
         );

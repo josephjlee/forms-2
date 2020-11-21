@@ -47,7 +47,7 @@ class ReviewForm extends BaseForm
                 ],
                 'type'       => 'radio',
                 'attributes' => [
-                    'value'       => 1,
+                    'value' => 1,
                 ],
             ]
         );

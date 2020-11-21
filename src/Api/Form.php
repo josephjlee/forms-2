@@ -88,7 +88,7 @@ class Form extends AbstractApi
     public function getFormCount($id, $uid)
     {
         // Set info
-        $where = ['uid' => $uid, 'form' => $id];
+        $where   = ['uid' => $uid, 'form' => $id];
         $columns = ['count' => new Expression('count(*)')];
 
         // Get count
@@ -100,7 +100,7 @@ class Form extends AbstractApi
 
     public function getFormView($id, $uid)
     {
-        $where = ['uid' => $uid, 'form' => $id];
+        $where   = ['uid' => $uid, 'form' => $id];
         $columns = ['count' => new Expression('count(*)')];
         $select  = Pi::model('record', $this->getModule())->select()->columns($columns)->where($where);
         $count   = Pi::model('record', $this->getModule())->selectWith($select)->current()->count;

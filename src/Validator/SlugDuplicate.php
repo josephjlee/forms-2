@@ -30,14 +30,14 @@ class SlugDuplicate extends AbstractValidator
 
     protected $options
         = [
-            'module', 'table', 'id'
+            'module', 'table', 'id',
         ];
 
     /**
      * Slug validate
      *
-     * @param  mixed $value
-     * @param  array $context
+     * @param mixed $value
+     * @param array $context
      *
      * @return boolean
      */

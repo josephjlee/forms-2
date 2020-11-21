@@ -52,8 +52,8 @@ class ArchiveController extends ActionController
         $config = Pi::service('registry')->config->read($module);
 
         // Get data
-        $record     = Pi::api('record', 'forms')->getRecord($id);
-        $data       = Pi::api('record', 'forms')->getRecordData($record['id']);
+        $record = Pi::api('record', 'forms')->getRecord($id);
+        $data   = Pi::api('record', 'forms')->getRecordData($record['id']);
 
         // Check
         if ($record['uid'] != Pi::user()->getId()) {
