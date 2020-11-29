@@ -15,7 +15,7 @@ return [
     'meta'       => [
         'title'       => _a('Form'),
         'description' => _a('Multi forms generator system'),
-        'version'     => '0.2.2',
+        'version'     => '0.2.3',
         'license'     => 'New BSD',
         'logo'        => 'image/logo.png',
         'readme'      => 'docs/readme.txt',

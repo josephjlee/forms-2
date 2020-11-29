@@ -133,6 +133,25 @@ class ManageForm extends BaseForm
             ]
         );
 
+        // multi_steps
+        $this->add(
+            [
+                'name'       => 'multi_steps',
+                'options'    => [
+                    'label'         => __('Multi steps'),
+                    'value_options' => [
+                        1 => __('Yes'),
+                        0 => __('No'),
+                    ],
+                ],
+                'type'       => 'radio',
+                'attributes' => [
+                    'value'       => 0,
+                    'description' => __('Multi steps form view and show each step after submit before step'),
+                ],
+            ]
+        );
+
         // review_action
         $this->add(
             [

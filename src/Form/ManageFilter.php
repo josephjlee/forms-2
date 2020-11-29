@@ -100,6 +100,14 @@ class ManageFilter extends InputFilter
             ]
         );
 
+        // multi_steps
+        $this->add(
+            [
+                'name'     => 'multi_steps',
+                'required' => false,
+            ]
+        );
+
         // status
         $this->add(
             [

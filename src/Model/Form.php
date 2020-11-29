@@ -35,6 +35,7 @@ class Form extends Model
             'register_need',
             'review_need',
             'show_answer',
+            'multi_steps',
             'review_action',
         ];
 }

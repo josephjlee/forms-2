@@ -198,6 +198,24 @@ class Update extends BasicUpdate
             }
         }
 
+        // Update to version 0.2.3
+        if (version_compare($moduleVersion, '0.2.3', '<')) {
+            // Alter table add field `review_action`
+            $sql = sprintf("ALTER TABLE %s ADD `multi_steps` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0'", $formTable);
+            try {
+                $formAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+        }
+
         return true;
     }
 }
