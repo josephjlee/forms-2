@@ -40,7 +40,7 @@ class AnswerForm extends BaseForm
                 'name'       => 'submit',
                 'type'       => 'submit',
                 'attributes' => [
-                    'value' => __('I Watched'),
+                    'value' => (isset($option['submit_btn']) && !empty($option['submit_btn'])) ? $option['submit_btn'] : __('Submit'),
                     'class' => 'btn btn-primary',
                 ],
             ]
