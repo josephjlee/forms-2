@@ -26,10 +26,10 @@ use Pi\Application\Api\AbstractApi;
 
 class Record extends AbstractApi
 {
-    public function getRecord($id)
+    public function getRecord($id, $form = [], $user = [], $setForm = true, $setUser = true)
     {
         $record = Pi::model('record', $this->getModule())->find($id);
-        return $this->canonizeRecord($record);
+        return $this->canonizeRecord($record, $form, $user, $setForm, $setUser);
     }
 
     public function getUser($uid)

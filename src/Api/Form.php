@@ -188,13 +188,14 @@ class Form extends AbstractApi
                     $params['values'][$elementKey] = json_encode($params['values'][$elementKey]);
                 }
 
+                // Save
                 $saveData              = Pi::model('data', 'forms')->createRow();
                 $saveData->record      = $saveRecord->id;
                 $saveData->uid         = $params['uid'];
                 $saveData->form        = $formId;
                 $saveData->time_create = time();
                 $saveData->element     = $element['id'];
-                $saveData->value       = _escape(_strip($params['values'][$elementKey]));
+                $saveData->value       = _escape($params['values'][$elementKey]);
                 $saveData->save();
             }
         }
@@ -204,5 +205,30 @@ class Form extends AbstractApi
 
         // Return record
         return $saveRecord->id;
+    }
+
+    public function update($formId, $recordId, $params)
+    {
+        // Save elements
+        foreach ($params['elements'] as $element) {
+            $elementKey = sprintf('element-%s', $element['id']);
+            if (isset($params['values'][$elementKey]) && !empty($params['values'][$elementKey])) {
+
+                // Check is array
+                if (is_array($params['values'][$elementKey])) {
+                    $params['values'][$elementKey] = json_encode($params['values'][$elementKey]);
+                }
+
+                // Save
+                $saveData              = Pi::model('data', 'forms')->createRow();
+                $saveData->record      = $recordId;
+                $saveData->uid         = $params['uid'];
+                $saveData->form        = $formId;
+                $saveData->time_create = time();
+                $saveData->element     = $element['id'];
+                $saveData->value       = _escape($params['values'][$elementKey]);
+                $saveData->save();
+            }
+        }
     }
 }
