@@ -155,7 +155,8 @@ class RecordController extends ActionController
 
             // Set file
             Pi::service('audit')->attach(
-                'forms-export', [
+                'forms-export',
+                [
                     'file'   => Pi::path(sprintf('upload/forms/%s.csv', $file)),
                     'format' => 'csv',
                 ]
@@ -209,8 +210,6 @@ class RecordController extends ActionController
 
                 // Make export dynamic list
                 foreach ($recordDate as $date) {
-
-
                     $exportData[$row->id][sprintf('element_%s', $date['element_id'])] = $date['value'];
                     $exportTitle[sprintf('element_%s', $date['element_id'])]          = $date['element_title'];
                 }
@@ -250,7 +249,8 @@ class RecordController extends ActionController
             } else {
                 $nextUrl       = Pi::url(
                     $this->url(
-                        '', [
+                        '',
+                        [
                             'action'     => 'export',
                             'page'       => $page,
                             'count'      => $count,
@@ -274,7 +274,7 @@ class RecordController extends ActionController
 
             $percent = ($percent > 99 && $percent < 100) ? (intval($percent) + 1) : intval($percent);
 
-            //$fileList = '';
+        //$fileList = '';
         } else {
             // Set info
             $info          = [];

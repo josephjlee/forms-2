@@ -66,5 +66,4 @@ class Report extends AbstractApi
         // result full information
         return $questionList;
     }
-
 }

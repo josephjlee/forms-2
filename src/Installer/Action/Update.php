@@ -62,7 +62,8 @@ class Update extends BasicUpdate
                 $elementAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult(
-                    'db', [
+                    'db',
+                    [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
                             . $exception->getMessage(),
@@ -77,7 +78,8 @@ class Update extends BasicUpdate
                 $elementAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult(
-                    'db', [
+                    'db',
+                    [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
                             . $exception->getMessage(),
@@ -92,7 +94,8 @@ class Update extends BasicUpdate
                 $elementAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult(
-                    'db', [
+                    'db',
+                    [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
                             . $exception->getMessage(),
@@ -110,7 +113,8 @@ class Update extends BasicUpdate
                 $formAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult(
-                    'db', [
+                    'db',
+                    [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
                             . $exception->getMessage(),
@@ -125,7 +129,8 @@ class Update extends BasicUpdate
                 $formAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult(
-                    'db', [
+                    'db',
+                    [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
                             . $exception->getMessage(),
@@ -140,7 +145,8 @@ class Update extends BasicUpdate
                 $recordAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult(
-                    'db', [
+                    'db',
+                    [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
                             . $exception->getMessage(),
@@ -155,7 +161,8 @@ class Update extends BasicUpdate
                 $recordAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult(
-                    'db', [
+                    'db',
+                    [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
                             . $exception->getMessage(),
@@ -173,7 +180,8 @@ class Update extends BasicUpdate
                 $formAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult(
-                    'db', [
+                    'db',
+                    [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
                             . $exception->getMessage(),
@@ -188,7 +196,8 @@ class Update extends BasicUpdate
                 $elementAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult(
-                    'db', [
+                    'db',
+                    [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
                             . $exception->getMessage(),
@@ -206,7 +215,8 @@ class Update extends BasicUpdate
                 $formAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult(
-                    'db', [
+                    'db',
+                    [
                         'status'  => false,
                         'message' => 'Table alter query failed: '
                             . $exception->getMessage(),

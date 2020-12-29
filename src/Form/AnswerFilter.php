@@ -20,6 +20,7 @@ class AnswerFilter extends InputFilter
     public function __construct($option = [])
     {
         // Make list of answers
-        if (isset($option['list']) && !empty($option['list']) && is_array($option['list'])) {}
+        if (isset($option['list']) && !empty($option['list']) && is_array($option['list'])) {
+        }
     }
 }
