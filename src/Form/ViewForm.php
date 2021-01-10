@@ -45,6 +45,7 @@ class ViewForm extends BaseForm
                         $attributes = [
                             'type' => $element['type'],
                         ];
+                        $options = [];
                         break;
 
                     case 'textarea':
@@ -53,29 +54,36 @@ class ViewForm extends BaseForm
                             'rows' => '5',
                             'cols' => '40',
                         ];
+                        $options = [];
                         break;
 
                     case 'checkbox':
-                        $options     = [
+                        $attributes = [];
+                        $options = [
                             'value_options' => $this->makeArray($element['value']),
                         ];
+
                         $elementType = 'multi_checkbox';
                         break;
 
                     case 'radio':
-                        $options     = [
+                        $attributes = [];
+                        $options = [
                             'value_options'    => $this->makeArray($element['value']),
                             'label_attributes' => [
                                 'class' => 'form-check',
                             ],
                         ];
+
                         $elementType = $element['type'];
                         break;
 
                     case 'select':
-                        $options     = [
+                        $attributes = [];
+                        $options = [
                             'value_options' => $this->makeArray($element['value']),
                         ];
+
                         $elementType = $element['type'];
                         break;
                 }
@@ -94,11 +102,19 @@ class ViewForm extends BaseForm
                 if (isset($elementType) && !empty($elementType)) {
                     $formElement['type'] = $elementType;
                 }
-                if (isset($options) && !empty($options)) {
-                    $formElement['options'] = array_unique(array_merge($formElement['options'], $options));
+                if (isset($options) && !empty($options) && is_array($options)) {
+                    foreach ($options as $key => $value) {
+                        if (!isset($formElement['options'][$key])) {
+                            $formElement['options'][$key] = $value;
+                        }
+                    }
                 }
-                if (isset($attributes) && !empty($attributes)) {
-                    $formElement['attributes'] = array_unique(array_merge($formElement['attributes'], $attributes));
+                if (isset($attributes) && !empty($attributes) && is_array($attributes)) {
+                    foreach ($attributes as $key => $value) {
+                        if (!isset($formElement['attributes'][$key])) {
+                            $formElement['attributes'][$key] = $value;
+                        }
+                    }
                 }
 
                 $this->add($formElement);
